@@ -7,6 +7,7 @@ end
 
 
 gem 'devise', '~> 4.3'
+gem 'httparty', '~> 0.15.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.3'
@@ -41,6 +42,7 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'awesome_print'
 end
 
 group :development do
