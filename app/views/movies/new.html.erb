@@ -1,0 +1,9 @@
+<h1>Add a movie to your wishlist ❤️</h1>
+
+<%= form_with url: remote_movies_path, method: :get, local: true do |f| %>
+  <div class="field">
+    <%= f.label :search %>
+    <%= f.text_field :search %>
+  </div>
+  <%= f.submit "Search", name: nil  %>
+<% end %>
