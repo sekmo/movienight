@@ -1,2 +1,14 @@
 <h1>RemoteMovies#index</h1>
-<p>Find me in app/views/remote_movies/index.html.erb</p>
+
+<% if params[:search].present? %>
+  <% if @movies.any? %>
+    <% @movies.each do |movie| %>
+      <%= content_tag :p, "#{movie[:tmdb_id]} - #{movie[:title]}" %>
+    <% end %>
+  <% else %>
+    <h2>Sorry, no movies found.</h2>
+  <% end %>
+
+<% else %>
+  <h2>No keywords specified.</h2>
+<% end %>
