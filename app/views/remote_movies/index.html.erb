@@ -3,7 +3,12 @@
 <% if params[:search].present? %>
   <% if @movies.any? %>
     <% @movies.each do |movie| %>
-      <%= content_tag :p, "#{movie[:tmdb_id]} - #{movie[:title]}" %>
+      <%= link_to(movies_path, method: :post) do %>
+        <div style="margin-bottom: 10px; border: 1px solid #eee; background: #f8f8f8;">
+          <%= image_tag "http://image.tmdb.org/t/p/w185/#{movie[:poster_path]}", style: 'vertical-align: middle' %>
+          <%= "#{movie[:tmdb_id]} - #{movie[:title]}" %>
+        </div>
+      <% end %>
     <% end %>
   <% else %>
     <h2>Sorry, no movies found.</h2>
