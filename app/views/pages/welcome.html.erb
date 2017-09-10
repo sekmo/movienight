@@ -4,4 +4,10 @@
 
 <p>Just create a personal "Movies to watch" wishlist, so when you are with your friends or your partner, the app cross-compares the lists and tell you what film you both want to watch. Easy peasy.</p>
 
-<p style="margin-top: 2em"><%= link_to "Register and add your movies", new_user_registration_path, class: 'button' %></p>
+
+<% if user_signed_in? %>
+  <p style="margin-top: 2em"><%= link_to "Add movies to your wishlist!", movies_new_path, class: 'button' %></p>
+<% else %>
+  <p style="margin-top: 2em"><%= link_to "Register and add your movies", new_user_registration_path, class: 'button' %></p>
+  <p style="margin-top: 2em">Already registered?<br /><%= link_to "Login", new_user_session_path, class: 'button' %></p>
+<% end %>

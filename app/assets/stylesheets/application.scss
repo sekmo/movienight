@@ -14,22 +14,23 @@
  *= require_self
  */
 
- body {
-   font-family: helvetica, sans-serif;
- }
+body {
+  font-family: helvetica, sans-serif;
+}
 
- .field_with_errors{
-   display: inline;
-   color: tomato;
- }
+.field_with_errors{
+  display: inline;
+  color: tomato;
+}
 
- div.flash {
-   font-size: 0.9rem;  /* use rem when setting font-size of a component */
-   padding: 1em;       /* padding should scale with font-size */
-   &.notice {          /* nesting is awesome <3 (output is div.flash.notice) */
-     background: #f8ec89;
-   }
-   &.error {
-     background: #f78181;
-   }
- }
+div.flash {
+  font-size: 0.9rem;
+  padding: 1em;
+  &.notice,
+  &.alert {
+    background: #f8ec89;
+  }
+  &.error {
+    background: #f78181;
+  }
+}
