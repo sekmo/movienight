@@ -1,7 +1,8 @@
 class RemoteMoviesController < ApplicationController
   def index
     keyword = params[:search]
-    response = HTTParty.get("https://api.themoviedb.org/3/search/movie?api_key=#{Rails.application.secrets.tmdb_api_key}&query=#{keyword}&adult=false")
+    tmdb_api_key = Rails.application.secrets.tmdb_api_key
+    response = HTTParty.get("https://api.themoviedb.org/3/search/movie?api_key=#{tmdb_api_key}&query=#{keyword}&adult=false")
 
     @movies = []
     if response.code == 200

@@ -10,23 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170904193147) do
+ActiveRecord::Schema.define(version: 20170913135316) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "movies", force: :cascade do |t|
+  create_table "cached_movies", force: :cascade do |t|
     t.integer "tmdb_id"
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "movies_users", id: false, force: :cascade do |t|
-    t.bigint "movie_id", null: false
-    t.bigint "user_id", null: false
-    t.index ["movie_id", "user_id"], name: "index_movies_users_on_movie_id_and_user_id"
-    t.index ["user_id", "movie_id"], name: "index_movies_users_on_user_id_and_movie_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -46,4 +39,15 @@ ActiveRecord::Schema.define(version: 20170904193147) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "wishes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "cached_movie_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cached_movie_id"], name: "index_wishes_on_cached_movie_id"
+    t.index ["user_id"], name: "index_wishes_on_user_id"
+  end
+
+  add_foreign_key "wishes", "cached_movies"
+  add_foreign_key "wishes", "users"
 end
