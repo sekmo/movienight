@@ -45,6 +45,7 @@ group :development, :test do
   gem 'awesome_print'
   gem 'rspec-rails'
   gem 'database_cleaner'
+  gem 'factory_girl'
 end
 
 group :development do
@@ -58,6 +59,7 @@ end
 
 group :test do
   gem 'shoulda-matchers', require: false
+  gem 'faker'
 end
 
 
