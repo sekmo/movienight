@@ -3,10 +3,10 @@
 <% if params[:search].present? %>
   <% if @movies.any? %>
     <% @movies.each do |movie| %>
-      <%= link_to(wishes_path(tmdb_id: movie[:tmdb_id], title: movie[:title]), method: :post) do %>
+      <%= link_to(wishes_path(tmdb_code: movie[:tmdb_code], title: movie[:title]), method: :post) do %>
         <div style="margin-bottom: 10px; border: 1px solid #eee; background: #f8f8f8;">
           <%= image_tag "http://image.tmdb.org/t/p/w185/#{movie[:poster_path]}", style: 'vertical-align: middle' %>
-          <%= "#{movie[:tmdb_id]} - #{movie[:title]}" %>
+          <%= "#{movie[:tmdb_code]} - #{movie[:title]}" %>
         </div>
       <% end %>
     <% end %>

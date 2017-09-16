@@ -8,7 +8,7 @@ class RemoteMoviesController < ApplicationController
     if response.code == 200
       response_hash = response.to_hash["results"]
       response_hash.each do |movie|
-        @movies << { title: movie["title"], tmdb_id: movie["id"], poster_path: movie["poster_path"] }
+        @movies << { title: movie["title"], tmdb_code: movie["id"], poster_path: movie["poster_path"] }
       end
     end
 

@@ -3,16 +3,16 @@ class WishesController < ApplicationController
   end
 
   def index
-    @wishes = Wish.find_by_user(current_user).includes(:cached_movie)
+    @wishes = Wish.find_by_user(current_user).includes(:movie)
   end
 
   def create
-    tmdb_id = params[:tmdb_id]
+    tmdb_code = params[:tmdb_code]
     movie_title = params[:title]
     user_id = current_user.id
-    movie = CachedMovie.find_or_create_by(tmdb_id: tmdb_id, title: movie_title)
+    movie = Movie.find_or_create_by(tmdb_code: tmdb_code, title: movie_title)
     if movie.persisted?
-      Wish.create(cached_movie: movie, user: current_user)
+      Wish.create(movie: movie, user: current_user)
       flash[:notice] = "The note has been created successfully."
       redirect_to wishes_url
     else
