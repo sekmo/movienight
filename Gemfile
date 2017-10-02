@@ -37,22 +37,22 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+  gem 'awesome_print'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara'
-  gem 'selenium-webdriver'
-  gem 'awesome_print'
-  gem 'rspec-rails'
   gem 'database_cleaner'
   gem 'factory_girl'
   gem 'faker'
+  gem 'rspec-rails'
+  gem 'selenium-webdriver'
 end
 
 group :development do
-  gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'spring-commands-rspec'
+  gem 'web-console', '>= 3.3.0'
 end
 
 group :test do

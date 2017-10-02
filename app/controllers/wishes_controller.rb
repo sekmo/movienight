@@ -9,11 +9,10 @@ class WishesController < ApplicationController
   def create
     tmdb_code = params[:tmdb_code]
     movie_title = params[:title]
-    user_id = current_user.id
     movie = Movie.find_or_create_by(tmdb_code: tmdb_code, title: movie_title)
     if movie.persisted?
       Wish.create(movie: movie, user: current_user)
-      flash[:notice] = "The note has been created successfully."
+      flash[:notice] = "The movie has been added successfully to your wishlist."
       redirect_to wishes_url
     else
       flash.now[:alert] = "Error adding the movie to your wishlist."
