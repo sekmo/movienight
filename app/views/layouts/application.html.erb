@@ -9,10 +9,20 @@
   </head>
 
   <body>
+    <header class="header">
+      <div class="header__inner wrapper">
+        <%= link_to 'Movienight', root_path, class: "site-title" %>
+      </div>
+    </header>
+
     <% flash.each do |key, value| %>
-      <%= content_tag :div, value, class: "flash #{key}" %>
+      <%= content_tag :div, value, class: "flash #{key}" do %>
+        <%= content_tag :div, value, class: "flash__content wrapper" %>
+      <% end %>
     <% end %>
 
-    <%= yield %>
+    <main class="wrapper">
+      <%= yield %>
+    </main>
   </body>
 </html>

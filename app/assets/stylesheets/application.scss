@@ -16,6 +16,25 @@
 
 body {
   font-family: helvetica, sans-serif;
+  margin: 0;
+}
+
+.wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  width: 90%;
+}
+
+.header {
+  background: #2f687b;
+  padding: 20px 0;
+  color: white;
+  font-size: 20px;
+}
+
+.site-title {
+  color: white;
+  text-decoration: none;
 }
 
 .field_with_errors{
@@ -32,5 +51,25 @@ div.flash {
   }
   &.error {
     background: #f78181;
+  }
+}
+
+.wishes-index {
+  &__wish {
+    margin-bottom: 10px;
+    border: 1px solid #eee;
+    background: #f8f8f8;
+    & > img {
+      vertical-align: middle; height: 70px;
+    }
+  }
+}
+
+.movie-search-result {
+  &__movie {
+    margin-bottom: 10px; border: 1px solid #eee; background: #f8f8f8;
+    & > img {
+      vertical-align: middle; height: 100px;
+    }
   }
 }
