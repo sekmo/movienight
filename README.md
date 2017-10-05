@@ -16,10 +16,10 @@ When the user logs in and searches for a movie, the *RemoteMoviesController* mak
 
 ## Next steps
 
-* Add a validation with external api call (to check tmdb_id/movie title validity) before persisting movie data
+* Friendship requests
+* Event creation, invite friends
+* Comment on events
 * Add Foundation to prototype faster
-* Feature: Event creation and inviting
-* Feature: Comment on events
 
 Possible features:
 * Movie reviews

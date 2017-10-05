@@ -11,13 +11,24 @@
   <body>
     <header class="header">
       <div class="header__inner wrapper">
-        <%= link_to 'Movienight', root_path, class: "site-title" %>
+        <%= link_to 'MovieNight', root_path, class: "site-title" %>
+        <nav class="main-nav">
+          <ul>
+            <% if user_signed_in? %>
+              <li><%= link_to "Your wishlist", wishes_path %></li>
+              <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+            <% else %>
+              <li><%= link_to "Login", new_user_session_path %></li>
+              <li><%= link_to "Register", new_user_registration_path %></li>
+            <% end %>
+          </ul>
+        </nav>
       </div>
     </header>
 
     <% flash.each do |key, value| %>
       <%= content_tag :div, value, class: "flash #{key}" do %>
-        <%= content_tag :div, value, class: "flash__content wrapper" %>
+        <%= content_tag :div, value, class: "flash__inner wrapper" %>
       <% end %>
     <% end %>
 
