@@ -7,25 +7,15 @@ class WishesController < ApplicationController
   end
 
   def create
-    tmdb_code = params[:tmdb_code]
-    movie_title = params[:title]
-    poster_path = params[:poster_path]
-    movie = Movie.find_by(tmdb_code: tmdb_code)
-    if movie.nil?
-      movie = Movie.create(tmdb_code: tmdb_code, title: movie_title, poster_path: poster_path)
-    end
-    if movie.persisted?
-      wish = Wish.find_or_initialize_by(movie: movie, user: current_user)
-      if wish.persisted?
-        flash[:notice] = "The movie was already present in your wishlist."
-      else
-        wish.save!
-        flash[:notice] = "The movie has been added successfully to your wishlist."
-      end
-      redirect_to wishes_url
+    movie = Movie.where(tmdb_code: params[:tmdb_code]).first_or_create!(title:       params[:title],
+                                                                        poster_path: params[:poster_path])
+    wish = Wish.find_or_initialize_by(movie: movie, user: current_user)
+    if wish.persisted?
+      flash[:notice] = "The movie was already present in your wishlist."
     else
-      flash.now[:alert] = "Error adding the movie to your wishlist."
-      render "new"
+      wish.save!
+      flash[:notice] = "The movie has been added successfully to your wishlist."
     end
+    redirect_to wishes_url
   end
 end
