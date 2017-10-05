@@ -10,7 +10,7 @@ RSpec.feature "Add movie to wishlist", type: :feature do
     visit wishes_new_path
     fill_in "search", with: "kill bill"
     click_on "Search"
-    expect(page).to have_content("24 - Kill Bill: Vol. 1")
-    expect { click_on "24 - Kill Bill: Vol. 1" }.to change { Wish.count }.from(0).to(1)
+    expect(page).to have_content("Kill Bill: Vol. 1")
+    expect { click_on "Kill Bill: Vol. 1" }.to change { Wish.count }.from(0).to(1)
   end
 end
