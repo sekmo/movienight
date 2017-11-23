@@ -1,4 +1,6 @@
 class WishesController < ApplicationController
+  before_action :set_wish, only: [:destroy]
+
   def new
   end
 
@@ -17,5 +19,20 @@ class WishesController < ApplicationController
       flash[:notice] = "The movie has been added successfully to your wishlist."
     end
     redirect_to wishes_url
+  end
+
+  def destroy
+    @wish.destroy
+    flash[:notice] = "The movie was successfully removed from your wishlist."
+    redirect_to wishes_url
+  end
+
+  private
+
+  def set_wish
+    @wish = Wish.find(params[:id])
+    check_owner @wish
+    rescue ActiveRecord::RecordNotFound
+      redirect_to_root_with_error
   end
 end
