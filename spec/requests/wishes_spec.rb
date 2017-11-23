@@ -8,7 +8,7 @@ RSpec.describe "Wishes", type: :request do
     end
 
     it "denies GET to /wishes/new" do
-      get wishes_new_path
+      get new_wish_path
       expect(response).to redirect_to(new_user_session_url)
     end
 
