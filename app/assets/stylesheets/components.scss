@@ -1,0 +1,61 @@
+.wishlist {
+  > ul {
+    padding-left: 0;
+    list-style: none;
+  }
+  .wish {
+    display: flex;
+    align-items: center;
+    border: 1px solid #eee;
+    &:not(:last-child) {
+      border-bottom: none;
+    }
+    background: #fff;
+    &__title {
+      flex-grow: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    & > img {
+      height: 70px;
+      width: 47px;
+      margin-right: rem(15px);
+    }
+    &__remove-button {
+      margin-left: rem(10px);
+      margin-right: rem(20px);
+    }
+  }
+}
+
+.searched-movies {
+  > ul {
+    padding-left: 0;
+    list-style: none;
+  }
+  .searched-movie {
+    display: flex;
+    align-items: center;
+    border: 1px solid #eee;
+    &:not(:last-child) {
+      border-bottom: none;
+    }
+    background: #fff;
+    &__title {
+      flex-grow: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    & > img {
+      height: 70px;
+      width: 47px;
+      margin-right: rem(15px);
+    }
+    &__add-button {
+      margin-left: rem(10px);
+      margin-right: rem(20px);
+    }
+  }
+}

@@ -1,0 +1,72 @@
+%clearfix,
+.clearfix{
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+// Margin utilities
+
+.u-m0{
+  margin: 0 !important;
+}
+
+.u-mt0{
+  margin-top: 0 !important;
+}
+
+.u-mt1{
+  margin-top: 1rem !important;
+}
+
+.u-mb0{
+  margin-bottom: 0 !important;
+}
+
+.u-mb1{
+  margin-bottom: 1rem !important;
+}
+
+.u-p0{
+  padding: 0 !important;
+}
+
+.u-pt0{
+  padding-top: 0 !important;
+}
+
+.u-pb0{
+  padding-bottom: 0 !important;
+}
+
+
+// Calculate em values
+
+@function em($target, $context: $font-size-var) {
+	@return ($target / $context) * 1em;
+}
+
+@function rem($target) {
+	@return ($target / $font-size-var) * 1rem;
+}
+
+
+// Breakpoint mixins
+
+// usage:
+// @include breakpoint-min($tablet){
+//   font-size: 1.1rem;
+// }
+@mixin breakpoint-min($points){
+  @media screen and (min-width: $points) {
+    @content;
+  }
+}
+
+@mixin breakpoint-max($points){
+  @media screen and (max-width: $points) {
+    @content;
+  }
+}

@@ -1,25 +1,27 @@
-<h1>RemoteMovies#index</h1>
+<h1>Results</h1>
 <p><%= link_to 'Go to your wishlist', wishes_path %></p>
 
-<div class="movie-search-result">
+<div class="searched-movies">
   <% if params[:search].present? %>
     <% if @movies.any? %>
-      <% @movies.each do |movie| %>
-        <%= link_to(wishes_path(tmdb_code:   movie[:tmdb_code],
-                                title:       movie[:title],
-                                poster_path: movie[:poster_path]), method: :post) do %>
-
-          <div class="movie-search-result__movie">
+      <ul>
+        <% @movies.each do |movie| %>
+          <li class="searched-movie">
             <%= movie_poster_image(movie[:poster_path]) %>
-            <%= content_tag(:span, "#{movie[:title]}") %>
-          </div>
+            <%= content_tag :span, "#{truncate(movie[:title], length: 50)}",
+                            class: "searched-movie__title" %>
+            <%= link_to 'add to wishlist',
+                        wishes_path(tmdb_code: movie[:tmdb_code],
+                                    title: movie[:title],
+                                    poster_path: movie[:poster_path]),
+                        method: :post, class: 'searched-movie__add-button btn btn-primary' %>
+          </li>
         <% end %>
-      <% end %>
+      </ul>
     <% else %>
-      <h2>Sorry, no movies found.</h2>
+      <h3>Sorry, no movies found.</h3>
     <% end %>
-
   <% else %>
-    <h2>No keywords specified.</h2>
+    <h3>No keywords specified.</h3>
   <% end %>
 </div>

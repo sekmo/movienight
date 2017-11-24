@@ -8,6 +8,6 @@
 <% if user_signed_in? %>
   <p style="margin-top: 2em"><%= link_to "Add movies to your wishlist!", new_wish_path, class: 'button' %></p>
 <% else %>
-  <p style="margin-top: 2em"><%= link_to "Register and add your movies", new_user_registration_path, class: 'button' %></p>
-  <p style="margin-top: 2em">Already registered?<br /><%= link_to "Login", new_user_session_path, class: 'button' %></p>
+  <p style="margin-top: 2em"><%= link_to "Register and add your movies", new_user_registration_path, class: 'btn btn-primary' %></p>
+  <p style="margin-top: 2em">Already registered?<br /><%= link_to "Login", new_user_session_path, class: 'btn btn-primary' %></p>
 <% end %>
