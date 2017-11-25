@@ -11,7 +11,11 @@ RSpec.feature "Wishlist", type: :feature do
     fill_in "search", with: "kill bill"
     click_on "Search"
     expect(page).to have_content("Kill Bill: Vol. 1")
-    expect { click_on "Kill Bill: Vol. 1" }.to change { @user.wishes.count }.by(1)
+    movie_span = find("span", text: "Kill Bill: Vol. 1")
+    movie_span_container = movie_span.first(:xpath, ".//..")
+    expect {
+      movie_span_container.click_on("Add to wishlist")
+    }.to change { @user.wishes.count }.by(1)
   end
 
   scenario "User removes a movie from her wishlist" do

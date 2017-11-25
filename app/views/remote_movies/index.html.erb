@@ -10,7 +10,7 @@
             <%= movie_poster_image(movie[:poster_path]) %>
             <%= content_tag :span, "#{truncate(movie[:title], length: 50)}",
                             class: "searched-movie__title" %>
-            <%= link_to 'add to wishlist',
+            <%= button_to 'Add to wishlist',
                         wishes_path(tmdb_code: movie[:tmdb_code],
                                     title: movie[:title],
                                     poster_path: movie[:poster_path]),
