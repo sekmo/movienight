@@ -25,13 +25,9 @@
         </nav>
       </div>
     </header>
-
     <% flash.each do |key, value| %>
-      <%= content_tag :div, value, class: "flash #{key}" do %>
-        <%= content_tag :div, value, class: "flash__inner wrapper" %>
-      <% end %>
+      <%= render(partial: 'shared/flash_message', locals: {type: key, message: value}) %>
     <% end %>
-
     <main class="wrapper">
       <%= yield %>
     </main>
