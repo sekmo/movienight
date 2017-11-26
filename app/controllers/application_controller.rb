@@ -14,4 +14,8 @@ class ApplicationController < ActionController::Base
       redirect_to_root_with_error
     end
   end
+
+  def flash_discard_if_xhr
+    flash.discard if request.xhr?
+  end
 end

@@ -18,7 +18,7 @@ RSpec.feature "Wishlist", type: :feature do
     }.to change { @user.wishes.count }.by(1)
   end
 
-  scenario "User removes a movie from her wishlist" do
+  scenario "User removes a movie from her wishlist", js: true do
     create(:wish, user: @user)
     movie = create(:movie)
     create(:wish, movie: movie, user: @user)
@@ -26,9 +26,11 @@ RSpec.feature "Wishlist", type: :feature do
     movie_span = find("span", text: movie.title)
     movie_span_container = movie_span.first(:xpath, ".//..")
     expect {
-      movie_span_container.click_on("Remove movie")
+      accept_alert do
+         movie_span_container.click_on("Remove movie")
+       end
+      wait_for_ajax
     }.to change { @user.wishes.count }.by(-1)
-    expect(page).to have_content "The movie was successfully removed from your wishlist."
     expect(page).not_to have_content "Kill Bill: Vol. 1"
   end
 end

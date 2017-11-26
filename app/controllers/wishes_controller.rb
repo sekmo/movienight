@@ -1,5 +1,6 @@
 class WishesController < ApplicationController
   before_action :set_wish, only: [:destroy]
+  after_action :flash_discard_if_xhr, only: :destroy
 
   def new
   end
@@ -16,15 +17,19 @@ class WishesController < ApplicationController
       flash[:notice] = "The movie was already present in your wishlist."
     else
       wish.save!
-      flash[:notice] = "The movie has been added successfully to your wishlist."
+      flash[:success] = "The movie has been added successfully to your wishlist."
     end
     redirect_to wishes_url
   end
 
   def destroy
-    @wish.destroy
-    flash[:notice] = "The movie was successfully removed from your wishlist."
-    redirect_to wishes_url
+    if @wish.destroy
+      flash[:success] = "The movie was successfully removed from your wishlist."
+    end
+    respond_to do |format|
+      format.html { redirect_to wishes_url }
+      format.js
+    end
   end
 
   private

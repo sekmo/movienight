@@ -1,0 +1,3 @@
+var wish = document.querySelector('li[data-wish-id="<%= @wish.id %>"]');
+console.log('li[data-wish-id="<%= @wish.id %>"]');
+wish.parentNode.removeChild(wish);
