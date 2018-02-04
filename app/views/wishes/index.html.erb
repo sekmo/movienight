@@ -9,7 +9,7 @@
         <%= movie_poster_image(wish.movie.poster_path) %>
         <%= content_tag :span, truncate(wish.movie.title, length: 50), class: "wish__title" %>
         <%= button_to "Remove movie", wish_path(wish), method: :delete,
-              data: { confirm: "Are you sure?" }, remote: true, class: "wish__remove-button btn btn-sm btn-danger" %>
+              data: { confirm: "Are you sure?" }, remote: true, class: "wish__remove-button btn btn-danger" %>
       </li>
     <% end %>
   </ul>
