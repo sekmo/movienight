@@ -25,9 +25,7 @@
         </nav>
       </div>
     </header>
-    <% flash.each do |key, value| %>
-      <%= render(partial: 'shared/flash_message', locals: {type: key, message: value}) %>
-    <% end %>
+    <%= render "shared/flash_messages" %>
     <main class="wrapper">
       <%= yield %>
     </main>
