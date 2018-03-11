@@ -1,4 +1,7 @@
 <% flash.each do |key, value| %>
-  <%= render(partial: 'shared/flash_message', locals: { alert_class: flash_class(key),
-                                              message: value }) %>
+  <%= render(
+        partial: 'shared/flash_message',
+        locals: { alert_class: flash_class(key), message: value }
+      )
+  %>
 <% end %>

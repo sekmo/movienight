@@ -18,4 +18,11 @@ class ApplicationController < ActionController::Base
   def flash_discard_if_xhr
     flash.discard if request.xhr?
   end
+
+  def check_profile
+    if current_user.profile.blank?
+      flash[:notice] = "Create a profile to add movies to your wishlist!"
+      redirect_to new_profile_path
+    end
+  end
 end

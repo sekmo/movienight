@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def error_messages_for(object)
+    render(partial: "shared/error_messages", locals: {object: object})
+  end
+
   def movie_poster_image(tmdb_movie_poster_path)
     if tmdb_movie_poster_path.present?
       image_tag("http://image.tmdb.org/t/p/w185/#{tmdb_movie_poster_path}")

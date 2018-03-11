@@ -1,4 +1,5 @@
 class WishesController < ApplicationController
+  before_action :check_profile
   before_action :set_wish, only: [:destroy]
   after_action :flash_discard_if_xhr, only: :destroy
 

@@ -6,7 +6,6 @@ RSpec.describe Wish, type: :model do
     it { is_expected.to belong_to(:movie) }
   end
 
-
   describe "validations" do
     it "is invalid without a movie_id" do
       expect(build(:wish, movie: nil)).to_not be_valid
