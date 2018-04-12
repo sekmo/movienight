@@ -1,0 +1,10 @@
+<% if object && object.errors.any?  %>
+  <div class="error-explanation">
+    <p>There were problems in the following fields:</p>
+    <ul>
+      <% object.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

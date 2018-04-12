@@ -1,4 +1,6 @@
 class RemoteMoviesController < ApplicationController
+  before_action :check_profile
+
   def index
     keyword = params[:search]
     tmdb_api_key = Rails.application.secrets.tmdb_api_key

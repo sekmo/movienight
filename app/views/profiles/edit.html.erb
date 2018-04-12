@@ -1,0 +1,7 @@
+<h1>Edit profile</h1>
+
+<%= link_to "Go back", profile_path, class: 'btn btn-default btn-sm' %>
+
+<br><br>
+
+<%= render partial: "form", locals: { profile: @profile } %>
