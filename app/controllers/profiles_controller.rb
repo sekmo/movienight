@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  before_action :set_profile, only: [:show, :edit]
+  before_action :set_profile, only: [:show, :edit, :update]
 
   def new
     if current_user.profile.present?
@@ -29,6 +29,12 @@ class ProfilesController < ApplicationController
   end
 
   def update
+    if @profile.update_attributes(profile_params)
+      flash[:notice] = "The update has been updated."
+      render "edit"
+    else
+      render "edit"
+    end
   end
 
   private
