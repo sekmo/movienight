@@ -24,6 +24,14 @@ RSpec.feature "Wishlist", type: :feature do
     expect(page).to have_content "Profile was successfully created. Now create your wishlist!"
   end
 
+  scenario "User cannot visit the new profile page if she already have a profile" do
+    @profile = create(:profile, user: @user, first_name: "Francesco", last_name: "Mari",
+      nickname: "sekmo")
+    visit new_profile_path
+    expect(page).to have_content "You already have a profile. Create your wishlist!"
+    expect(current_path).to eql(new_wish_path)
+  end
+
   scenario "User can update her profile" do
     @profile = create(:profile, user: @user, first_name: "Francesco", last_name: "Mari",
       nickname: "sekmo")
