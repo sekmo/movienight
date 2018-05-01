@@ -19,4 +19,8 @@ module ApplicationHelper
       else "alert alert-info"
     end
   end
+
+  def user_has_profile?
+    current_user.profile.try(:persisted?)
+  end
 end
