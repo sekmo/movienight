@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180210151103) do
+ActiveRecord::Schema.define(version: 20180510093039) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "friendship_requests", force: :cascade do |t|
+    t.integer "sender_id", null: false
+    t.integer "recipient_id", null: false
+    t.datetime "accepted_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipient_id"], name: "index_friendship_requests_on_recipient_id"
+    t.index ["sender_id"], name: "index_friendship_requests_on_sender_id"
+  end
 
   create_table "movies", force: :cascade do |t|
     t.integer "tmdb_code"
@@ -62,6 +72,8 @@ ActiveRecord::Schema.define(version: 20180210151103) do
     t.index ["user_id"], name: "index_wishes_on_user_id"
   end
 
+  add_foreign_key "friendship_requests", "users", column: "recipient_id"
+  add_foreign_key "friendship_requests", "users", column: "sender_id"
   add_foreign_key "profiles", "users", on_delete: :cascade
   add_foreign_key "wishes", "movies", on_delete: :cascade
   add_foreign_key "wishes", "users", on_delete: :cascade
