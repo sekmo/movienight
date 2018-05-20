@@ -1,0 +1,19 @@
+<h1>Your friends</h1>
+
+<ul class="friends">
+  <% @friends.each do |friend| %>
+    <li><%= friend.profile.full_name %></li>
+  <% end %>
+</ul>
+
+<% if @friendship_requests.any? %>
+  <h2>Pending requests</h2>
+  <ul class="pending-requests">
+    <% @friendship_requests.each do |friendship| %>
+      <li>
+        <%= friendship.sender.profile.full_name %>
+        <%= link_to("Accept request", friendship_path(friendship), method: :patch, class: "btn btn-primary btn-sm") %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
