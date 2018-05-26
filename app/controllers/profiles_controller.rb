@@ -31,7 +31,7 @@ class ProfilesController < ApplicationController
   def update
     if @profile.update_attributes(profile_params)
       flash[:notice] = "The update has been updated."
-      render "edit"
+      render "show"
     else
       render "edit"
     end
