@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.feature "Managing the wishlist", type: :feature do
+RSpec.describe "Managing the wishlist", type: :system do
   before(:each) do
     @user ||= create(:user, :with_profile)
     login_as @user, scope: :user
@@ -21,19 +21,23 @@ RSpec.feature "Managing the wishlist", type: :feature do
   end
 
   scenario "User removes a movie from her wishlist", js: true do
-    create(:wish, user: @user)
     movie = create(:movie)
     create(:wish, movie: movie, user: @user)
     visit wishes_path
+    expect(page).to have_content movie.title
 
-    movie_span = find("span", text: movie.title)
-    movie_span_container = movie_span.first(:xpath, ".//..")
-    expect {
-      accept_alert do
-         movie_span_container.click_on("Remove movie")
-       end
-      wait_for_ajax
-    }.to change { @user.wishes.count }.by(-1)
-    expect(page).not_to have_content "Kill Bill: Vol. 1"
+    movie_li = find("li", text: movie.title)
+
+    expect(@user.wishes.count).to eq(1)
+
+    movie_li.click_on("Remove movie")
+    expect(page).not_to have_content movie.title
+    expect(@user.wishes.count).to eq(0)
+
+    # TODO Why doesn't it work?
+    # expect {
+    #   movie_li.click_on("Remove movie")
+    #   wait_for_ajax
+    # }.to change { @user.reload.wishes.count }.from(1).to(0)
   end
 end
