@@ -40,7 +40,7 @@ gem 'jbuilder', '~> 2.5'
 group :development, :test do
   gem 'awesome_print'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'capybara'
+  gem 'capybara', '~> 2.13'
   gem 'database_cleaner'
   gem 'factory_girl'
   gem 'faker'
