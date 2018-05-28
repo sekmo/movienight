@@ -1,0 +1,11 @@
+<h1>Search result</h1>
+
+<% if @profiles.any? %>
+  <ul>
+    <% @profiles.each do |profile| %>
+    <li><%= profile.full_name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Sorry, no users found.</p>
+<% end %>

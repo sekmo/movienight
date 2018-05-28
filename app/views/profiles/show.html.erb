@@ -10,4 +10,4 @@
 </dl>
 
 <%= link_to "View friends", friendships_path, class: 'btn btn-primary' %>
-<%= link_to "Edit profile", edit_profile_path, class: 'btn btn-primary' %>
+<%= link_to "Edit profile", edit_profile_path(current_user.profile), class: 'btn btn-primary' %>
