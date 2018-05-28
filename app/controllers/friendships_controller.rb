@@ -1,5 +1,4 @@
 class FriendshipsController < ApplicationController
-  before_action :check_profile
   before_action :set_friendship, only: [:update, :destroy]
 
   def index
