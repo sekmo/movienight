@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :check_profile
 
   protected
 
@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_profile
-    if current_user.profile.blank?
+    if current_user.profile.nil?
       flash[:notice] = "Create a profile to add movies to your wishlist!"
       redirect_to new_profile_path
     end

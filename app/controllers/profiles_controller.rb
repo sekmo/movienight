@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update]
+  before_action :check_profile, only: [:index]
 
   def new
     if current_user.profile.present?
@@ -11,6 +12,12 @@ class ProfilesController < ApplicationController
   end
 
   def show
+  end
+
+  def index
+    term = params[:q]
+    redirect_to_root_with_error if term.blank?
+    @profiles = Profile.search_by_full_name(term)
   end
 
   def create

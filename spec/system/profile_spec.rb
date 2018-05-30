@@ -21,7 +21,7 @@ RSpec.feature "Wishlist", type: :feature do
   scenario "User can update her profile" do
     @profile = create(:profile, user: @user, first_name: "Francesco", last_name: "Mari",
       nickname: "sekmo")
-    visit edit_profile_path
+    visit edit_profile_path(@profile)
 
     fill_in "First name", with: "Mario"
     fill_in "Last name", with: "Rossi"

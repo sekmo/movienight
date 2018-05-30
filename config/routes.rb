@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   resources :wishes, only: [:new, :index, :create, :update, :destroy]
   resources :friendships
   devise_for :users
-  resource :profile, only: [:show, :create, :new, :edit, :update]
-  resolve('Profile') { [:profile] }
+  resources :profiles, only: [:index, :show, :create, :new, :edit, :update]
+  # resolve('Profile') { [:profile] }
 
   get  'pages/:page', to: 'pages#show', as: 'pages'
   root 'pages#show', page: 'welcome'
