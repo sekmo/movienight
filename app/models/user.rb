@@ -16,8 +16,9 @@ class User < ApplicationRecord
   end
 
   def friends
-    friends = outgoing_friendships.select(&:confirmed?).map(&:recipient) +
-                incoming_friendships.select(&:confirmed?).map(&:sender)
+    outgoing_friends_ids = outgoing_friendships.select(&:confirmed?).pluck(:recipient_id)
+    incoming_friends_ids = incoming_friendships.select(&:confirmed?).pluck(:sender_id)
+    User.where(id: outgoing_friends_ids + incoming_friends_ids).includes(:profile)
   end
 
   def friendship_requests
