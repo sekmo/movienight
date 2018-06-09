@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.feature "Wishlist", type: :feature do
+RSpec.feature "Profile", type: :feature do
   before(:each) do
     @user ||= create(:user, profile: nil)
     login_as @user, scope: :user
