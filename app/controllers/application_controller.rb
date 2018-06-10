@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_profile
-    if current_user.profile.nil?
+    if user_signed_in? && current_user.profile.nil?
       flash[:notice] = "Create a profile to add movies to your wishlist!"
       redirect_to new_profile_path
     end
