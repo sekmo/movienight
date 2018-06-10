@@ -15,4 +15,9 @@ RSpec.describe "Friendships", type: :request do
       expect(response).to redirect_to(new_profile_url)
     end
   end
+
+  describe "POST create" do
+    #TODO
+    it "creates a new friend request"
+  end
 end
