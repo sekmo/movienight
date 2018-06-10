@@ -7,7 +7,12 @@ class FriendshipsController < ApplicationController
   end
 
   def create
-    current_user.ask_friendship(params[:recipient])
+    recipient = User.find(params[:recipient])
+    if current_user.ask_friendship(recipient)
+      redirect_to friendships_url, notice: "Friend request sent"
+    else
+      redirect_to_root_with_error("Friend request already sent")
+    end
   end
 
   def update

@@ -3,7 +3,11 @@
 <% if @profiles.any? %>
   <ul>
     <% @profiles.each do |profile| %>
-    <li><%= profile.full_name %></li>
+    <li>
+      <%= profile.full_name %>
+      <%= button_to "Send friend request", friendships_path(recipient: profile.user), method: :post,
+          class: "btn btn-sm btn-primary" %>
+    </li>
     <% end %>
   </ul>
 <% else %>

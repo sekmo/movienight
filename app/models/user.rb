@@ -12,7 +12,9 @@ class User < ApplicationRecord
   has_one :profile
 
   def ask_friendship(user)
-    Friendship.create(sender: self, recipient: user)
+    Friendship.create!(sender: self, recipient: user)
+  rescue ActiveRecord::RecordInvalid
+    return false
   end
 
   def friends

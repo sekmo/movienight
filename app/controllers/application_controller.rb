@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def redirect_to_root_with_error
-    flash[:error] = "Error in your request"
+  def redirect_to_root_with_error(message = "Error in the request")
+    flash[:error] = message
     redirect_to root_url
   end
 
