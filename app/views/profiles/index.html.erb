@@ -2,12 +2,24 @@
 
 <% if @profiles.any? %>
   <ul>
+    <% matcher = ProfileMatcher.new(current_user) %>
     <% @profiles.each do |profile| %>
-    <li>
-      <%= profile.full_name %>
-      <%= button_to "Send friend request", friendships_path(recipient: profile.user), method: :post,
-          class: "btn btn-sm btn-primary" %>
-    </li>
+      <li>
+        <%= profile.full_name %>
+        <% match = matcher.match(profile) %>
+        <% case(match[:match_kind]) %>
+        <% when :friend %>
+          <%= button_to "Friends", {}, disabled: true, class: "btn btn-sm btn-primary" %>
+        <% when :requester %>
+          <%= button_to("Accept request", friendship_path(match[:friendship]), method: :patch,
+                class: "btn btn-primary btn-sm") %>
+        <% when :receiver %>
+          <%= button_to "Request sent", {}, disabled: true, class: "btn btn-sm btn-primary" %>
+        <% else %>
+          <%= button_to "Send friend request", friendships_path(recipient: profile.user),
+                method: :post, class: "btn btn-sm btn-primary" %>
+        <% end %>
+      </li>
     <% end %>
   </ul>
 <% else %>
