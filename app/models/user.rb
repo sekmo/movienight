@@ -17,11 +17,14 @@ class User < ApplicationRecord
     return false
   end
 
+  def friends_ids
+    outgoing_friendships.select(&:confirmed?).pluck(:recipient_id) +
+      incoming_friendships.select(&:confirmed?).pluck(:sender_id)
+  end
+
   def friends
     Rails.logger.debug("User#friends")
-    outgoing_friends_ids = outgoing_friendships.select(&:confirmed?).pluck(:recipient_id)
-    incoming_friends_ids = incoming_friendships.select(&:confirmed?).pluck(:sender_id)
-    User.where(id: outgoing_friends_ids + incoming_friends_ids)
+    User.where(id: friends_ids)
   end
 
   def friendship_requests

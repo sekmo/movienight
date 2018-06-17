@@ -1,8 +1,13 @@
 class ProfileMatcher
   def initialize(user)
     Rails.logger.debug("ProfileMatcher#initialize")
-    @friends_profiles = user.friends.map(&:profile)
+    Rails.logger.debug("user.friends.map(&:profile)")
+    @friends_profiles = Profile.where(user_id: user.friends_ids)
+
+    Rails.logger.debug("user.friendship_requesters.map(&:profile)")
     @friendship_requesters = user.friendship_requesters.map(&:profile)
+
+    Rails.logger.debug("user.friendship_receivers.map(&:profile)")
     @friendship_receivers = user.friendship_receivers.map(&:profile)
   end
 
