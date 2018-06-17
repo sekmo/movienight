@@ -17,7 +17,7 @@ class ProfilesController < ApplicationController
   def index
     term = params[:q]
     redirect_to_root_with_error if term.blank?
-    @profiles = Profile.search_by_full_name(term)
+    @profiles = Profile.search_by_full_name(term) - [current_user.profile]
   end
 
   def create

@@ -18,17 +18,24 @@ class User < ApplicationRecord
   end
 
   def friends
+    Rails.logger.debug("User#friends")
     outgoing_friends_ids = outgoing_friendships.select(&:confirmed?).pluck(:recipient_id)
     incoming_friends_ids = incoming_friendships.select(&:confirmed?).pluck(:sender_id)
-    User.where(id: outgoing_friends_ids + incoming_friends_ids).includes(:profile)
+    User.where(id: outgoing_friends_ids + incoming_friends_ids)
   end
 
   def friendship_requests
+    Rails.logger.debug("User#friendship_requests")
     incoming_friendships.select(&:pending?)
   end
 
   def friendship_requesters
-    #TODO add a join here - avoid select?
-    friendship_requests.map(&:sender)
+    Rails.logger.debug("User#friendship_requesters")
+    incoming_friendships.select(&:pending?).map(&:sender)
+  end
+
+  def friendship_receivers
+    Rails.logger.debug("User#friendship_receivers")
+    outgoing_friendships.select(&:pending?).map(&:recipient)
   end
 end
