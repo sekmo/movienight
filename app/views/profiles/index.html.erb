@@ -1,8 +1,8 @@
 <h1>Search result</h1>
 
 <% if @profiles.any? %>
+  <% matcher = ProfileMatcher.new(current_user) %>
   <ul>
-    <% matcher = ProfileMatcher.new(current_user) %>
     <% @profiles.each do |profile| %>
       <li>
         <%= profile.full_name %>
@@ -11,8 +11,8 @@
         <% when :friend %>
           <%= button_to "Friends", {}, disabled: true, class: "btn btn-sm btn-primary" %>
         <% when :requester %>
-          <%= button_to("Accept request", friendship_path(match[:friendship]), method: :patch,
-                class: "btn btn-primary btn-sm") %>
+          <%= button_to("Accept request", friendship_path(match[:friendship]),
+                method: :patch, class: "btn btn-primary btn-sm") %>
         <% when :receiver %>
           <%= button_to "Request sent", {}, disabled: true, class: "btn btn-sm btn-primary" %>
         <% else %>
