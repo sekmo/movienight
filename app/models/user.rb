@@ -23,22 +23,26 @@ class User < ApplicationRecord
   end
 
   def friends
-    Rails.logger.debug("User#friends")
     User.where(id: friends_ids)
   end
 
   def friendship_requests
-    Rails.logger.debug("User#friendship_requests")
     incoming_friendships.select(&:pending?)
   end
 
+  def friendship_requesters_ids
+    incoming_friendships.select(&:pending?).pluck(:sender_id)
+  end
+
   def friendship_requesters
-    Rails.logger.debug("User#friendship_requesters")
-    incoming_friendships.select(&:pending?).map(&:sender)
+    User.where(id: friend_requesters_ids)
+  end
+
+  def friendship_receivers_ids
+    outgoing_friendships.select(&:pending?).pluck(:sender_id)
   end
 
   def friendship_receivers
-    Rails.logger.debug("User#friendship_receivers")
-    outgoing_friendships.select(&:pending?).map(&:recipient)
+    User.where(id: friendship_receivers_ids)
   end
 end
