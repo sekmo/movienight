@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :outgoing_friendships, class_name: "Friendship", foreign_key: "sender_id"
   has_many :incoming_friendships, class_name: "Friendship", foreign_key: "recipient_id"
 
-  has_one :profile
+  has_one :profile, dependent: :destroy
 
   def ask_friendship(user)
     Friendship.create!(sender: self, recipient: user)
