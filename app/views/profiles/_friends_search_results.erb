@@ -1,0 +1,20 @@
+<% connections = ConnectionMapper.new(user_to_match, profiles).connections %>
+<ul>
+  <% connections.each do |connection| %>
+    <li>
+      <%= connection[:full_name] %>
+      <% case(connection[:type]) %>
+      <% when :friend %>
+        <%= button_to "Friends", {}, disabled: true, class: "btn btn-sm btn-primary" %>
+      <% when :requester %>
+        <%= button_to("Accept request", friendship_path(connection[:friendship]),
+              method: :patch, class: "btn btn-primary btn-sm") %>
+      <% when :receiver %>
+        <%= button_to "Request sent", {}, disabled: true, class: "btn btn-sm btn-primary" %>
+      <% when :stranger %>
+        <%= button_to "Send friend request", friendships_path(recipient: connection[:user_id]),
+              method: :post, class: "btn btn-sm btn-primary" %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
