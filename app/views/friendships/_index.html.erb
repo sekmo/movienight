@@ -1,10 +1,5 @@
-<br>
-<%= link_to profile_path(current_user.profile), class: 'btn btn-primary btn-sm' do %>
-  <span class="glyphicon glyphicon-menu-left"></span> Go back to your profile
-<% end %>
-
-<h1>Your friends</h1>
-
+<h2 style="display: inline-block">Your friends</h2>
+<%= link_to("Add a new friend", new_friendship_path, class: "btn btn-primary btn-xs") %>
 <ul class="friends">
   <% @friends.each do |friend| %>
     <li><%= friend.profile.full_name %></li>

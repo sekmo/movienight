@@ -1,13 +1,6 @@
-<h1>Your profile</h1>
+<h2><%= @profile.full_name %></h2>
+<%= link_to "Edit profile", edit_profile_path(current_user.profile), class: 'btn btn-xs' %>
 
-<dl class="row">
-  <dt class="col-sm-3">First name</dt>
-  <dd class="col-sm-9"><%= @profile.first_name %></dd>
-  <dt class="col-sm-3">Last name</dt>
-  <dd class="col-sm-9"><%= @profile.last_name %></dd>
-  <dt class="col-sm-3">Username</dt>
-  <dd class="col-sm-9"><%= @profile.nickname %></dd>
-</dl>
-
-<%= link_to "View friends", friendships_path, class: 'btn btn-primary' %>
-<%= link_to "Edit profile", edit_profile_path(current_user.profile), class: 'btn btn-primary' %>
+<div class="friendships">
+  <%= render "friendships/index" %>
+</div>

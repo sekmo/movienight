@@ -12,6 +12,8 @@ class ProfilesController < ApplicationController
   end
 
   def show
+    @friends = current_user.friends
+    @friendship_requests = current_user.friendship_requests
   end
 
   def index

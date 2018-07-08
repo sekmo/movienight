@@ -1,11 +1,6 @@
 class FriendshipsController < ApplicationController
   before_action :set_friendship, only: [:update, :destroy]
 
-  def index
-    @friends = current_user.friends
-    @friendship_requests = current_user.friendship_requests
-  end
-
   def create
     recipient = User.find(params[:recipient])
     if current_user.ask_friendship(recipient)
