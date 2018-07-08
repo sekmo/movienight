@@ -4,7 +4,7 @@ class FriendshipsController < ApplicationController
   def create
     recipient = User.find(params[:recipient])
     if current_user.ask_friendship(recipient)
-      redirect_to friendships_url, notice: "Friend request sent"
+      redirect_to profile_path(current_user.profile), notice: "Friend request sent"
     else
       redirect_to_root_with_error("Friend request already sent")
     end
@@ -13,7 +13,7 @@ class FriendshipsController < ApplicationController
   def update
     if @friendship.recipient == current_user && @friendship.confirm!
       flash[:notice] = "You have a new friend! ❤️"
-      redirect_to friendships_url
+      redirect_to profile_path(current_user.profile)
     else
       redirect_to_root_with_error
     end
@@ -23,7 +23,7 @@ class FriendshipsController < ApplicationController
     if current_user.in? [@friendship.sender, @friendship.recipient]
       @friendship.destroy
       flash[:notice] = "You've lost a friend. 💔"
-      redirect_to friendships_url
+      redirect_to profile_path(current_user.profile)
     else
       redirect_to_root_with_error
     end

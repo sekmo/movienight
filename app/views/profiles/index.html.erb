@@ -1,5 +1,9 @@
 <h1>Search result</h1>
 
+<%= render "search_form" %>
+
+<br>
+
 <% if @profiles.any? %>
   <%= render "friends_search_results", user_to_match: current_user, profiles: @profiles %>
 <% else %>
