@@ -11,12 +11,12 @@ RSpec.feature "Friendships", type: :feature do
   end
 
   scenario "User can accept a pending friendship request" do
-    visit friendships_path
+    visit profile_path(@tom.profile)
     expect(page).to have_content(@jerry.profile.full_name)
     pending_friend_li = find("ul.pending-requests").find("li", text: @jerry.profile.full_name)
 
     pending_friend_li.click_on("Accept request")
-    visit friendships_path
+    visit profile_path(@tom.profile)
 
     friends_ul = find("ul.friends")
     pending_requests_ul = find("ul.pending-requests")
