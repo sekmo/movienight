@@ -19,6 +19,6 @@ RSpec.feature "Search for movies", type: :feature do
     visit new_wish_path
 
     expect(current_path).to eql(new_profile_path)
-    expect(page).to have_content "Create a profile to add movies to your wishlist!"
+    expect(page).to have_content "Create your social profile to continue"
   end
 end

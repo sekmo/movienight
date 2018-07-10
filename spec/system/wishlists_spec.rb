@@ -6,6 +6,13 @@ RSpec.describe "Managing the wishlist", type: :system do
     login_as @user, scope: :user
   end
 
+  scenario "User cannot search for a movie if she doesn't have a profile" do
+    @user.profile.destroy
+    visit new_wish_path
+    expect(current_path).to eql(new_profile_path)
+    expect(page).to have_content "Create your social profile to continue"
+  end
+
   scenario "User adds a movie to her wishlist" do
     visit new_wish_path
     fill_in "search", with: "kill bill"

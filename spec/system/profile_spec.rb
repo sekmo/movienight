@@ -35,12 +35,6 @@ RSpec.feature "Profile", type: :feature do
      .and change { @profile.nickname }.from("sekmo").to("marione")
   end
 
-  scenario "User cannot search for a movie if she doesn't have a profile" do
-    visit new_wish_path
-    expect(current_path).to eql(new_profile_path)
-    expect(page).to have_content "Create a profile to add movies to your wishlist!"
-  end
-
   scenario "User cannot visit the new profile page if she already have a profile" do
     @profile = create(:profile, user: @user, first_name: "Francesco", last_name: "Mari",
       nickname: "sekmo")

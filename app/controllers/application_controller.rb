@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :authenticate_user!, :check_profile
+  before_action :authenticate_user!
+  before_action :enforce_current_user_profile, if: -> { user_signed_in? }
 
   protected
 
@@ -19,9 +20,9 @@ class ApplicationController < ActionController::Base
     flash.discard if request.xhr?
   end
 
-  def check_profile
-    if user_signed_in? && current_user.profile.nil?
-      flash[:notice] = "Create a profile to add movies to your wishlist!"
+  def enforce_current_user_profile
+    if !current_user.profile.try(:persisted?)
+      flash[:notice] = "Create your social profile to continue 😺"
       redirect_to new_profile_path
     end
   end

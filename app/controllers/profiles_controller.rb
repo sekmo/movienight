@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update]
-  before_action :check_profile, only: [:index]
+  before_action :enforce_current_user_profile, only: [:index]
 
   def new
     if current_user.profile.present?
@@ -40,7 +40,7 @@ class ProfilesController < ApplicationController
   def update
     if @profile.update_attributes(profile_params)
       flash[:notice] = "The update has been updated."
-      render "show"
+      redirect_to profile_url
     else
       render "edit"
     end
@@ -53,10 +53,11 @@ class ProfilesController < ApplicationController
   end
 
   def set_profile
-    @profile = Profile.find_by_user_id!(current_user)
+    @profile = Profile.find(params[:id])
+    check_owner(@profile)
 
     rescue ActiveRecord::RecordNotFound
-      flash[:error] = "Profile not found. Create a profile to add movies to your wishlist!"
+      flash[:error] = "Create your social profile to continue 😺"
       redirect_to new_profile_path
   end
 end
