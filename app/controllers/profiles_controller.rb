@@ -55,9 +55,7 @@ class ProfilesController < ApplicationController
   def set_profile
     @profile = Profile.find(params[:id])
     check_owner(@profile)
-
-    rescue ActiveRecord::RecordNotFound
-      flash[:error] = "Create your social profile to continue 😺"
-      redirect_to new_profile_path
+  rescue ActiveRecord::RecordNotFound
+    redirect_to_root_with_error
   end
 end
