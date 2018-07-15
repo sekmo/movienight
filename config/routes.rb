@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :friendships
   devise_for :users
   resources :profiles, only: [:index, :show, :create, :new, :edit, :update]
+  resources :public_profiles, only: [:index, :show]
   # resolve('Profile') { [:profile] }
 
   get  'pages/:page', to: 'pages#show', as: 'pages'
