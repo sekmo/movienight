@@ -1,39 +1,6 @@
-<h2 style="display: inline-block">Your friends</h2>
+<h2>Friends</h2>
 <ul class="friends">
   <% @friends.each do |friend| %>
     <li><%= friend.profile.full_name %></li>
   <% end %>
 </ul>
-<%= link_to("Add a new friend", "#", class: "btn btn-primary btn-sm", data: { toggle: "modal", target: "#search-friend-modal" }) %>
-<% if @friendship_requests.any? %>
-  <h2>Pending requests</h2>
-  <ul class="pending-requests">
-    <% @friendship_requests.each do |friendship| %>
-      <li>
-        <%= friendship.sender.profile.full_name %>
-        <%= link_to("Accept request", friendship_path(friendship), method: :patch, class: "btn btn-primary btn-xs") %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
-
-<div class="modal fade" id="search-friend-modal" tabindex="-1" role="dialog" aria-labelledby="search_friend_form">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Add a new friend</h4>
-      </div>
-      <%= form_with(url: profiles_path, local: true, method: :get) do |f| %>
-        <div class="modal-body">
-            <%= f.label :q, "Search for:" %>
-            <%= f.text_field :q %>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <%= f.button "Search", name: nil, class: "btn btn-primary" %>
-        </div>
-      <% end %>
-    </div>
-  </div>
-</div>
