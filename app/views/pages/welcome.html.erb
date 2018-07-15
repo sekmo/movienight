@@ -6,7 +6,7 @@
 
 
 <% if user_signed_in? %>
-  <% if current_user.profile.present? %>
+  <% if current_user_profile.present? %>
     <p style="margin-top: 2em"><%= link_to "Add movies to your wishlist!", new_wish_path, class: "btn btn-primary btn-lg" %></p>
   <% else %>
     <p style="margin-top: 2em"><%= link_to "Create a profile to continue", new_profile_path, class: "btn btn-primary btn-lg" %></p>

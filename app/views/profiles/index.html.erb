@@ -5,7 +5,7 @@
 <br>
 
 <% if @profiles.any? %>
-  <%= render "friends_search_results", user_to_match: current_user, profiles: @profiles %>
+  <%= render "friends_search_results", profile_to_match: current_user_profile, profiles: @profiles %>
 <% else %>
   <p>Sorry, no users found.</p>
 <% end %>

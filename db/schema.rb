@@ -10,18 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180510093039) do
+ActiveRecord::Schema.define(version: 20180715200120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "friendships", force: :cascade do |t|
     t.integer "sender_id", null: false
-    t.integer "recipient_id", null: false
+    t.integer "receiver_id", null: false
     t.datetime "confirmation_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["recipient_id"], name: "index_friendships_on_recipient_id"
+    t.index ["receiver_id"], name: "index_friendships_on_receiver_id"
     t.index ["sender_id"], name: "index_friendships_on_sender_id"
   end
 
@@ -72,8 +72,8 @@ ActiveRecord::Schema.define(version: 20180510093039) do
     t.index ["user_id"], name: "index_wishes_on_user_id"
   end
 
-  add_foreign_key "friendships", "users", column: "recipient_id"
-  add_foreign_key "friendships", "users", column: "sender_id"
+  add_foreign_key "friendships", "profiles", column: "receiver_id"
+  add_foreign_key "friendships", "profiles", column: "sender_id"
   add_foreign_key "profiles", "users", on_delete: :cascade
   add_foreign_key "wishes", "movies", on_delete: :cascade
   add_foreign_key "wishes", "users", on_delete: :cascade

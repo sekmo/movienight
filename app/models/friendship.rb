@@ -1,9 +1,9 @@
 class Friendship < ApplicationRecord
-  belongs_to :sender, :class_name => "User"
-  belongs_to :recipient, :class_name => "User"
+  belongs_to :sender, :class_name => "Profile"
+  belongs_to :receiver, :class_name => "Profile"
 
-  validates :sender_id, presence: true, uniqueness: { scope: [:recipient_id] }
-  validates :recipient_id, presence: true
+  validates :sender_id, presence: true, uniqueness: { scope: [:receiver_id] }
+  validates :receiver_id, presence: true
 
   def confirmed?
     confirmation_date.present?

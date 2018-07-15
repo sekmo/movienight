@@ -2,7 +2,7 @@ class PublicProfilesController < ApplicationController
   def index
     term = params[:q]
     redirect_to_root_with_error if term.blank?
-    @profiles = Profile.search_by_full_name(term) - [current_user.profile]
+    @profiles = Profile.search_by_full_name(term) - [current_user_profile]
   end
 
   def show
