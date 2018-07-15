@@ -1,18 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe ConnectionMapper, type: :model do
-  let(:francesco) { create(:user) }
-  let(:chiara) { create(:user, :with_profile) }
-  let(:andrew) { create(:user, :with_profile) }
-  let(:mark) { create(:user, :with_profile) }
-  let(:stranger) { create(:user, :with_profile) }
-  let(:search_result_profiles) { [chiara.profile, andrew.profile, mark.profile, stranger.profile] }
+  let(:francesco) { create(:profile) }
+  let(:chiara) { create(:profile) }
+  let(:andrew) { create(:profile) }
+  let(:mark) { create(:profile) }
+  let(:stranger) { create(:profile) }
+  let(:search_result_profiles) { [chiara, andrew, mark, stranger] }
   let(:connection_mapper) { ConnectionMapper.new(francesco, search_result_profiles) }
 
   before do
-    Friendship.create!(sender: francesco, recipient: chiara).confirm!
-    Friendship.create!(sender: francesco, recipient: andrew)
-    Friendship.create!(sender: mark, recipient: francesco)
+    Friendship.create!(sender: francesco, receiver: chiara).confirm!
+    Friendship.create!(sender: francesco, receiver: andrew)
+    Friendship.create!(sender: mark, receiver: francesco)
   end
 
   describe "#connections" do
@@ -21,24 +21,24 @@ RSpec.describe ConnectionMapper, type: :model do
         connection_mapper.connections
       ).to eq([
         {
-          full_name: chiara.profile.full_name,
-          user_id: chiara.id,
+          full_name: chiara.full_name,
+          profile: chiara,
           type: :friend
         },
         {
-          full_name: andrew.profile.full_name,
-          user_id: andrew.id,
+          full_name: andrew.full_name,
+          profile: andrew,
           type: :receiver
         },
         {
-          full_name: mark.profile.full_name,
-          user_id: mark.id,
+          full_name: mark.full_name,
+          profile: mark,
           type: :requester,
-          friendship: Friendship.find_by!(sender: mark, recipient: francesco),
+          friendship: Friendship.find_by!(sender: mark, receiver: francesco),
         },
         {
-          full_name: stranger.profile.full_name,
-          user_id: stranger.id,
+          full_name: stranger.full_name,
+          profile: stranger,
           type: :stranger
         }
       ])
@@ -50,9 +50,9 @@ RSpec.describe ConnectionMapper, type: :model do
       expect(
         connection_mapper.send(:profiles_book)
       ).to eq({
-        friends_prof_ids: [chiara.profile.id],
-        friend_requesters_prof_ids: [mark.profile.id],
-        friend_receivers_prof_ids: [andrew.profile.id],
+        friends_ids: [chiara.id],
+        friend_requesters_ids: [mark.id],
+        friend_receivers_ids: [andrew.id],
       })
     end
   end
@@ -60,27 +60,27 @@ RSpec.describe ConnectionMapper, type: :model do
   describe "#connection_with" do
     it "Returns a friend connection" do
       expect(
-        connection_mapper.send(:connection_with, chiara.profile)
+        connection_mapper.send(:connection_with, chiara)
       ).to eq({ type: :friend })
     end
 
     it "Returns a receiver connection" do
       expect(
-        connection_mapper.send(:connection_with, andrew.profile)
+        connection_mapper.send(:connection_with, andrew)
       ).to eq({ type: :receiver })
     end
 
 
     it "Matches the profile of a user who sent us a friend request" do
-      friendship = Friendship.find_by!(sender: mark, recipient: francesco)
+      friendship = Friendship.find_by!(sender: mark, receiver: francesco)
       expect(
-        connection_mapper.send(:connection_with, mark.profile)
+        connection_mapper.send(:connection_with, mark)
       ).to eq({ type: :requester, friendship: friendship })
     end
 
     it "Matches the profile of an unrelated user" do
       expect(
-        connection_mapper.send(:connection_with, stranger.profile)
+        connection_mapper.send(:connection_with, stranger)
       ).to eq({ type: :stranger })
     end
   end

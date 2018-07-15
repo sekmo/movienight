@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Friendship, type: :model do
   describe "relationships" do
     it { is_expected.to belong_to(:sender) }
-    it { is_expected.to belong_to(:recipient) }
+    it { is_expected.to belong_to(:receiver) }
   end
 
   describe "#confirm!" do

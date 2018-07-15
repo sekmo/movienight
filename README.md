@@ -16,8 +16,8 @@ When the user logs in and searches for a movie, the *RemoteMoviesController* mak
 
 *Profile*: a user is asked to create a Profile with first name, last name and username to add movies on her wishlist.
 
-*Friendship* represent a friendship request: has a sender and a recipient. To represent that the
-recipient has confirmed the friendship, we just fill the confirmation date on the friendship,
+*Friendship* represent a friendship request: has a sender and a receiver. To represent that the
+receiver has confirmed the friendship, we just fill the confirmation date on the friendship,
 otherwise remains a pending request.
 
 ## Feature roadmap:

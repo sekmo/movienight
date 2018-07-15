@@ -3,7 +3,7 @@ class ProfilesController < ApplicationController
   before_action :enforce_current_user_profile, only: [:index]
 
   def new
-    if current_user.profile.present?
+    if current_user_has_profile?
       flash[:notice] = "You already have a profile. Create your wishlist!"
       redirect_to new_wish_path
     else
@@ -12,14 +12,14 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @friends = current_user.friends
-    @friendship_requests = current_user.friendship_requests
+    @friends = @profile.friends
+    @friendship_requests = @profile.friendship_requests
   end
 
   def index
     term = params[:q]
     redirect_to_root_with_error if term.blank?
-    @profiles = Profile.search_by_full_name(term) - [current_user.profile]
+    @profiles = Profile.search_by_full_name(term) - [current_user_profile]
   end
 
   def create

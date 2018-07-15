@@ -1,4 +1,4 @@
-<% connections = ConnectionMapper.new(user_to_match, profiles).connections %>
+<% connections = ConnectionMapper.new(profile_to_match, profiles).connections %>
 <ul>
   <% connections.each do |connection| %>
     <li>
@@ -12,7 +12,7 @@
       <% when :receiver %>
         <%= button_to "Request sent", {}, disabled: true, class: "btn btn-sm btn-primary" %>
       <% when :stranger %>
-        <%= button_to "Send friend request", friendships_path(recipient: connection[:user_id]),
+        <%= button_to "Send friend request", friendships_path(receiver: connection[:profile]),
               method: :post, class: "btn btn-sm btn-primary" %>
       <% end %>
     </li>

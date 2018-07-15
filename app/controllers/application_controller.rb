@@ -21,9 +21,17 @@ class ApplicationController < ActionController::Base
   end
 
   def enforce_current_user_profile
-    if !current_user.profile.try(:persisted?)
+    if !current_user_has_profile?
       flash[:notice] = "Create your social profile to continue 😺"
       redirect_to new_profile_path
     end
+  end
+
+  def current_user_has_profile?
+    helpers.current_user_has_profile?
+  end
+
+  def current_user_profile
+    helpers.current_user_profile
   end
 end

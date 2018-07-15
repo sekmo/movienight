@@ -20,7 +20,11 @@ module ApplicationHelper
     end
   end
 
-  def user_has_profile?
+  def current_user_has_profile?
     current_user.profile.try(:persisted?)
+  end
+
+  def current_user_profile
+    @_current_user_profile ||= current_user.profile
   end
 end

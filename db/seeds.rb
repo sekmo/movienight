@@ -43,15 +43,15 @@ Profile.create!([
   { first_name: "Jack", last_name: "Steward", nickname: "jack", user: User.find(9) }
 ])
 
-User.find(1).ask_friendship(User.find(2))
+Profile.find(1).ask_friendship(Profile.find(2))
 Friendship.last.confirm!
-User.find(3).ask_friendship(User.find(1))
+Profile.find(3).ask_friendship(Profile.find(1))
 Friendship.last.confirm!
-User.find(1).ask_friendship(User.find(4))
-User.find(5).ask_friendship(User.find(1))
-User.find(1).ask_friendship(User.find(6))
-User.find(7).ask_friendship(User.find(1))
-User.find(1).ask_friendship(User.find(8))
-User.find(9).ask_friendship(User.find(1))
+Profile.find(1).ask_friendship(Profile.find(4))
+Profile.find(5).ask_friendship(Profile.find(1))
+Profile.find(1).ask_friendship(Profile.find(6))
+Profile.find(7).ask_friendship(Profile.find(1))
+Profile.find(1).ask_friendship(Profile.find(8))
+Profile.find(9).ask_friendship(Profile.find(1))
 
 puts "Users, Profiles created."

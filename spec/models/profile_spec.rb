@@ -33,4 +33,30 @@ RSpec.describe Profile, type: :model do
       end
     end
   end
+
+  describe "#ask_friendship" do
+    it "creates a new friendship" do
+      @tom   ||= create(:profile)
+      @jerry ||= create(:profile)
+
+      expect {
+        @tom.ask_friendship(@jerry)
+      }.to change { @jerry.reload.friendship_requesters.include?(@tom) }.from(false).to(true)
+    end
+  end
+
+  describe "#friends" do
+    #TODO
+    it "returns all the friends of the user"
+  end
+
+  describe "#friendship_requests" do
+    #TODO
+    it "returns the pending friendship requests"
+  end
+
+  describe "#friendship_requesters" do
+    #TODO
+    it "returns the users that made a friendship request to the user"
+  end
 end
