@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!
-  before_action :enforce_current_user_profile, if: -> { user_signed_in? }
+  before_action :check_current_user_has_profile, if: -> { user_signed_in? }
 
   protected
 
@@ -10,8 +10,8 @@ class ApplicationController < ActionController::Base
     redirect_to root_url
   end
 
-  def check_owner(object)
-    if object.user != current_user
+  def check_current_profile_owner_of(object)
+    if object.profile != current_user_profile
       redirect_to_root_with_error
     end
   end
@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
     flash.discard if request.xhr?
   end
 
-  def enforce_current_user_profile
+  def check_current_user_has_profile
     if !current_user_has_profile?
       flash[:notice] = "Create your social profile to continue 😺"
       redirect_to new_profile_path

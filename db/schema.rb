@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180715200120) do
+ActiveRecord::Schema.define(version: 20180716201604) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,19 +62,19 @@ ActiveRecord::Schema.define(version: 20180715200120) do
   end
 
   create_table "wishes", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.bigint "profile_id", null: false
     t.bigint "movie_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["movie_id", "user_id"], name: "index_wishes_on_movie_id_and_user_id", unique: true
+    t.index ["movie_id", "profile_id"], name: "index_wishes_on_movie_id_and_profile_id", unique: true
     t.index ["movie_id"], name: "index_wishes_on_movie_id"
-    t.index ["user_id", "movie_id"], name: "index_wishes_on_user_id_and_movie_id"
-    t.index ["user_id"], name: "index_wishes_on_user_id"
+    t.index ["profile_id", "movie_id"], name: "index_wishes_on_profile_id_and_movie_id"
+    t.index ["profile_id"], name: "index_wishes_on_profile_id"
   end
 
   add_foreign_key "friendships", "profiles", column: "receiver_id"
   add_foreign_key "friendships", "profiles", column: "sender_id"
   add_foreign_key "profiles", "users", on_delete: :cascade
   add_foreign_key "wishes", "movies", on_delete: :cascade
-  add_foreign_key "wishes", "users", on_delete: :cascade
+  add_foreign_key "wishes", "profiles"
 end

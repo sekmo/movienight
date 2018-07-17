@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :wish do
-    association :user
+    association :profile
     association :movie
   end
 end

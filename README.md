@@ -6,11 +6,19 @@ It comes from an idea I had some months ago, after I spent with my girlfriend ab
 
 I thought we could create a personal movie wishlist (with movies that you want to watch or re-watch), so when you are with your friends or your partner, the app cross-compares the lists and tells which films you both want to watch. Easy peasy.
 
-## Current stage
+## Current features
 
-The application is in its embryo stage - at the moment it has the movie searcher and the "Add to whishlist" feature.
-Currently we have four models: *User*, *Profile*, *Movie*, *Wish*, and *Friendship*.
-*Wish* represents the film that a *User* wants to watch, it's basically a lookup table between *User* and *Movie*.
+* Profile creation
+* Search for movies (TMDB api)
+* Add movies to the wishlist
+* Search for friends
+* Send friendship requests to other profiles
+
+Currently we have five models: *User*, *Profile*, *Movie*, *Wish*, and *Friendship*.
+
+*Wish* represents the movie that a *Profile* wants to watch, it's basically a lookup table between *Profile* and *Movie*. The Wish and Friendship models relate with the Profile model rather than Users, since
+we pass around Profiles, not Users (think about friendships and event invites).
+Also, in this way the authentication is kept separated from the social feature.
 
 When the user logs in and searches for a movie, the *RemoteMoviesController* makes a request to the TMDB api and presents a list with the requested movies. When the user clicks on a movie, we create (if needed) a new record on the *movies* table (caching the *tmdb_id* and the *title*), then we create a new *Wish* that relates the *Movie* with the *User*.
 
@@ -22,7 +30,6 @@ otherwise remains a pending request.
 
 ## Feature roadmap:
 
-* Search for a profile to send a friend request
 * Event creation, invite friends
 * Comment on events
 
