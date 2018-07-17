@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update]
-  before_action :enforce_current_user_profile, only: [:index]
+  before_action :check_current_user_has_profile, only: [:index]
 
   def new
     if current_user_has_profile?
@@ -54,8 +54,14 @@ class ProfilesController < ApplicationController
 
   def set_profile
     @profile = Profile.find(params[:id])
-    check_owner(@profile)
+    check_current_user_owner_of @profile
   rescue ActiveRecord::RecordNotFound
-    redirect_to_root_with_error
+      redirect_to_root_with_error
+  end
+
+  def check_current_user_owner_of(object)
+    if object.user != current_user
+      redirect_to_root_with_error
+    end
   end
 end

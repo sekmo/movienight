@@ -2,12 +2,13 @@ require "rails_helper"
 
 RSpec.describe "Managing the wishlist", type: :system do
   before(:each) do
-    @user ||= create(:user, :with_profile)
-    login_as @user, scope: :user
+    user = create(:user, :with_profile)
+    @profile = user.profile
+    login_as user, scope: :user
   end
 
   scenario "User cannot search for a movie if she doesn't have a profile" do
-    @user.profile.destroy
+    @profile.destroy
     visit new_wish_path
     expect(current_path).to eql(new_profile_path)
     expect(page).to have_content "Create your social profile to continue"
@@ -24,22 +25,22 @@ RSpec.describe "Managing the wishlist", type: :system do
     movie_span_container = movie_span.first(:xpath, ".//..")
     expect {
       movie_span_container.click_on("Add to wishlist")
-    }.to change { @user.wishes.count }.by(1)
+    }.to change { @profile.wishes.count }.by(1)
   end
 
   scenario "User removes a movie from her wishlist", js: true do
     movie = create(:movie)
-    create(:wish, movie: movie, user: @user)
+    create(:wish, movie: movie, profile: @profile)
     visit wishes_path
     expect(page).to have_content movie.title
 
     movie_li = find("li", text: movie.title)
 
-    expect(@user.wishes.count).to eq(1)
+    expect(@profile.wishes.count).to eq(1)
 
     movie_li.click_on("Remove movie")
     expect(page).not_to have_content movie.title
-    expect(@user.wishes.count).to eq(0)
+    expect(@profile.wishes.count).to eq(0)
 
     # TODO Why doesn't it work?
     # expect {
