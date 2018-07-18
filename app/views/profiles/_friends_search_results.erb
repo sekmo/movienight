@@ -1,5 +1,5 @@
 <% connections = ConnectionMapper.new(profile_to_match, profiles).connections %>
-<ul>
+<ul class="friend-search-results">
   <% connections.each do |connection| %>
     <li>
       <%= connection[:full_name] %>
