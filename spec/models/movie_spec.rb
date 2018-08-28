@@ -20,4 +20,27 @@ RSpec.describe Movie, type: :model do
       expect(build(:movie, tmdb_code: 42)).to_not be_valid
     end
   end
+
+  describe ".match_all_profiles" do
+    let(:tom)   { create(:profile) }
+    let(:jerry) { create(:profile) }
+    let(:spike) { create(:profile) }
+
+    let(:movie_1) { create(:movie) }
+    let(:movie_2) { create(:movie) }
+    let(:movie_3) { create(:movie) }
+    let(:movie_4) { create(:movie) }
+
+    let!(:tom_wish1)   { create(:wish, movie: movie_1, profile: tom) }
+    let!(:jerry_wish1) { create(:wish, movie: movie_2, profile: jerry) }
+    let!(:spike_wish1) { create(:wish, movie: movie_3, profile: spike) }
+
+    let!(:tom_wish2)   { create(:wish, movie: movie_4, profile: tom) }
+    let!(:jerry_wish2) { create(:wish, movie: movie_4, profile: jerry) }
+    let!(:spike_wish2) { create(:wish, movie: movie_4, profile: spike) }
+
+    it "returns the movies that multiple profiles have in common" do
+      expect(Movie.match_all_profiles([tom.id, jerry.id, spike.id])).to eq([movie_4])
+    end
+  end
 end
