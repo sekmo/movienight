@@ -1,0 +1,17 @@
+<h1>Matching movies!</h1>
+
+<div class="movie-list">
+  <% if @movies.any? %>
+    <ul>
+      <% @movies.each do |movie| %>
+        <li class="movie">
+          <%= movie_poster_image(movie[:poster_path]) %>
+          <%= content_tag :span, "#{truncate(movie[:title], length: 50)}",
+                          class: "movie__title" %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <h3>Sorry, no movies found. 🙁</h3>
+  <% end %>
+</div>

@@ -1,20 +1,20 @@
 <h1>Results</h1>
 <p><%= link_to 'Go to your wishlist', wishes_path %></p>
 
-<div class="searched-movies">
+<div class="movie-list">
   <% if params[:search].present? %>
     <% if @movies.any? %>
       <ul>
         <% @movies.each do |movie| %>
-          <li class="searched-movie">
+          <li class="movie">
             <%= movie_poster_image(movie[:poster_path]) %>
             <%= content_tag :span, "#{truncate(movie[:title], length: 50)}",
-                            class: "searched-movie__title" %>
+                            class: "movie__title" %>
             <%= button_to 'Add to wishlist',
                         wishes_path(tmdb_code: movie[:tmdb_code],
                                     title: movie[:title],
                                     poster_path: movie[:poster_path]),
-                        method: :post, class: 'searched-movie__add-button btn btn-primary' %>
+                        method: :post, class: 'movie__add-button btn btn-primary' %>
           </li>
         <% end %>
       </ul>

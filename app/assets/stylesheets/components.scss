@@ -29,12 +29,12 @@
   }
 }
 
-.searched-movies {
+.movie-list {
   > ul {
     padding-left: 0;
     list-style: none;
   }
-  .searched-movie {
+  .movie {
     display: flex;
     align-items: center;
     border: 1px solid #eee;
