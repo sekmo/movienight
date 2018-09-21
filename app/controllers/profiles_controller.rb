@@ -49,7 +49,7 @@ class ProfilesController < ApplicationController
   private
 
   def profile_params
-    params[:profile].permit(:nickname, :first_name, :last_name)
+    params[:profile].permit(:nickname, :first_name, :last_name, :image)
   end
 
   def set_profile
