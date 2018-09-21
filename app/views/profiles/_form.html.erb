@@ -15,6 +15,12 @@
     <%= f.text_field :nickname %>
   </div>
 
+  <div class="field">
+    <%= f.label :image %><br />
+    <%= f.hidden_field :image, value: f.object.cached_image_data %>
+    <%= f.file_field :image %>
+  </div>
+
   <br>
   <%= f.submit class: 'btn btn-primary' %>
 <% end %>
