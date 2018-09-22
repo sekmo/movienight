@@ -1,8 +1,12 @@
-<h2><%= @profile.full_name %></h2>
-<%= link_to "Edit profile", edit_profile_path(current_user_profile), class: 'btn btn-xs' %>
+<div class="profile">
+  <h2><%= @profile.full_name %></h2>
+  <%= profile_image_for(@profile) %>
 
-<div class="friendships">
-  <%= render "friendships/index" %>
-  <%= render "shared/search_friend_modal" %>
-  <%= render "friendships/pending_requests" %>
+  <%= link_to "Edit profile", edit_profile_path(current_user_profile), class: "small" %>
+
+  <div class="profile__friendships">
+    <%= render "friendships/index" %>
+    <%= render "shared/search_friend_modal" %>
+    <%= render "friendships/pending_requests" %>
+  </div>
 </div>

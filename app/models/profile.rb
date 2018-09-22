@@ -14,6 +14,10 @@ class Profile < ApplicationRecord
     "#{first_name} #{last_name} (#{nickname})"
   end
 
+  def initials
+    "#{first_name[0]}#{last_name[0]}"
+  end
+
   def self.search_by_full_name(term)
     return [] if term.blank?
     where("first_name ILIKE ?", "%#{term}%")

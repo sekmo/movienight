@@ -12,6 +12,13 @@ RSpec.describe Profile, type: :model do
     end
   end
 
+  describe  "initials" do
+    it "returns the initials of the profile" do
+      profile = build(:profile, first_name: "Gegio", last_name: "Stockhausen")
+      expect(profile.initials).to eq("GS")
+    end
+  end
+
   describe ".search_by_full_name" do
     let(:francesco) { create(:profile, first_name: "Francesco", last_name: "Mari", nickname: "sekmo") }
     let(:andrea) { create(:profile, first_name: "Andrea", last_name: "Rossi", nickname: "frank") }
