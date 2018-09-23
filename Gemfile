@@ -51,6 +51,8 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'spring-commands-rspec'
   gem 'web-console', '>= 3.3.0'
+  gem 'mina', require: false
+  gem 'mina-puma', require: false
 end
 
 group :test do
