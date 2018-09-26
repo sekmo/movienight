@@ -1,12 +1,17 @@
 <h1>Match your friend's movies!</h1>
 
-<%= form_tag match_path, method: "get" do %>
-  <% @friends.each do |friend| %>
-    <p>
-      <%= check_box_tag "profiles_ids[]", friend.id, false, id: "profile_#{friend.id}" %>
-      <%= label_tag "profile_#{friend.id}", friend.full_name %>
-    </p>
-  <% end %>
+<% if @friends.any? %>
+  <p>Select one or more friends to see which movies you both want to watch!</p>
+  <%= form_tag match_path, method: "get" do %>
+    <% @friends.each do |friend| %>
+      <p>
+        <%= check_box_tag "profiles_ids[]", friend.id, false, id: "profile_#{friend.id}" %>
+        <%= label_tag "profile_#{friend.id}", friend.full_name %>
+      </p>
+    <% end %>
 
-  <%= submit_tag "See matching movies!", name: nil %>
+    <%= submit_tag "See matching movies!", name: nil %>
+  <% end %>
+<% else %>
+  <p>Add some friends <%= link_to "from your profile page", profile_path(current_user_profile) %> to see which movies you both want to watch!</p>
 <% end %>
