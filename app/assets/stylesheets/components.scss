@@ -66,6 +66,8 @@
     width: rem(100px);
     display: block;
     border-radius: 100%;
+    background-size: cover !important;
+    background-position: center center !important;
     &--placeholder {
       height: rem(100px);
       width: rem(100px);
