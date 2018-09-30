@@ -13,21 +13,7 @@
     <header class="header">
       <div class="header__inner wrapper">
         <%= link_to 'MovieNight', root_path, class: "site-title" %>
-        <nav class="main-nav">
-          <ul>
-            <% if user_signed_in? %>
-              <li><%= link_to "Your wishlist", wishes_path %></li>
-              <% if current_user_has_profile? %>
-                <li><%= link_to "Quick match", new_match_path %></li>
-                <li><%= link_to "Your profile", profile_path(current_user_profile) %></li>
-              <% end %>
-              <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
-            <% else %>
-              <li><%= link_to "Login", new_user_session_path %></li>
-              <li><%= link_to "Register", new_user_registration_path %></li>
-            <% end %>
-          </ul>
-        </nav>
+        <%= render "shared/menu" %>
       </div>
     </header>
     <%= render "shared/flash_messages" %>
