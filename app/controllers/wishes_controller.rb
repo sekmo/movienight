@@ -10,8 +10,19 @@ class WishesController < ApplicationController
   end
 
   def create
-    movie = Movie.create_with(title: params[:title], poster_path: params[:poster_path])
-                 .find_or_create_by!(tmdb_code: params[:tmdb_code])
+    movie_details = TMDB::Client.get_movie_details(params[:tmdb_code])
+
+    movie = Movie.create_with(
+      title: movie_details["title"],
+      poster_path: movie_details["poster_path"],
+      length: movie_details["runtime"],
+      rating: movie_details["vote_average"],
+      year: movie_details["release_date"][0..3].to_i,
+      directors: movie_details["credits"]["crew"]
+        .select { |person| person["job"] == "Director" }
+        .map { |person| person["name"] }
+    ).find_or_create_by!(tmdb_code: params[:tmdb_code])
+
     wish = Wish.find_or_initialize_by(movie: movie, profile: current_user_profile)
     if wish.persisted?
       flash[:notice] = "The movie was already present in your wishlist."

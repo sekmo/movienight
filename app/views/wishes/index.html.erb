@@ -7,8 +7,13 @@
     <% @wishes.each do |wish| %>
       <li class="wish" data-wish-id="<%= wish.id %>">
         <%= movie_poster_image(wish.movie.poster_path) %>
-        <%= content_tag :span, truncate(wish.movie.title, length: 50), class: "wish__title" %>
-        <%= button_to "Remove movie", wish_path(wish), method: :delete,
+        <div class="wish__info">
+          <span class="wish__title"><%= truncate(wish.movie.title, length: 50) %></span>
+          <p class="wish__directors">
+            <%= "#{wish.movie.directors.sort.join(', ')} (#{wish.movie.year})" %>
+          </p>
+        </div>
+        <%= button_to "Remove", wish_path(wish), method: :delete,
               remote: true, class: "wish__remove-button btn btn-danger" %>
       </li>
     <% end %>

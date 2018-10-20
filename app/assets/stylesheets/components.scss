@@ -11,11 +11,16 @@
       border-bottom: none;
     }
     background: #fff;
-    &__title {
+    &__info {
       flex-grow: 1;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+    &__directors {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 0;
     }
     & > img {
       height: 70px;

@@ -11,10 +11,8 @@
             <%= content_tag :span, "#{truncate(movie[:title], length: 50)}",
                             class: "movie__title" %>
             <%= button_to 'Add to wishlist',
-                        wishes_path(tmdb_code: movie[:tmdb_code],
-                                    title: movie[:title],
-                                    poster_path: movie[:poster_path]),
-                        method: :post, class: 'movie__add-button btn btn-primary' %>
+                        wishes_path(tmdb_code: movie[:tmdb_code]),
+                          method: :post, class: 'movie__add-button btn btn-primary' %>
           </li>
         <% end %>
       </ul>
