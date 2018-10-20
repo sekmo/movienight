@@ -23,6 +23,11 @@ module TMDB
       movies
     end
 
+    def get_movie_details(tmdb_code)
+      response_body = make_request("/movie/#{tmdb_code}", "append_to_response=credits,videos")
+      JSON.parse(response_body)
+    end
+
     def make_request(endpoint, query_string)
       url = "#{API_BASE_PATH}#{endpoint}?#{query_string}&api_key=#{@api_key}"
       response = HTTParty.get(url)
