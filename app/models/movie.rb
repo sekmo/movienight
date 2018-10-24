@@ -12,18 +12,16 @@ class Movie < ApplicationRecord
   end
 
   def self.find_or_create_by_tmdb_id(tmdb_id)
-    #TODO Don't do an api request if the movie is persisted
-    movie_details = TMDB::Client.get_movie_details(tmdb_id)
-
-    Movie.create_with(
-      title: movie_details["title"],
-      poster_path: movie_details["poster_path"],
-      length: movie_details["runtime"],
-      rating: movie_details["vote_average"],
-      year: movie_details["release_date"][0..3].to_i,
-      directors: movie_details["credits"]["crew"]
+    Movie.find_or_create_by!(tmdb_code: tmdb_id) do |movie|
+      movie_details = TMDB::Client.get_movie_details(tmdb_id)
+      movie.title = movie_details["title"]
+      movie.poster_path = movie_details["poster_path"]
+      movie.length = movie_details["runtime"]
+      movie.rating = movie_details["vote_average"]
+      movie.year = movie_details["release_date"][0..3].to_i
+      movie.directors = movie_details["credits"]["crew"]
         .select { |person| person["job"] == "Director" }
-        .map { |person| person["name"] }
-    ).find_or_create_by!(tmdb_code: tmdb_id)
+        .map { |person| person["name"] }.sort
+    end
   end
 end
