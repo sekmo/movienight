@@ -9,7 +9,8 @@ module TMDB
     end
 
     def self.search_movies(keyword)
-      response_body = make_request("/search/movie", "query=#{keyword}&adult=false")
+      escaped_keyword = URI.escape(keyword)
+      response_body = make_request("/search/movie", "query=#{escaped_keyword}&adult=false")
       response_hash = JSON.parse(response_body)["results"]
 
       movies = []
