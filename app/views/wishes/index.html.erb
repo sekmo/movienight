@@ -10,7 +10,7 @@
         <div class="wish__info">
           <span class="wish__title"><%= truncate(wish.movie.title, length: 50) %></span>
           <p class="wish__directors">
-            <%= "#{wish.movie.directors.sort.join(', ')} (#{wish.movie.year})" %>
+            <%= "#{wish.movie.directors.join(', ')} (#{wish.movie.year})" %>
           </p>
         </div>
         <%= button_to "Remove", wish_path(wish), method: :delete,
