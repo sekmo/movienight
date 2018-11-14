@@ -7,8 +7,25 @@ class Movie < ApplicationRecord
   validates :title, presence: true
 
   # Return all the movies that are in all the watchlists of every specified profile
+  # def self.match_all_profiles(profile_ids)
+  #   Movie.joins(:profiles).where(profiles: {id: profile_ids}).group(:id).having("COUNT(*) = ?", profile_ids.size)
+  # end
+
   def self.match_all_profiles(profile_ids)
-    Movie.joins(:profiles).where(profiles: {id: profile_ids}).group(:id).having("COUNT(*) = ?", profile_ids.size)
+    # It returns two arrays: the first with the 100% matching movies, the second with the
+    # partially matching movies
+    # {
+    #   complete_match: [ movie1, movie2 ],
+    #   partial_match: [ movie3, movie4, movie5 ],
+    # }
+    Movie.select("id","title","poster_path", "rating", "round((count(1)::numeric/#{profile_ids.size}*100))::integer as matching_percentage")
+    .joins(:profiles)
+    .where(profiles: {id: profile_ids})
+    .order(count: :desc, rating: :desc)
+    .group(:id)
+    .partition {|movie| movie.matching_percentage == 100}
+    .map.with_index {|arr,i| [ i == 0 ? :complete_match : :partial_match, arr]}
+    .to_h
   end
 
   def self.find_or_create_by_tmdb_id(tmdb_id)

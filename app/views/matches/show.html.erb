@@ -1,9 +1,10 @@
-<h1>Matching movies!</h1>
+<h3>These are the movies that matches your watchlists:</h3>
 
 <div class="movie-list">
-  <% if @movies.any? %>
+  <% if @movies[:complete_match].any? %>
+    <p>Complete Match:</p>
     <ul>
-      <% @movies.each do |movie| %>
+      <% @movies[:complete_match].each do |movie| %>
         <li class="movie">
           <%= movie_poster_image(movie[:poster_path]) %>
           <%= content_tag :span, "#{truncate(movie[:title], length: 50)}",
@@ -11,7 +12,24 @@
         </li>
       <% end %>
     </ul>
-  <% else %>
-    <h3>Sorry, no movies found. 🙁</h3>
+  <% end %>
+
+  <% if @movies[:partial_match].any? && @amount_of_matched_users > 2 %>
+    <p>Partial match:</p>
+    <ul>
+      <% @movies[:partial_match].each do |movie| %>
+        <li class="movie">
+          <%= movie_poster_image(movie[:poster_path]) %>
+          <%= content_tag :span, "#{truncate(movie[:title], length: 50)}",
+                          class: "movie__title" %>
+          <%= movie.matching_percentage %> -
+          <%= movie.rating %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <% if (@movies[:complete_match]+@movies[:partial_match]).blank? %>
+    <h3>☝️ Please add some movies to your watchlists, people!</h3>
   <% end %>
 </div>
