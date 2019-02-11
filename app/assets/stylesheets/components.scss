@@ -65,6 +65,44 @@
   }
 }
 
+.matched-movies-list {
+  > ul {
+    padding-left: 0;
+    list-style: none;
+  }
+  .movie {
+    display: flex;
+    align-items: center;
+    border: 1px solid #eee;
+    &:not(:last-child) {
+      border-bottom: none;
+    }
+    background: #fff;
+    &__info {
+      flex-grow: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: rem(18px);
+      line-height: 1.2;
+      &--secondary {
+        font-size: rem(13px);
+        color: #4e4e4e;
+      }
+    }
+    & > img {
+      height: 70px;
+      width: 47px;
+      margin-right: rem(15px);
+    }
+    .movie-rating,
+    .movie-matching-percentage {
+      font-size: rem(16px);
+      font-weight: 600;
+    }
+  }
+}
+
 .profile {
   &__picture {
     height: rem(100px);

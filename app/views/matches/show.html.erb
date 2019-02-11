@@ -1,29 +1,35 @@
 <h3>These are the movies that matches your watchlists:</h3>
 
-<div class="movie-list">
+<div class="matched-movies-list">
   <% if @movies[:complete_match].any? %>
     <p>Complete Match:</p>
-    <ul>
+    <ul class="complete-match-list">
       <% @movies[:complete_match].each do |movie| %>
-        <li class="movie">
-          <%= movie_poster_image(movie[:poster_path]) %>
-          <%= content_tag :span, "#{truncate(movie[:title], length: 50)}",
-                          class: "movie__title" %>
-        </li>
+      <li class="movie">
+        <%= movie_poster_image(movie[:poster_path]) %>
+        <span class="movie__info"><%= "#{truncate(movie[:title], length: 50)}" %><br>
+          <span class="movie__info--secondary">
+            <span class="movie-rating"><%= movie.rating == 0 ? "n/a" : movie.rating %></span> avg. rating /
+            <span class="movie-matching-percentage"><%= movie.matching_percentage %>%</span> match
+          </span>
+        </span>
+      </li>
       <% end %>
     </ul>
   <% end %>
 
   <% if @movies[:partial_match].any? && @amount_of_matched_users > 2 %>
     <p>Partial match:</p>
-    <ul>
+    <ul class="partial-match-list">
       <% @movies[:partial_match].each do |movie| %>
         <li class="movie">
           <%= movie_poster_image(movie[:poster_path]) %>
-          <%= content_tag :span, "#{truncate(movie[:title], length: 50)}",
-                          class: "movie__title" %>
-          <%= movie.matching_percentage %> -
-          <%= movie.rating %>
+          <span class="movie__info"><%= "#{truncate(movie[:title], length: 50)}" %><br>
+            <span class="movie__info--secondary">
+              <span class="movie-rating"><%= movie.rating == 0 ? "n/a" : movie.rating %></span> avg. rating /
+              <span class="movie-matching-percentage"><%= movie.matching_percentage %>%</span> match (<%= movie.matching_users %> out of <%= movie.total_matched_users %>)
+            </span>
+          </span>
         </li>
       <% end %>
     </ul>

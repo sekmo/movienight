@@ -18,7 +18,7 @@ class Movie < ApplicationRecord
     #   complete_match: [ movie1, movie2 ],
     #   partial_match: [ movie3, movie4, movie5 ],
     # }
-    Movie.select("id","title","poster_path", "rating", "round((count(1)::numeric/#{profile_ids.size}*100))::integer as matching_percentage")
+    Movie.select("id","title","poster_path", "rating", "count(1) as matching_users", "#{profile_ids.size} as total_matched_users", "round((count(1)::numeric/#{profile_ids.size}*100))::integer as matching_percentage")
     .joins(:profiles)
     .where(profiles: {id: profile_ids})
     .order(count: :desc, rating: :desc)
