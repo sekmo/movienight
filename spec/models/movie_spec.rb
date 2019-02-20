@@ -40,7 +40,10 @@ RSpec.describe Movie, type: :model do
     let!(:spike_wish2) { create(:wish, movie: movie_4, profile: spike) }
 
     it "returns the movies that multiple profiles have in common" do
-      expect(Movie.match_all_profiles([tom.id, jerry.id, spike.id])).to eq([movie_4])
+      expect(Movie.match_all_profiles([tom.id, jerry.id, spike.id])).to eq(
+        complete_match: [movie_4],
+        partial_match: [movie_1, movie_2, movie_3]
+      )
     end
   end
 end

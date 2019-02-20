@@ -40,7 +40,7 @@ RSpec.describe "Managing the wishlist", type: :system do
 
     expect(profile.wishes.count).to eq(1)
 
-    movie_li.click_on("Remove movie")
+    movie_li.click_on("Remove")
     expect(page).not_to have_content movie.title
     expect(profile.wishes.count).to eq(0)
 
