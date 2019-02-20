@@ -1,8 +1,7 @@
-<h1>Results</h1>
-<p><%= link_to 'Go to your wishlist', wishes_path %></p>
-
-<div class="movie-list">
-  <% if params[:search].present? %>
+<% if params[:search].present? %>
+  <h1>Search result</h1>
+  <%= render partial: "wishes/form", locals: { search_term: params[:search] } %><br>
+  <div class="movie-list">
     <% if @movies.any? %>
       <ul>
         <% @movies.each do |movie| %>
@@ -19,7 +18,7 @@
     <% else %>
       <h3>Sorry, no movies found.</h3>
     <% end %>
-  <% else %>
-    <h3>No keywords specified.</h3>
-  <% end %>
-</div>
+  </div>
+<% else %>
+  <h3>No keywords specified.</h3>
+<% end %>
