@@ -24,9 +24,9 @@ RSpec.describe "Managing the wishlist", type: :system do
     expect(page).to have_content("Kill Bill: Vol. 1")
 
     movie_span = page.all("span", text: "Kill Bill: Vol. 1").first
-    movie_span_container = movie_span.first(:xpath, ".//..")
+    movie_span_container = movie_span.first(:xpath, ".//../..")
     expect {
-      movie_span_container.click_on("Add to wishlist")
+      movie_span_container.click_on("Add to watchlist")
     }.to change { profile.wishes.count }.by(1)
   end
 
