@@ -19,7 +19,7 @@ module TMDB
           title: movie["title"],
           tmdb_code: movie["id"],
           poster_path: movie["poster_path"],
-          length: movie
+          year: movie["release_date"][0..3]
         }
       end
       movies
