@@ -44,9 +44,6 @@
   }
   .movie {
     width: calc(100% / 2 - 20px);
-    @include breakpoint-min($phablet){
-      width: calc(100% / 3 - 20px);
-    }
     @include breakpoint-min($tablet){
       width: calc(100% / 4 - 20px);
     }
@@ -75,6 +72,14 @@
     & > img {
       width: 100%;
       height: rem(216px);
+      @include breakpoint-min($phablet){
+        height: rem(241px);
+      }
+      @include breakpoint-min($tablet){
+        height: rem(230px);
+      }
+
+
       border-radius: rem(4px);
       box-shadow: 0 1px 2px 0 rgba(168,182,191,0.6);
       transition: all .25s ease-out;
@@ -84,7 +89,14 @@
     }
     > form {
       position: absolute;
-      bottom: rem(40px);
+      top: rem(174px);
+      @include breakpoint-min($phablet){
+        top: rem(197px);
+      }
+      @include breakpoint-min($tablet){
+        top: rem(188px);
+      }
+
       left: 0;
       width: 100%;
       text-align: center;

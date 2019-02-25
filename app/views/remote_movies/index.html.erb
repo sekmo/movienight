@@ -8,7 +8,7 @@
           <li class="movie">
             <%= movie_poster_image(movie[:poster_path]) %>
             <%= button_to "Add to watchlist", wishes_path(tmdb_code: movie[:tmdb_code]),
-                  method: :post, class: "movie__add-button btn btn-primary" %>
+                  method: :post, class: "movie__add-button btn btn-primary btn-sm" %>
             <p class="movie__details">
               <span class="movie__details__title"><%= truncate(movie[:title], length: 50) %></span>
               <% if movie[:year].present? %>
