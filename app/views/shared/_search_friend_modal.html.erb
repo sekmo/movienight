@@ -3,17 +3,19 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add a new friend</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Add a new friend</h4>
       </div>
       <%= form_with(url: profiles_path, local: true, method: :get) do |f| %>
         <div class="modal-body">
+          <div class="form-group">
             <%= f.label :q, "Search for:" %>
-            <%= f.text_field :q %>
+            <%= f.text_field :q, placeholder: "Friend name", class: "form-control" %>
+          </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
           <%= f.button "Search", name: nil, class: "btn btn-primary" %>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       <% end %>
     </div>
