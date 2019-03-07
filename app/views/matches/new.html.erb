@@ -5,8 +5,8 @@
   <%= form_tag match_path, method: "get" do %>
     <% @friends.each do |friend| %>
       <p>
-        <%= check_box_tag "profiles_ids[]", friend.id, false, id: "profile_#{friend.id}" %>
-        <%= label_tag "profile_#{friend.id}", friend.full_name %>
+        <%= check_box_tag "users_ids[]", friend.user.id, false, id: "user_#{friend.user.id}" %>
+        <%= label_tag "user_#{friend.user.id}", friend.full_name %>
       </p>
     <% end %>
 

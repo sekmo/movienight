@@ -4,13 +4,13 @@ class MatchesController < ApplicationController
   end
 
   def show
-    @movies = Movie.match_all_profiles(profiles_ids + [current_user_profile.id])
-    @amount_of_matched_users = params[:profiles_ids].size + 1
+    @movies = Movie.match_all_users(users_ids + [current_user.id])
+    @amount_of_matched_users = params[:users_ids].size + 1
   end
 
   private
 
-  def profiles_ids
-    params[:profiles_ids].map(&:to_i)
+  def users_ids
+    params[:users_ids].map(&:to_i)
   end
 end

@@ -3,7 +3,6 @@ class Profile < ApplicationRecord
   validates :nickname, uniqueness: { case_sensitive: false }
 
   belongs_to :user
-  has_many :wishes, dependent: :destroy
   has_many :movies, through: :wishes
   has_many :outgoing_friendships, class_name: "Friendship", foreign_key: "sender_id"
   has_many :incoming_friendships, class_name: "Friendship", foreign_key: "receiver_id"

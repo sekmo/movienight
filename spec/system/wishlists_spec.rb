@@ -27,22 +27,22 @@ RSpec.describe "Managing the wishlist", type: :system do
     movie_span_container = movie_span.first(:xpath, ".//../..")
     expect {
       movie_span_container.click_on("Add to watchlist")
-    }.to change { profile.wishes.count }.by(1)
+    }.to change { user.wishes.count }.by(1)
   end
 
   scenario "User removes a movie from her wishlist", js: true do
     movie = create(:movie)
-    create(:wish, movie: movie, profile: profile)
+    create(:wish, movie: movie, user: user)
     visit wishes_path
     expect(page).to have_content movie.title
 
     movie_li = find("li", text: movie.title)
 
-    expect(profile.wishes.count).to eq(1)
+    expect(user.wishes.count).to eq(1)
 
     movie_li.click_on("Remove")
     expect(page).not_to have_content movie.title
-    expect(profile.wishes.count).to eq(0)
+    expect(user.wishes.count).to eq(0)
 
     # TODO Why doesn't it work?
     # expect {

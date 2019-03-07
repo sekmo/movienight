@@ -10,36 +10,35 @@ RSpec.describe MatchesController, type: :request do
     end
 
     context "as an authenticated user" do
-      let(:tom)   { create(:profile) }
-      let(:jerry) { create(:profile) }
-      let(:spike) { create(:profile) }
+      let(:tom)   { create(:user, :with_profile) }
+      let(:jerry) { create(:user) }
+      let(:spike) { create(:user) }
 
       let(:movie_1) { create(:movie) }
       let(:movie_2) { create(:movie) }
       let(:movie_3) { create(:movie) }
       let(:movie_4) { create(:movie) }
 
-      let!(:tom_wish1)   { create(:wish, movie: movie_1, profile: tom) }
-      let!(:jerry_wish1) { create(:wish, movie: movie_2, profile: jerry) }
-      let!(:spike_wish1) { create(:wish, movie: movie_3, profile: spike) }
+      let!(:tom_wish1)   { create(:wish, movie: movie_1, user: tom) }
+      let!(:jerry_wish1) { create(:wish, movie: movie_2, user: jerry) }
+      let!(:spike_wish1) { create(:wish, movie: movie_3, user: spike) }
 
-      let!(:tom_wish2)   { create(:wish, movie: movie_4, profile: tom) }
-      let!(:jerry_wish2) { create(:wish, movie: movie_4, profile: jerry) }
-      let!(:spike_wish2) { create(:wish, movie: movie_4, profile: spike) }
+      let!(:tom_wish2)   { create(:wish, movie: movie_4, user: tom) }
+      let!(:jerry_wish2) { create(:wish, movie: movie_4, user: jerry) }
+      let!(:spike_wish2) { create(:wish, movie: movie_4, user: spike) }
 
       before do
-        user = create(:user, profile: tom)
-        login_as user, scope: :user
+        login_as tom, scope: :user
       end
 
-      it "sets the movies in common among the profiles" do
+      it "sets the movies in common among the users" do
         match = {
           complete_match: [movie_4],
           partial_match: [movie_1, movie_2, movie_3]
         }
 
-        expect(Movie).to receive(:match_all_profiles).with([2, 3, tom.id]).and_call_original
-        get match_path(profiles_ids: [2,3])
+        expect(Movie).to receive(:match_all_users).with([2, 3, tom.id]).and_call_original
+        get match_path(users_ids: [2,3])
         expect(assigns(:movies)).to eq(match)
       end
     end

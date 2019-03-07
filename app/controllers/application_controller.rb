@@ -10,8 +10,8 @@ class ApplicationController < ActionController::Base
     redirect_to root_url
   end
 
-  def check_current_profile_owner_of(object)
-    if object.profile != current_user_profile
+  def check_current_user_owner_of(object)
+    if object.user != current_user
       redirect_to_root_with_error
     end
   end

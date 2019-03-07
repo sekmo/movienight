@@ -6,13 +6,13 @@ class WishesController < ApplicationController
   end
 
   def index
-    @wishes = Wish.find_by_profile(current_user_profile).includes(:movie)
+    @wishes = Wish.find_by_user(current_user).includes(:movie)
   end
 
   def create
     movie = Movie.find_or_create_by_tmdb_id(params[:tmdb_code])
-    wish = Wish.find_or_initialize_by(movie: movie, profile: current_user_profile)
-    
+    wish = Wish.find_or_initialize_by(movie: movie, user: current_user)
+
     if wish.persisted?
       flash[:notice] = "The movie was already present in your wishlist."
     else
@@ -36,7 +36,7 @@ class WishesController < ApplicationController
 
   def set_wish
     @wish = Wish.find(params[:id])
-    check_current_profile_owner_of @wish
+    check_current_user_owner_of @wish
   rescue ActiveRecord::RecordNotFound
       redirect_to_root_with_error
   end

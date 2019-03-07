@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Profile, type: :model do
   describe "relationships" do
     it { is_expected.to belong_to(:user) }
-    it { should have_many(:wishes) } # Absolutely right
   end
 
   describe "validations" do

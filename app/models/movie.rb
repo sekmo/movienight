@@ -1,6 +1,6 @@
 class Movie < ApplicationRecord
   has_many :wishes, dependent: :destroy
-  has_many :profiles, through: :wishes
+  has_many :users, through: :wishes
 
   validates :tmdb_code, presence: true, uniqueness: true,
             numericality: { only_integer: true, greater_than_or_equal_to: 0 }
@@ -11,16 +11,16 @@ class Movie < ApplicationRecord
   #   Movie.joins(:profiles).where(profiles: {id: profile_ids}).group(:id).having("COUNT(*) = ?", profile_ids.size)
   # end
 
-  def self.match_all_profiles(profile_ids)
+  def self.match_all_users(users_ids)
     # It returns two arrays: the first with the 100% matching movies, the second with the
     # partially matching movies
     # {
     #   complete_match: [ movie1, movie2 ],
     #   partial_match: [ movie3, movie4, movie5 ],
     # }
-    Movie.select("id","title","poster_path", "rating", "count(1) as matching_users", "#{profile_ids.size} as total_matched_users", "round((count(1)::numeric/#{profile_ids.size}*100))::integer as matching_percentage")
-    .joins(:profiles)
-    .where(profiles: {id: profile_ids})
+    Movie.select("id","title","poster_path", "rating", "count(1) as matching_users", "#{users_ids.size} as total_matched_users", "round((count(1)::numeric/#{users_ids.size}*100))::integer as matching_percentage")
+    .joins(:users)
+    .where(users: {id: users_ids})
     .order(count: :desc, rating: :desc)
     .group(:id)
     .partition {|movie| movie.matching_percentage == 100}
