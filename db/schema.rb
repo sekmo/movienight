@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190303094206) do
+ActiveRecord::Schema.define(version: 20190311225249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,8 +77,8 @@ ActiveRecord::Schema.define(version: 20190303094206) do
     t.index ["user_id"], name: "index_wishes_on_user_id"
   end
 
-  add_foreign_key "friendships", "profiles", column: "receiver_id"
-  add_foreign_key "friendships", "profiles", column: "sender_id"
+  add_foreign_key "friendships", "users", column: "receiver_id"
+  add_foreign_key "friendships", "users", column: "sender_id"
   add_foreign_key "profiles", "users", on_delete: :cascade
   add_foreign_key "wishes", "movies", on_delete: :cascade
   add_foreign_key "wishes", "users"

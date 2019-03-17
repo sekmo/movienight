@@ -37,7 +37,5 @@ class WishesController < ApplicationController
   def set_wish
     @wish = Wish.find(params[:id])
     check_current_user_owner_of @wish
-  rescue ActiveRecord::RecordNotFound
-      redirect_to_root_with_error
   end
 end

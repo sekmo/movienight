@@ -3,7 +3,7 @@
   <ul class="pending-requests">
     <% @friendship_requests.each do |friendship| %>
       <li>
-        <%= friendship.sender.full_name %>
+        <%= friendship.sender.profile.full_name %>
         <%= link_to("Accept request", friendship_path(friendship), method: :patch, class: "btn btn-primary btn-xs") %>
       </li>
     <% end %>

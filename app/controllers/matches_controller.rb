@@ -1,6 +1,6 @@
 class MatchesController < ApplicationController
   def new
-    @friends = current_user_profile.friends
+    @friends = current_user.friends
   end
 
   def show

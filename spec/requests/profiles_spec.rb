@@ -9,23 +9,35 @@ RSpec.describe ProfilesController, type: :request do
   end
 
   describe "GET index" do
-    let!(:francesco) { create(:profile, first_name: "Francesco", last_name: "Mari", nickname: "sekmo") }
-    let!(:andrea) { create(:profile, first_name: "Andrea", last_name: "Rossi", nickname: "frank") }
-    let!(:mario) { create(:profile, first_name: "Mario", last_name: "Franceschini", nickname: "marione") }
+    let(:francesco) { create(:user) }
+    let(:andrea) { create(:user) }
+    let(:mario) { create(:user) }
+
+    before do
+      create(:profile, user: francesco, first_name: "Francesco", last_name: "Mari", nickname: "sekmo")
+      create(:profile, user: andrea, first_name: "Andrea", last_name: "Rossi", nickname: "frank")
+      create(:profile, user: mario, first_name: "Mario", last_name: "Franceschini", nickname: "marione")
+    end
 
     it "returns the searched profiles" do
       user = create(:user, :with_profile)
       login_as user, scope: :user
 
-      expect(Profile).to receive(:search_by_full_name).with("fra").and_call_original
+      expect(User).to receive(:search_by_full_name).with("fra").and_call_original
       get profiles_path, params: { q: "fra" }
 
       expect(response).to have_http_status(:success)
-      expect(assigns(:profiles)).to eq([francesco, andrea, mario])
+      expect(assigns(:users)).to eq([francesco, andrea, mario])
       expect(response.body).to include("Francesco Mari", "Andrea Rossi", "Mario Franceschini")
     end
 
     it "denies access to users with no profile" do
+      user = create(:user)
+      login_as user, scope: :user
+
+      get profiles_path, params: { q: "fra" }
+
+      expect(response).to redirect_to(new_profile_url)
     end
   end
 
@@ -48,7 +60,7 @@ RSpec.describe ProfilesController, type: :request do
 
       expect(response).to have_http_status(:success)
       expect(assigns(:profile)).to eq(francesco.profile)
-      expect(assigns(:friends)).to eq(francesco.profile.friends)
+      expect(assigns(:friends)).to eq(francesco.friends)
     end
   end
 end

@@ -3,10 +3,10 @@
 <% if @friends.any? %>
   <p>Select one or more friends to see which movies you both want to watch!</p>
   <%= form_tag match_path, method: "get" do %>
-    <% @friends.each do |friend| %>
+    <% @friends.each do |user| %>
       <p>
-        <%= check_box_tag "users_ids[]", friend.user.id, false, id: "user_#{friend.user.id}" %>
-        <%= label_tag "user_#{friend.user.id}", friend.full_name %>
+        <%= check_box_tag "users_ids[]", user.id, false, id: "user_#{user.id}" %>
+        <%= label_tag "user_#{user.id}", user.profile.full_name %>
       </p>
     <% end %>
 

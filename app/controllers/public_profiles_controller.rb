@@ -14,7 +14,5 @@ class PublicProfilesController < ApplicationController
 
   def set_profile
     @profile = Profile.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    redirect_to_root_with_error
   end
 end

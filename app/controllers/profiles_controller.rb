@@ -12,14 +12,14 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @friends = @profile.friends
-    @friendship_requests = @profile.friendship_requests
+    @friends = current_user.friends
+    @friendship_requests = current_user.friendship_requests
   end
 
   def index
     term = params[:q]
     redirect_to_root_with_error if term.blank?
-    @profiles = Profile.search_by_full_name(term) - [current_user_profile]
+    @users = User.search_by_full_name(term) - [current_user]
   end
 
   def create
@@ -52,11 +52,10 @@ class ProfilesController < ApplicationController
     params[:profile].permit(:nickname, :first_name, :last_name, :image)
   end
 
+  # TODO we don't need to pass :id
   def set_profile
     @profile = Profile.find(params[:id])
     check_current_user_owner_of @profile
-  rescue ActiveRecord::RecordNotFound
-      redirect_to_root_with_error
   end
 
   def check_current_user_owner_of(object)
