@@ -34,7 +34,7 @@ module TMDB
       url = "#{api_base_path}#{endpoint}?#{query_string}&api_key=#{api_key}"
       response = HTTParty.get(url)
 
-      api_response_errors = JSON.parse(response.body)["errors"]
+      api_response_errors = JSON.parse(response.body)["status_message"]
       if response.code != 200 or api_response_errors
         raise TMDB::RequestError.new(api_response_errors)
       end
