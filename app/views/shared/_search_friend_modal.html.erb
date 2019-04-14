@@ -6,7 +6,7 @@
         <h5 class="modal-title" id="exampleModalLabel">Add a new friend</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
-      <%= form_with(url: profiles_path, local: true, method: :get) do |f| %>
+      <%= form_with(url: users_path, local: true, method: :get) do |f| %>
         <div class="modal-body">
           <div class="form-group">
             <%= f.label :q, "Search for:" %>

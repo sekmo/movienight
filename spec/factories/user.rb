@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :user do
     sequence(:email) { |n| "user#{n}@example.org" }
-    password "123456"
-    trait :with_profile do
-      after(:create) { |user| create(:profile, user: user) }
-    end
+    password { Faker::Internet.password(8) }
+    first_name { Faker::Name.unique.first_name }
+    last_name { Faker::Name.unique.last_name }
+    username { Faker::Name.unique.first_name.downcase }
   end
 end

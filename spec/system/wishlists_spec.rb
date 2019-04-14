@@ -1,33 +1,32 @@
 require "rails_helper"
 
 RSpec.describe "Managing the wishlist", type: :system do
-  let(:user) { create(:user, :with_profile) }
-  let(:profile) { user.profile }
+  let(:user) { create(:user) }
 
   before(:each) do
     login_as user, scope: :user
   end
 
-  scenario "User cannot search for a movie if she doesn't have a profile" do
-    profile.destroy
-    visit new_wish_path
-    expect(current_path).to eql(new_profile_path)
-    expect(page).to have_content "Create your social profile to continue"
-  end
-
   scenario "User adds a movie to her wishlist" do
     visit new_wish_path
-    fill_in "search", with: "kill bill"
+    fill_in "search", with: "kill bill 1"
+    stub_request(:get, /api.themoviedb.org\/3\/search\/movie\?adult=false&api_key=.*&query=kill%20bill/)
+      .to_return(status: 200, body: file_fixture("tmdb_search_movie.json").read)
 
     click_on "Search"
-
     expect(page).to have_content("Kill Bill: Vol. 1")
 
     movie_span = page.all("span", text: "Kill Bill: Vol. 1").first
     movie_span_container = movie_span.first(:xpath, ".//../..")
+
+    stub_request(:get, /api.themoviedb.org\/3\/movie\/24\?api_key=.*&append_to_response=credits,videos/)
+      .to_return(status: 200, body: file_fixture("tmdb_movie_details.json").read)
     expect {
       movie_span_container.click_on("Add to watchlist")
     }.to change { user.wishes.count }.by(1)
+
+    expect(WebMock).to have_requested(:get, /api.themoviedb.org\/3\/search\/movie\?adult=false&api_key=.*&query=kill%20bill/).once
+    expect(WebMock).to have_requested(:get, /api.themoviedb.org\/3\/movie\/24\?api_key=.*&append_to_response=credits,videos/).once
   end
 
   scenario "User removes a movie from her wishlist", js: true do

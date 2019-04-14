@@ -4,10 +4,15 @@ Rails.application.routes.draw do
   resources :friendships
   resources :matches, only: [:new]
   get  'matches/', to: 'matches#show', as: 'match'
-  devise_for :users
-  resources :profiles, only: [:index, :show, :create, :new, :edit, :update]
-  resources :public_profiles, only: [:index, :show]
-  # resolve('Profile') { [:profile] }
+  devise_for :users, controllers: { registrations: 'users/registrations' }
+  resources :users do
+    member do
+      get :show
+    end
+  end
+
+  # resources :profiles, only: [:index, :show, :create, :new, :edit, :update]
+  # resources :public_profiles, only: [:index, :show]
 
   get  'pages/:page', to: 'pages#show', as: 'pages'
   root 'pages#show', page: 'welcome'

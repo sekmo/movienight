@@ -6,11 +6,7 @@ class Movie < ApplicationRecord
             numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :title, presence: true
 
-  # Return all the movies that are in all the watchlists of every specified profile
-  # def self.match_all_profiles(profile_ids)
-  #   Movie.joins(:profiles).where(profiles: {id: profile_ids}).group(:id).having("COUNT(*) = ?", profile_ids.size)
-  # end
-
+  # Return all the movies that are in all the watchlists of every specified user
   def self.match_all_users(users_ids)
     # It returns two arrays: the first with the 100% matching movies, the second with the
     # partially matching movies

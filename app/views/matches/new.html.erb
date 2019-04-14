@@ -6,12 +6,12 @@
     <% @friends.each do |user| %>
       <p>
         <%= check_box_tag "users_ids[]", user.id, false, id: "user_#{user.id}" %>
-        <%= label_tag "user_#{user.id}", user.profile.full_name %>
+        <%= label_tag "user_#{user.id}", user.full_name %>
       </p>
     <% end %>
 
     <%= submit_tag "See matching movies!", name: nil %>
   <% end %>
 <% else %>
-  <p>Add some friends <%= link_to "from your profile page", profile_path(current_user_profile) %> to see which movies you both want to watch!</p>
+  <p>Add some friends <%= link_to "from your profile page", user_path(current_user.id) %> to see which movies you both want to watch!</p>
 <% end %>

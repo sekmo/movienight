@@ -15,7 +15,7 @@ class ConnectionMapper
       connection = connection_with(user)
       type = connection[:type]
       detailed_connection = {
-        full_name: user.profile.full_name,
+        full_name: user.full_name,
         user: user,
         type: type
       }

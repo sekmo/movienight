@@ -3,19 +3,28 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  include ImageUploader[:image]
 
-  has_one :profile, dependent: :destroy
   has_many :wishes, dependent: :destroy
-
   has_many :outgoing_friendships, class_name: "Friendship", foreign_key: "sender_id"
   has_many :incoming_friendships, class_name: "Friendship", foreign_key: "receiver_id"
 
+  validates_presence_of :first_name, :last_name, :username
+  validates :username, uniqueness: { case_sensitive: false }
+
   def self.search_by_full_name(term)
     return [] if term.blank?
-    eager_load(:profile)
-      .where("profiles.first_name ILIKE :term OR last_name ILIKE :term OR nickname ILIKE :term",
-        { term: "%#{term}%" }
-      )
+    where("users.first_name ILIKE :term OR last_name ILIKE :term OR username ILIKE :term",
+      { term: "%#{term}%" }
+    )
+  end
+
+  def full_name
+    "#{first_name} #{last_name} (#{username})"
+  end
+
+  def initials
+    "#{first_name[0]}#{last_name[0]}"
   end
 
   def ask_friendship(user)
@@ -31,7 +40,7 @@ class User < ApplicationRecord
   end
 
   def friends
-    self.class.where(id: friends_ids).includes(:profile)
+    self.class.where(id: friends_ids)
   end
 
   def friendship_requests

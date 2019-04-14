@@ -4,13 +4,13 @@ RSpec.describe MatchesController, type: :request do
   describe "#show" do
     context "as a public user" do
       it "denies access" do
-        get match_path(profiles_ids: [2,3])
+        get match_path(users_ids: [2,3])
         expect(response).to redirect_to(new_user_session_url)
       end
     end
 
     context "as an authenticated user" do
-      let(:tom)   { create(:user, :with_profile) }
+      let(:tom)   { create(:user) }
       let(:jerry) { create(:user) }
       let(:spike) { create(:user) }
 
@@ -44,7 +44,7 @@ RSpec.describe MatchesController, type: :request do
     end
   end
 
-  describe "GET #new" do
+  describe "GET /matches/new" do
     context "as a public user" do
       it "redirects to login" do
         get new_match_path
@@ -54,7 +54,7 @@ RSpec.describe MatchesController, type: :request do
 
     context "as an authenticated user" do
       before  do
-        user = create(:user, :with_profile)
+        user = create(:user)
         login_as user, scope: :user
       end
 

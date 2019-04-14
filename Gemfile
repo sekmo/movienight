@@ -43,6 +43,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-remote'
   gem 'pry-nav'
+  gem 'webmock'
 end
 
 group :development do

@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, :check_current_user_has_profile
+  skip_before_action :authenticate_user!
 
   def show
     render "pages/#{params[:page]}"

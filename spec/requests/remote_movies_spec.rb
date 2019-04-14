@@ -6,13 +6,5 @@ RSpec.describe "RemoteMovies", type: :request do
       get remote_movies_path
       expect(response).to redirect_to(new_user_session_url)
     end
-
-    it "denies access to to users with no profile" do
-      user = create(:user, profile: nil)
-      login_as user, scope: :user
-
-      get remote_movies_path
-      expect(response).to redirect_to(new_profile_url)
-    end
   end
 end

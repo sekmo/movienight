@@ -1,24 +1,17 @@
 require "rails_helper"
 
-RSpec.feature "Search for movies", type: :feature do
-  scenario "User with profile can search for movies" do
-    user = create(:user, :with_profile)
-    login_as user, scope: :user
-    visit new_wish_path
-    fill_in "search", with: "kill bill"
-
-    click_on "Search"
-
-    expect(page).to have_content("Kill Bill: Vol. 1")
-  end
-
-  scenario "User without profile cannot search for movies" do
+RSpec.feature "Search for movies", type: :system do
+  scenario "User can search for movies" do
     user = create(:user)
     login_as user, scope: :user
+    stub_request(:get, /api.themoviedb.org\/3\/search\/movie\?adult=false&api_key=.*&query=kill%20bill/)
+      .to_return(status: 200, body: file_fixture("tmdb_search_movie.json").read)
 
     visit new_wish_path
+    fill_in "search", with: "kill bill"
+    click_on "Search"
 
-    expect(current_path).to eql(new_profile_path)
-    expect(page).to have_content "Create your social profile to continue"
+    expect(WebMock).to have_requested(:get, /api.themoviedb.org\/3\/search\/movie\?adult=false&api_key=.*&query=kill%20bill/).once
+    expect(page).to have_content("Kill Bill: Vol. 1")
   end
 end

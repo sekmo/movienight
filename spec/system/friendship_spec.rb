@@ -2,15 +2,14 @@ require "rails_helper"
 
 RSpec.feature "Friendships", type: :system do
   before(:each) do
-    @tom   = create(:user, :with_profile)
-    @jerry = create(:user)
-    create(:profile, user: @jerry, first_name: "jerry", last_name: "bomby", nickname: "jerry")
+    @tom   = create(:user)
+    @jerry = create(:user, first_name: "jerry", last_name: "bomby", username: "jerry")
 
     login_as @tom, scope: :user
   end
 
   scenario "User can search for friends and send a friend request", js: true do
-    visit profile_path(@tom.profile)
+    visit user_path(@tom.id)
 
     click_on("Add a new friend")
     fill_in "q", with: "jerry"
@@ -25,10 +24,10 @@ RSpec.feature "Friendships", type: :system do
 
   scenario "User can accept a pending friendship request" do
     @jerry.ask_friendship(@tom)
-    visit profile_path(@tom)
-    expect(page).to have_content(@jerry.profile.full_name)
+    visit user_path(@tom)
+    expect(page).to have_content(@jerry.full_name)
 
-    pending_friend_li = find("ul.pending-requests").find("li", text: @jerry.profile.full_name)
+    pending_friend_li = find("ul.pending-requests").find("li", text: @jerry.full_name)
 
     expect{
       pending_friend_li.click_on("Accept request")

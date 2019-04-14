@@ -1,8 +1,8 @@
 <div class="profile">
-  <h2><%= @profile.full_name %></h2>
-  <%= profile_image_for(@profile) %>
+  <h2><%= @user.full_name %></h2>
+  <%= profile_image_for(@user) %>
 
-  <%= link_to "Edit profile", edit_profile_path(current_user_profile), class: "small" %>
+  <%= link_to "Edit profile", edit_user_registration_path, class: "small" %>
 
   <div class="profile__friendships">
     <%= render "friendships/index" %>

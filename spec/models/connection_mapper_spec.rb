@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe ConnectionMapper, type: :model do
-  let(:francesco) { create(:user, :with_profile) }
-  let(:chiara) { create(:user, :with_profile) }
-  let(:andrew) { create(:user, :with_profile) }
-  let(:mark) { create(:user, :with_profile) }
-  let(:stranger) { create(:user, :with_profile) }
+  let(:francesco) { create(:user) }
+  let(:chiara) { create(:user) }
+  let(:andrew) { create(:user) }
+  let(:mark) { create(:user) }
+  let(:stranger) { create(:user) }
   let(:connection_mapper) { ConnectionMapper.new(francesco, [chiara, andrew, mark, stranger]) }
 
   before do
@@ -20,23 +20,23 @@ RSpec.describe ConnectionMapper, type: :model do
         connection_mapper.connections
       ).to eq([
         {
-          full_name: chiara.profile.full_name,
+          full_name: chiara.full_name,
           user: chiara,
           type: :friend
         },
         {
-          full_name: andrew.profile.full_name,
+          full_name: andrew.full_name,
           user: andrew,
           type: :receiver
         },
         {
-          full_name: mark.profile.full_name,
+          full_name: mark.full_name,
           user: mark,
           type: :requester,
           friendship: Friendship.find_by!(sender: mark, receiver: francesco),
         },
         {
-          full_name: stranger.profile.full_name,
+          full_name: stranger.full_name,
           user: stranger,
           type: :stranger
         }
