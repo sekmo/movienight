@@ -1,14 +1,14 @@
-<h1>Your movie wishlist</h1>
+<h1>Your movie watchlist</h1>
 <% if @wishes.any? %>
-  <p>Add other movies to your wishlist:</p>
+  <p>Add other movies to your watchlist:</p>
 <% else %>
-  <p>Your wishlist has no movies yet 😢</p>
+  <p>Your watchlist has no movies yet 😢</p>
   <p>Why don't you add some?</p>
 <% end %>
 <%= render partial: "wishes/form", locals: { search_term: nil } %>
 <br>
 
-<div class="wishlist">
+<div class="watchlist">
   <% if @wishes.any? %>
     <ul>
       <% @wishes.each do |wish| %>

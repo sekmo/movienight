@@ -1,13 +1,13 @@
 require "rails_helper"
 
-RSpec.describe "Managing the wishlist", type: :system do
+RSpec.describe "Managing the watchlist", type: :system do
   let(:user) { create(:user) }
 
   before(:each) do
     login_as user, scope: :user
   end
 
-  scenario "User adds a movie to her wishlist" do
+  scenario "User adds a movie to her watchlist" do
     visit new_wish_path
     fill_in "search", with: "kill bill 1"
     stub_request(:get, /api.themoviedb.org\/3\/search\/movie\?adult=false&api_key=.*&query=kill%20bill/)
@@ -29,7 +29,7 @@ RSpec.describe "Managing the wishlist", type: :system do
     expect(WebMock).to have_requested(:get, /api.themoviedb.org\/3\/movie\/24\?api_key=.*&append_to_response=credits,videos/).once
   end
 
-  scenario "User removes a movie from her wishlist", js: true do
+  scenario "User removes a movie from her watchlist", js: true do
     movie = create(:movie)
     create(:wish, movie: movie, user: user)
     visit wishes_path
