@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.feature "Registration", type: :system do
-  scenario "User can create a profile" do
+  scenario "User can register" do
     visit new_user_registration_path
 
     fill_in "First name", with: "Francesco"
@@ -17,7 +17,7 @@ RSpec.feature "Registration", type: :system do
   end
 
   # TODO add test for image attachment
-  scenario "User can update her profile" do
+  scenario "User can update her data" do
     @user ||= create(
       :user,
       first_name: "Francesco",

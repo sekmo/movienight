@@ -11,7 +11,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # resources :profiles, only: [:index, :show, :create, :new, :edit, :update]
   # resources :public_profiles, only: [:index, :show]
 
   get  'pages/:page', to: 'pages#show', as: 'pages'
