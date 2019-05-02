@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :friendships
   resources :matches, only: [:new]
   get  'matches/', to: 'matches#show', as: 'match'
-  devise_for :users, controllers: { registrations: 'users/registrations' }
+  devise_for :users, controllers: { registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
   resources :users do
     member do
       get :show

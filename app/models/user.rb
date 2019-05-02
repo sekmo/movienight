@@ -3,6 +3,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  devise :omniauthable, omniauth_providers: [:google_oauth2]
+
   include ImageUploader[:image]
 
   has_many :wishes, dependent: :destroy
@@ -11,6 +14,35 @@ class User < ApplicationRecord
 
   validates_presence_of :first_name, :last_name, :username
   validates :username, uniqueness: { case_sensitive: false }
+
+  def self.from_omniauth(access_token)
+    data = access_token.info
+    if user = User.where(:provider => access_token.provider, :uid => access_token.uid).first
+    elsif user = User.where(:email => access_token.info.email).first
+      user.update!(:provider => access_token.provider, :uid => access_token.uid)
+    else
+      user = User.new(
+        provider: access_token.provider,
+        uid: access_token.uid,
+        email: data["email"],
+        first_name: data['first_name'],
+        last_name: data['last_name'],
+      )
+    end
+    user
+ end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.google_data"]
+        user.email = data["info"]["email"] if user.email.blank?
+        user.first_name = data["info"]["first_name"] if user.first_name.blank?
+        user.last_name = data["info"]["last_name"] if user.last_name.blank?
+        user.provider = data["provider"] if user.provider.blank?
+        user.uid = data["uid"] if user.uid.blank?
+      end
+    end
+  end
 
   def self.search_by_full_name(term)
     return [] if term.blank?
