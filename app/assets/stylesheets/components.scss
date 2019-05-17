@@ -1,3 +1,74 @@
+.login {
+  text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
+
+  .welcome-back {
+    margin-top: 20px;
+  }
+
+
+  .omniauth-button {
+    color: white;
+    padding: 11px 20px;
+    font-weight: 600;
+    &__google {
+      margin-top: 30px;
+      background: #d95252;
+      &:hover {
+        background: #E66D6D;
+      }
+    }
+  }
+
+  input {
+    &[type="email"] {
+      margin-bottom: rem(15px);
+    }
+    &[type="email"],
+    &[type="password"] {
+      padding-top: 1.375rem;
+      padding-bottom: 1.375rem;
+    }
+  }
+
+  .login-button {
+    margin-bottom: 5px;
+    &:hover {
+      background: lighten($brand-color-var, 3%);
+    }
+  }
+
+  .login-or-separator {
+    height: 34px;
+    text-align: center;
+    margin-bottom: 5px;
+    span {
+      font-size: 14px;
+      color: #a7a7a7;
+      background: $background-color;
+      padding: 0 6px;
+    }
+    hr {
+      margin-top: -10px;
+    }
+  }
+
+  .btn {
+    font-weight: 600;
+    padding-top: 11px;
+    padding-bottom: 11px;
+  }
+
+  .remember-me {
+    text-align: left;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+} //.login end
+
+
 .watchlist {
   > ul {
     padding-left: 0;

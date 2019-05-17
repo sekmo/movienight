@@ -1,0 +1,11 @@
+<%- if devise_mapping.omniauthable? %>
+  <%- resource_class.omniauth_providers.each do |provider| %>
+    <% provider_name = provider == :google_oauth2 ? "Google" : OmniAuth::Utils.camelize(provider) %>
+    <%= link_to(
+          "Login with #{provider_name}",
+          omniauth_authorize_path(resource_name, provider),
+          class: "btn btn-block omniauth-button omniauth-button__#{provider_name.downcase}")
+    %>
+    <br>
+  <% end %>
+<% end %>
