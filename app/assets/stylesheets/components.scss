@@ -218,26 +218,115 @@
   }
 }
 
-.profile {
-  &__picture {
-    height: rem(100px);
-    width: rem(100px);
-    display: block;
+
+.profile__cover {
+  margin-top: rem(-20px);
+  background: black;
+  position: relative;
+  height: rem(137px);
+  @include breakpoint-min($tablet){
+    height: rem(237px);
+  }
+  margin-bottom: 30px;
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.52)), image-url("cinema_chairs.jpg");
+  background-size: cover !important;
+  background-position: top center !important;
+  & > .wrapper {
+    height: 100%;
+    position: relative;
+  }
+  // &::before {
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 100%;
+  //   background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.9) 75%);
+  //   background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.9) 75%);
+  //   -webkit-transform: translate3d(0,30%,0);
+  //   transform: translate3d(0,30%,0);
+  //   content: '';
+  //   opacity: 1;
+  //   transition: opacity 0.35s, transform 0.35s;
+  // }
+}
+
+.edit_profile_link {
+  position: absolute;
+  top: 33px;
+  left: 23px;
+  font-size: 11px;
+  color: white !important;
+  opacity: .8;
+  text-decoration: none !important;
+  @include breakpoint-min($tablet){
+    top: 86px;
+    left: 44px;
+    font-size: 12px;
+  }
+}
+
+.profile__info {
+  position: absolute;
+  color: white;
+  bottom: 8px;
+  left: rem(112px);
+  font-size: 20px;
+  @include breakpoint-min($tablet){
+    left: rem(170px);
+  }
+}
+
+.profile__info__name {
+  display: block;
+  margin-bottom: -8px;
+  font-size: 20px;
+  line-height: 1.2;
+  @include breakpoint-min($tablet){
+    font-size: 26px;
+    margin-bottom: -6px;
+  }
+}
+
+.profile__info__username {
+  font-size: 12px;
+  @include breakpoint-min($tablet){
+    font-size: 16px;
+  }
+}
+
+.profile-picture {
+  position: absolute;
+  height: rem(100px);
+  width: rem(100px);
+  bottom: -22px;
+  border: 2px solid white;
+  border-radius: 100%;
+  @include breakpoint-min($tablet){
+    height: rem(144px);
+    width: rem(144px);
+  }
+
+  &--image {
+    position: absolute;
+    height: 100%;
+    width: 100%;
     border-radius: 100%;
     background-size: cover !important;
     background-position: center center !important;
-    &--placeholder {
-      height: rem(100px);
-      width: rem(100px);
-      display: table-cell;
-      vertical-align: middle;
-      text-align: center;
-      border-radius: 100%;
-      background: #dcdcdc;
-      color: #a2a1a9;
-      font-size: 3em;
-      font-weight: 100;
-      text-transform: uppercase;
-    }
+  }
+  &--placeholder {
+    position: absolute;
+    display: table-cell;
+    height: 100%;
+    width: 100%;
+    border-radius: 100%;
+    vertical-align: middle;
+    text-align: center;
+    background: #dcdcdc;
+    color: #a2a1a9;
+    font-size: 3em;
+    font-weight: 100;
+    text-transform: uppercase;
   }
 }

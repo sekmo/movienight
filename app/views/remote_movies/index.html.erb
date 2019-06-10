@@ -1,27 +1,29 @@
-<% if params[:search].present? %>
-  <h1>Search result</h1>
-  <%= render partial: "wishes/form", locals: { search_term: params[:search] } %><br>
-  <div class="movie-list">
-    <% if @movies.any? %>
-      <ul>
-        <% @movies.each do |movie| %>
-          <li class="movie">
-            <%= movie_poster_image(movie[:poster_path]) %>
-            <%= button_to "Add to watchlist", wishes_path(tmdb_code: movie[:tmdb_code]),
-                  method: :post, class: "movie__add-button btn btn-primary btn-sm" %>
-            <p class="movie__details">
-              <span class="movie__details__title"><%= truncate(movie[:title], length: 50) %></span>
-              <% if movie[:year].present? %>
-                <span class="movie__details__year">(<%= movie[:year] %>)</span>
-              <% end %>
-            </p>
-          </li>
-        <% end %>
-      </ul>
-    <% else %>
-      <h3>Sorry, no movies found.</h3>
-    <% end %>
-  </div>
-<% else %>
-  <h3>No keywords specified.</h3>
-<% end %>
+<div class="wrapper">
+  <% if params[:search].present? %>
+    <h1>Search result</h1>
+    <%= render partial: "wishes/form", locals: { search_term: params[:search] } %><br>
+    <div class="movie-list">
+      <% if @movies.any? %>
+        <ul>
+          <% @movies.each do |movie| %>
+            <li class="movie">
+              <%= movie_poster_image(movie[:poster_path]) %>
+              <%= button_to "Add to watchlist", wishes_path(tmdb_code: movie[:tmdb_code]),
+                    method: :post, class: "movie__add-button btn btn-primary btn-sm" %>
+              <p class="movie__details">
+                <span class="movie__details__title"><%= truncate(movie[:title], length: 50) %></span>
+                <% if movie[:year].present? %>
+                  <span class="movie__details__year">(<%= movie[:year] %>)</span>
+                <% end %>
+              </p>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <h3>Sorry, no movies found.</h3>
+      <% end %>
+    </div>
+  <% else %>
+    <h3>No keywords specified.</h3>
+  <% end %>
+</div>

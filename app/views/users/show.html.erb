@@ -1,12 +1,22 @@
 <div class="profile">
-  <h2><%= @user.full_name %></h2>
-  <%= profile_image_for(@user) %>
+  <div class="profile__cover">
+    <div class="clearfix wrapper">
+      <%= link_to "edit profile", edit_user_registration_path, class: "edit_profile_link" %>
+      <%= profile_image_for(@user) %>
+      <div class="profile__info">
+        <span class="profile__info__name"><%= @user.full_name %></span>
+        <span class="profile__info__username"><%= @user.username %></span>
+      </div>
+    </div>
+  </div>
 
-  <%= link_to "Edit profile", edit_user_registration_path, class: "small" %>
+  <div class="profile__data wrapper">
+    <div class="profile__watchlist"></div>
 
-  <div class="profile__friendships">
-    <%= render "friendships/index" %>
-    <%= render "shared/search_friend_modal" %>
-    <%= render "friendships/pending_requests" %>
+    <div class="profile__friendships">
+      <%= render "friendships/index" %>
+      <%= render "shared/search_friend_modal" %>
+      <%= render "friendships/pending_requests" %>
+    </div>
   </div>
 </div>

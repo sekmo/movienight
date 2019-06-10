@@ -52,6 +52,10 @@ class User < ApplicationRecord
   end
 
   def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def full_name_with_nickname
     "#{first_name} #{last_name} (#{username})"
   end
 

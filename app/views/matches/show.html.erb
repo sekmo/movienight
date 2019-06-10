@@ -1,45 +1,47 @@
-<h3>These are the movies that matches your watchlists:</h3>
+<div class="wrapper">
+  <h3>These are the movies that matches your watchlists:</h3>
 
-<div class="matched-movies-list">
-  <% if @movies[:complete_match].any? %>
-    <p>We found <%= @movies[:complete_match].size %> movies with a 100% match:</p>
-    <ul class="complete-match-list">
-      <% @movies[:complete_match].each do |movie| %>
-      <li class="movie">
-        <%= movie_poster_image(movie[:poster_path]) %>
-        <span class="movie__info"><%= "#{truncate(movie[:title], length: 50)}" %><br>
-          <span class="movie__info--secondary">
-            <span class="movie-rating"><%= movie.rating == 0 ? "n/a" : movie.rating %></span> tmdb score /
-            <span class="movie-matching-percentage"><%= movie.matching_percentage %>%</span> match
-          </span>
-        </span>
-      </li>
-      <% end %>
-    </ul>
-  <% elsif @movies[:partial_match].any? %>
-    <p>Unfortunately we haven't found any 100% matching movies, but here are some movies with a partial match:</p>
-  <% end %>
-
-  <% if @movies[:partial_match].any? %>
+  <div class="matched-movies-list">
     <% if @movies[:complete_match].any? %>
-      <br><p>...and <%= @movies[:partial_match].size %> movies with a partial match:</p>
-    <% end %>
-    <ul class="partial-match-list">
-      <% @movies[:partial_match].each do |movie| %>
+      <p>We found <%= @movies[:complete_match].size %> movies with a 100% match:</p>
+      <ul class="complete-match-list">
+        <% @movies[:complete_match].each do |movie| %>
         <li class="movie">
           <%= movie_poster_image(movie[:poster_path]) %>
           <span class="movie__info"><%= "#{truncate(movie[:title], length: 50)}" %><br>
             <span class="movie__info--secondary">
               <span class="movie-rating"><%= movie.rating == 0 ? "n/a" : movie.rating %></span> tmdb score /
-              <span class="movie-matching-percentage"><%= movie.matching_percentage %>%</span> match (<%= movie.matching_users %> out of <%= movie.total_matched_users %>)
+              <span class="movie-matching-percentage"><%= movie.matching_percentage %>%</span> match
             </span>
           </span>
         </li>
-      <% end %>
-    </ul>
-  <% end %>
+        <% end %>
+      </ul>
+    <% elsif @movies[:partial_match].any? %>
+      <p>Unfortunately we haven't found any 100% matching movies, but here are some movies with a partial match:</p>
+    <% end %>
 
-  <% if (@movies[:complete_match]+@movies[:partial_match]).blank? %>
-    <h3>Please add some movies to your watchlists before matching your watchlists 😜</h3>
-  <% end %>
+    <% if @movies[:partial_match].any? %>
+      <% if @movies[:complete_match].any? %>
+        <br><p>...and <%= @movies[:partial_match].size %> movies with a partial match:</p>
+      <% end %>
+      <ul class="partial-match-list">
+        <% @movies[:partial_match].each do |movie| %>
+          <li class="movie">
+            <%= movie_poster_image(movie[:poster_path]) %>
+            <span class="movie__info"><%= "#{truncate(movie[:title], length: 50)}" %><br>
+              <span class="movie__info--secondary">
+                <span class="movie-rating"><%= movie.rating == 0 ? "n/a" : movie.rating %></span> tmdb score /
+                <span class="movie-matching-percentage"><%= movie.matching_percentage %>%</span> match (<%= movie.matching_users %> out of <%= movie.total_matched_users %>)
+              </span>
+            </span>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <% if (@movies[:complete_match]+@movies[:partial_match]).blank? %>
+      <h3>Please add some movies to your watchlists before matching your watchlists 😜</h3>
+    <% end %>
+  </div>
 </div>

@@ -1,11 +1,13 @@
-<h1>Search result</h1>
+<div class="wrapper">
+  <h1>Search result</h1>
 
-<%= render "search_form" %>
+  <%= render "search_form" %>
 
-<br>
+  <br>
 
-<% if @users.any? %>
-  <%= render "friends_search_results", user_to_match: current_user, users: @users %>
-<% else %>
-  <p>Sorry, no users found.</p>
-<% end %>
+  <% if @users.any? %>
+    <%= render "friends_search_results", user_to_match: current_user, users: @users %>
+  <% else %>
+    <p>Sorry, no users found.</p>
+  <% end %>
+</div>

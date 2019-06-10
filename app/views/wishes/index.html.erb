@@ -1,29 +1,31 @@
-<h1>Your movie watchlist</h1>
-<% if @wishes.any? %>
-  <p>Add other movies to your watchlist:</p>
-<% else %>
-  <p>Your watchlist has no movies yet 😢</p>
-  <p>Why don't you add some?</p>
-<% end %>
-<%= render partial: "wishes/form", locals: { search_term: nil } %>
-<br>
-
-<div class="watchlist">
+<div class="wrapper">
+  <h1>Your movie watchlist</h1>
   <% if @wishes.any? %>
-    <ul>
-      <% @wishes.each do |wish| %>
-        <li class="wish" data-wish-id="<%= wish.id %>">
-          <%= movie_poster_image(wish.movie.poster_path) %>
-          <div class="wish__info">
-            <span class="wish__title"><%= truncate(wish.movie.title, length: 50) %></span>
-            <p class="wish__directors">
-              <%= "#{wish.movie.directors&.join(", ")} (#{wish.movie.year})" %>
-            </p>
-          </div>
-          <%= button_to "Remove", wish_path(wish), method: :delete,
-                remote: true, class: "wish__remove-button btn btn-danger" %>
-        </li>
-      <% end %>
-    </ul>
+    <p>Add other movies to your watchlist:</p>
+  <% else %>
+    <p>Your watchlist has no movies yet 😢</p>
+    <p>Why don't you add some?</p>
   <% end %>
+  <%= render partial: "wishes/form", locals: { search_term: nil } %>
+  <br>
+
+  <div class="watchlist">
+    <% if @wishes.any? %>
+      <ul>
+        <% @wishes.each do |wish| %>
+          <li class="wish" data-wish-id="<%= wish.id %>">
+            <%= movie_poster_image(wish.movie.poster_path) %>
+            <div class="wish__info">
+              <span class="wish__title"><%= truncate(wish.movie.title, length: 50) %></span>
+              <p class="wish__directors">
+                <%= "#{wish.movie.directors&.join(", ")} (#{wish.movie.year})" %>
+              </p>
+            </div>
+            <%= button_to "Remove", wish_path(wish), method: :delete,
+                  remote: true, class: "wish__remove-button btn btn-danger" %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
 </div>
