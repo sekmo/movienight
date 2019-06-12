@@ -3,11 +3,16 @@ module ApplicationHelper
     render(partial: "shared/error_messages", locals: {object: object})
   end
 
-  def movie_poster_image(tmdb_movie_poster_path)
-    if tmdb_movie_poster_path.present?
-      image_tag("http://image.tmdb.org/t/p/w185/#{tmdb_movie_poster_path}")
+  def movie_poster_image(poster_path)
+    image_path = poster_path(poster_path)
+    image_tag(image_path)
+  end
+
+  def poster_path(poster_path)
+    if poster_path.present?
+      "http://image.tmdb.org/t/p/w185/#{poster_path}"
     else
-      image_tag("poster-placeholder.png")
+      image_url("poster-placeholder.png")
     end
   end
 

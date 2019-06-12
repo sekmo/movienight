@@ -11,7 +11,29 @@
   </div>
 
   <div class="profile__data wrapper">
-    <div class="profile__watchlist"></div>
+    <div class="movie-list">
+      <p><%= @user.first_name %>'s Watchlist</p>
+
+      <% if @wishes.any? %>
+        <ul>
+          <% @wishes.each do |wish| %>
+            <% movie = wish.movie %>
+            <li class="movie">
+              <%= tag.div class: "movie__poster", style: "background: url(#{poster_path(movie[:poster_path])})" %>
+              <p class="movie__details">
+                <span class="movie__details__title"><%= truncate(movie[:title], length: 50) %></span>
+                <% if movie[:year].present? %>
+                  <span class="movie__details__year">(<%= movie[:year] %>)</span>
+                <% end %>
+              </p>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+
+
+
+    </div>
 
     <div class="profile__friendships">
       <%= render "friendships/index" %>

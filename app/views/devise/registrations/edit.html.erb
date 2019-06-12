@@ -52,7 +52,7 @@
     <br>
     <div class="field">
       <% if f.object.image.present? %>
-        <%= profile_image_for(@user) %>
+        <%= profile_image_for(@user, "edit_profile_picture") %>
         <%#= image_tag f.object.image_url, class: "profile__picture" %>
       <% end %>
     </div>
