@@ -1,44 +1,55 @@
-<div class="profile">
-  <div class="profile__cover">
-    <div class="clearfix wrapper">
+<div class="profile__cover">
+  <div class="clearfix wrapper">
+    <% if @user == current_user %>
       <%= link_to "edit profile", edit_user_registration_path, class: "edit_profile_link" %>
-      <%= profile_image_for(@user) %>
-      <div class="profile__info">
-        <span class="profile__info__name"><%= @user.full_name %></span>
-        <span class="profile__info__username"><%= @user.username %></span>
-      </div>
+    <% end %>
+
+    <%= profile_image_for(@user) %>
+    <div class="profile__info">
+      <span class="profile__info__name"><%= @user.full_name %></span>
+      <span class="profile__info__username"><%= @user.username %></span>
     </div>
   </div>
+</div>
 
-  <div class="profile__data wrapper">
-    <div class="movie-list">
-      <p><%= @user.first_name %>'s Watchlist</p>
-
-      <% if @wishes.any? %>
-        <ul>
-          <% @wishes.each do |wish| %>
-            <% movie = wish.movie %>
-            <li class="movie">
-              <%= tag.div class: "movie__poster", style: "background: url(#{poster_path(movie[:poster_path])})" %>
-              <p class="movie__details">
-                <span class="movie__details__title"><%= truncate(movie[:title], length: 50) %></span>
-                <% if movie[:year].present? %>
-                  <span class="movie__details__year">(<%= movie[:year] %>)</span>
-                <% end %>
-              </p>
-            </li>
-          <% end %>
-        </ul>
+<div class="wrapper">
+  <div class="movie-list">
+    <h3><%= @user == current_user ? "Your" : "#{@user.first_name}'s"  %> Watchlist</h3>
+    <% if @wishes.any? %>
+      <ul>
+        <% @wishes.each do |wish| %>
+          <% movie = wish.movie %>
+          <li class="movie">
+            <%= tag.div class: "movie__poster", style: "background: url(#{poster_path(movie[:poster_path])})" %>
+            <p class="movie__details">
+              <span class="movie__details__title"><%= truncate(movie[:title], length: 50) %></span>
+              <% if movie[:year].present? %>
+                <span class="movie__details__year">(<%= movie[:year] %>)</span>
+              <% end %>
+            </p>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+  <br>
+  <div class="friendships">
+    <h3><%= @user == current_user ? "Your" : "#{@user.first_name}'s"  %> Friends</h3>
+    <ul class="friends">
+      <% @friends.each do |friend| %>
+          <li>
+            <%= link_to user_path(friend) do %>
+              <%= profile_image_for(friend) %>
+              <p><%= friend.full_name %></p>
+            <% end %>
+          </li>
       <% end %>
+    </ul>
 
-
-
-    </div>
-
-    <div class="profile__friendships">
-      <%= render "friendships/index" %>
+    <% if @user == current_user %>
       <%= render "shared/search_friend_modal" %>
       <%= render "friendships/pending_requests" %>
-    </div>
+      <br><br>
+    <% end %>
   </div>
 </div>

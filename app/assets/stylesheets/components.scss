@@ -106,6 +106,10 @@
 }
 
 .movie-list {
+  h3 {
+    font-size: rem(12px);
+    color: #888;
+  }
   > ul {
     padding-left: 0;
     list-style: none;
@@ -116,29 +120,17 @@
   .movie {
     width: calc(100% / 3 - 10px);
     @include breakpoint-min($tablet){
-      width: calc(100% / 4 - 10px);
+      width: calc(100% / 5 - 10px);
     }
     @include breakpoint-min($tablet-h){
-      width: calc(100% / 5 - 10px);
+      width: calc(100% / 6 - 10px);
     }
     margin: rem(5px);
     transition: all .25s ease-out;
     position: relative;
-    &:hover {
-      .movie__add-button {
-        opacity: 1;
-      }
-    }
     &__poster {
       width: 100%;
-      height: 134px;
-      @include breakpoint-min($mobile){
-        height: 158px;
-      }
-      @include breakpoint-min($tablet){
-        height: 248px;
-      }
-
+      padding-top: 150%; // To maintain the ratio
       background-size: cover !important;
       background-position: center center !important;
       border-radius: rem(4px);
@@ -146,6 +138,21 @@
       transition: all .25s ease-out;
       &:hover {
         box-shadow: 0 5px 10px 0 rgba(168, 182, 191, 0.6)
+      }
+      form.button_to {
+        position: absolute;
+        margin-top: -34px;
+        width: 100%;
+      }
+    }
+    .movie__add-button {
+      opacity: 0;
+      transition: all .25s ease-out;
+      width: 100%;
+    }
+    &:hover {
+      .movie__add-button {
+        opacity: 1;
       }
     }
     &__details {
@@ -178,23 +185,18 @@
       }
     }
     > form {
-      position: absolute;
-      top: rem(174px);
-      @include breakpoint-min($phablet){
-        top: rem(197px);
-      }
-      @include breakpoint-min($tablet){
-        top: rem(188px);
-      }
+      // position: absolute;
+      // top: rem(174px);
+      // @include breakpoint-min($phablet){
+      //   top: rem(197px);
+      // }
+      // @include breakpoint-min($tablet){
+      //   top: rem(188px);
+      // }
 
       left: 0;
       width: 100%;
       text-align: center;
-    }
-    &__add-button {
-      transition: all .25s ease-out;
-      opacity: 0;
-      width: 90%;
     }
   }
 }
@@ -275,7 +277,7 @@
   position: absolute;
   color: white;
   bottom: 8px;
-  left: rem(112px);
+  left: rem(122px);
   font-size: 20px;
   @include breakpoint-min($tablet){
     left: rem(170px);
@@ -300,20 +302,25 @@
   }
 }
 
-.profile-picture {
+.profile__cover .profile-picture {
   position: absolute;
+  bottom: -22px;
   height: rem(100px);
   width: rem(100px);
-  bottom: -22px;
-  border: 2px solid white;
-  border-radius: 100%;
   @include breakpoint-min($tablet){
     height: rem(144px);
     width: rem(144px);
   }
+}
+
+.profile-picture {
+  position: relative;
+  border: 2px solid white;
+  border-radius: 100%;
 
   &--image {
     position: absolute;
+    top: 0;
     height: 100%;
     width: 100%;
     border-radius: 100%;
@@ -322,20 +329,55 @@
   }
   &--placeholder {
     position: absolute;
-    display: table-cell;
+    top: 0;
+    display: flex;
     height: 100%;
     width: 100%;
-    padding-top: 6px;
     border-radius: 100%;
-    vertical-align: middle;
-    text-align: center;
-    background: #dcdcdc;
-    color: #a2a1a9;
-    font-size: 3em;
+    justify-content: center;
+    align-items: center;
+    background: image-url("clapperboard.jpg");
+    background-size: cover !important;
+    background-position: top center !important;
+    color: transparent;
+    font-size: 38px;
     font-weight: 100;
     text-transform: uppercase;
-    @include breakpoint-min($tablet){
-      padding-top: 30px;
+  }
+}
+
+.friendships {
+  h3 {
+    font-size: rem(12px);
+    color: #888;
+  }
+
+  .friends {
+    padding-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin: -5px;
+
+    & li {
+      display: inline-block;
+      font-size: 13px;
+      width: calc(100% / 3 - 10px);
+      @include breakpoint-min($tablet){
+        width: calc(100% / 6 - 10px);
+      }
+      @include breakpoint-min($tablet-h){
+        width: calc(100% / 7 - 10px);
+      }
+      margin: rem(5px);
+      text-align: center;
+      a {
+        color: #888;
+        text-decoration: none;
+      }
+      & .profile-picture {
+        width: 100%;
+        padding-top: calc(100% - 4px);
+      }
     }
   }
 }

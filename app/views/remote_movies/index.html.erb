@@ -7,9 +7,10 @@
         <ul>
           <% @movies.each do |movie| %>
             <li class="movie">
-              <%= movie_poster_image(movie[:poster_path]) %>
-              <%= button_to "Add to watchlist", wishes_path(tmdb_code: movie[:tmdb_code]),
+              <%= tag.div class: "movie__poster", style: "background: url(#{poster_path(movie[:poster_path])})" do %>
+              <%= button_to "Add", wishes_path(tmdb_code: movie[:tmdb_code]),
                     method: :post, class: "movie__add-button btn btn-primary btn-sm" %>
+              <% end %>
               <p class="movie__details">
                 <span class="movie__details__title"><%= truncate(movie[:title], length: 50) %></span>
                 <% if movie[:year].present? %>
