@@ -1,11 +1,17 @@
+require 'open-uri'
+require 'rubygems/package'
+require 'zlib'
+
 module TMDB
+  API_BASE_PATH = "https://api.themoviedb.org/3".freeze
+
   module  Client
     def self.api_key
       Rails.application.secrets.tmdb_api_key
     end
 
     def self.api_base_path
-      "https://api.themoviedb.org/3"
+      API_BASE_PATH
     end
 
     def self.search_movies(keyword)
@@ -30,8 +36,27 @@ module TMDB
       JSON.parse(response_body)
     end
 
+    def self.get_updated_movies_ids
+      date_string = (Date.today - 2).strftime('%d_%m_%Y') # Two days ago just to be safe
+      source = open("http://files.tmdb.org/p/exports/movie_ids_#{date_string}.json.gz")
+      result = Zlib::GzipReader.new(source).read
+      serialized_movies_lines = result.split("\n")
+
+      serialized_movies_lines.map do |tmdb_movie|
+        JSON.parse(tmdb_movie)["id"]
+      end
+
+      # tmdb_movies.each do |tmdb_movie|
+      #   parsed_tmdb_movie = JSON.parse(tmdb_movie)
+      #   tmdb_id = parsed_tmdb_movie["id"]
+      #   Rails.logger.info("id #{tmdb_id} - #{parsed_tmdb_movie["original_title"]}")
+      #   Movie.find_or_create_by_tmdb_id(tmdb_id)
+      # end
+    end
+
     def self.make_request(endpoint, query_string)
       url = "#{api_base_path}#{endpoint}?#{query_string}&api_key=#{api_key}"
+
       response = HTTParty.get(url)
 
       api_response_errors = JSON.parse(response.body)["status_message"]

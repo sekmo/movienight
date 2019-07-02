@@ -7,6 +7,7 @@ end
 
 gem 'bootstrap', '~> 4.3.1'
 gem 'devise', '~> 4.3'
+gem 'whenever'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'httparty', '~> 0.15.6'

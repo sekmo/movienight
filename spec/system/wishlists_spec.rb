@@ -22,7 +22,7 @@ RSpec.describe "Managing the watchlist", type: :system do
     stub_request(:get, /api.themoviedb.org\/3\/movie\/24\?api_key=.*&append_to_response=credits,videos/)
       .to_return(status: 200, body: file_fixture("tmdb_movie_details.json").read)
     expect {
-      movie_span_container.click_on("Add to watchlist")
+      movie_span_container.click_on("Add")
     }.to change { user.wishes.count }.by(1)
 
     expect(WebMock).to have_requested(:get, /api.themoviedb.org\/3\/search\/movie\?adult=false&api_key=.*&query=kill%20bill/).once

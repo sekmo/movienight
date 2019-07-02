@@ -25,16 +25,52 @@ class Movie < ApplicationRecord
   end
 
   def self.find_or_create_by_tmdb_id(tmdb_id)
-    Movie.find_or_create_by!(tmdb_code: tmdb_id) do |movie|
-      movie_details = TMDB::Client.get_movie_details(tmdb_id)
-      movie.title = movie_details["title"]
-      movie.poster_path = movie_details["poster_path"]
-      movie.length = movie_details["runtime"]
-      movie.rating = movie_details["vote_average"]
-      movie.year = movie_details["release_date"][0..3].to_i
-      movie.directors = movie_details["credits"]["crew"]
-        .select { |person| person["job"] == "Director" }
-        .map { |person| person["name"] }.sort
-    end
+    find_by(tmdb_code: tmdb_id) || create_from_tmdb(tmdb_id)
   end
+
+  def self.create_from_tmdb(tmdb_id)
+    movie_details = TMDB::Client.get_movie_details(tmdb_id)
+    Movie.create!(
+      {
+        tmdb_code: movie_details["id"],
+        title: movie_details["title"],
+        poster_path: movie_details["poster_path"],
+        length: movie_details["runtime"],
+        rating: movie_details["vote_average"],
+        year: movie_details["release_date"][0..3].to_i,
+        directors: movie_details["credits"]["crew"]
+          .select { |person| person["job"] == "Director" }
+          .map { |person| person["name"] }.sort
+      }
+    )
+  end
+
+  # def self.sync_from_tmdb
+  #   puts "XXX Started! #{DateTime.now  }"
+  #   stored_tmdb_ids = Movie.all.pluck(:tmdb_code)
+  #   all_updated_tmdb_ids = TMDB::Client.get_updated_movies_ids
+  #   ids_to_sync = all_updated_tmdb_ids - stored_tmdb_ids
+  #
+  #   ids_to_sync.each_slice(40) do |ids_to_sync_grouped|
+  #     time = Time.now
+  #
+  #     ids_to_sync_grouped.each do |tmdb_id|
+  #       begin
+  #         # MovieSyncJob.perform_later(tmdb_id)
+  #         Movie.create_from_tmdb(tmdb_id)
+  #       rescue TMDB::RequestError => e
+  #         Rails.logger.info("XXX Error with tmdb_id #{tmdb_id} - #{e.message}")
+  #       end
+  #     end
+  #
+  #     seconds_elapsed = Time.now - time
+  #     Rails.logger.info("seconds_elapsed: #{seconds_elapsed}")
+  #     if seconds_elapsed < 10
+  #       Rails.logger.info("sleeping for #{10 - seconds_elapsed}")
+  #       sleep(10 - seconds_elapsed)
+  #     end
+  #
+  #   puts "XXX Finished! #{DateTime.now}"
+  #   end
+  # end
 end
