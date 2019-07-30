@@ -1,8 +1,9 @@
 <div class="wrapper">
-  <h1>Match your friend's movies!</h1>
+  <br><br><br><br><br>
+  <h1>Match your friend's movies</h1>
 
   <% if @friends.any? %>
-    <p>Select one or more friends to see which movies you both want to watch!</p>
+    <p>Select one or more friends to see which movies you have in common</p>
     <%= form_tag match_path, method: "get" do %>
       <% @friends.each do |user| %>
         <p>
@@ -14,6 +15,6 @@
       <%= submit_tag "See matching movies!", name: nil %>
     <% end %>
   <% else %>
-    <p>Add some friends <%= link_to "from your profile page", user_path(current_user.id) %> to see which movies you both want to watch!</p>
+    <p>Add some friends <%= link_to "from your profile page", user_path(current_user.id) %> to see which movies you have in common</p>
   <% end %>
 </div>

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'remote_movies', to: 'remote_movies#index'
-  resources :wishes, only: [:new, :index, :create, :update, :destroy]
+  resources :wishes, only: [:new, :create, :update, :destroy]
   resources :friendships
   resources :matches, only: [:new]
   get  'matches/', to: 'matches#show', as: 'match'

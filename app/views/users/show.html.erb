@@ -7,7 +7,7 @@
     <%= profile_image_for(@user) %>
     <div class="profile__info">
       <span class="profile__info__name"><%= @user.full_name %></span>
-      <span class="profile__info__username"><%= @user.username %></span>
+      <span class="profile__info__username">@<%= @user.username %></span>
     </div>
   </div>
 </div>

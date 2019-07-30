@@ -11,11 +11,16 @@ html, body {
 
 body {
   padding-top: rem(70px);
+  color: $text-color;
 }
 
-// h1, h2, h3, h4, h5, h6 {
-//   font-weight: 500;
-// }
+hr {
+  border-top: 1px solid rgba(123, 123, 123, 0.45);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+}
 
 // h1, h2 {
 //   letter-spacing: -1px;
@@ -34,7 +39,7 @@ body {
   margin-bottom: 0;
   padding: 14px 0;
   width: 100%;
-  background: $brand-color-var;
+  background: $header-color;
   color: white;
 }
 

@@ -35,7 +35,7 @@
   .login-button {
     margin-bottom: 5px;
     &:hover {
-      background: lighten($brand-color-var, 3%);
+      background: darken($header-color, 3%);
     }
   }
 
@@ -90,7 +90,7 @@
     }
     &__directors {
       font-size: 13px;
-      color: #888;
+      // color: #888;
       margin-bottom: 0;
     }
     & > img {
@@ -108,7 +108,7 @@
 .movie-list {
   h3 {
     font-size: rem(12px);
-    color: #888;
+    // color: #888;
   }
   > ul {
     padding-left: 0;
@@ -134,11 +134,11 @@
       background-size: cover !important;
       background-position: center center !important;
       border-radius: rem(4px);
-      box-shadow: 0 1px 2px 0 rgba(168,182,191,0.6);
+      box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0.62);
       transition: all .25s ease-out;
-      &:hover {
-        box-shadow: 0 5px 10px 0 rgba(168, 182, 191, 0.6)
-      }
+      // &:hover {
+      //   box-shadow: 0 5px 10px 0 rgba(168, 182, 191, 0.6)
+      // }
       form.button_to {
         position: absolute;
         margin-top: -34px;
@@ -156,6 +156,9 @@
       }
     }
     &__details {
+      &__title {
+        font-weight: 500;
+      }
       margin-top: rem(5px);
       margin-bottom: 0;
       font-size: rem(13px);
@@ -163,7 +166,8 @@
       &__year {
         font-size: rem(10px);
         font-weight: normal;
-        color: grey;
+        color: darken( $text-color, 10% )
+        // color: grey;
       }
     }
     & > img {
@@ -209,11 +213,12 @@
   .movie {
     display: flex;
     align-items: center;
-    border: 1px solid #eee;
+    // border: 1px solid #eee;
     &:not(:last-child) {
       border-bottom: none;
+      margin-bottom: 14px;
     }
-    background: #fff;
+    // background: #fff;
     &__info {
       flex-grow: 1;
       white-space: nowrap;
@@ -223,7 +228,7 @@
       line-height: 1.2;
       &--secondary {
         font-size: rem(13px);
-        color: #4e4e4e;
+        // color: #4e4e4e;
       }
     }
     & > img {
@@ -287,7 +292,9 @@
     display: block;
     margin-bottom: -8px;
     font-size: 20px;
+    font-weight: 500;
     line-height: 1.2;
+    text-shadow: 0 0 8px #000000;
     @include breakpoint-min($tablet){
       font-size: 26px;
       margin-bottom: -6px;
@@ -296,6 +303,8 @@
 
   &__username {
     font-size: 12px;
+    // font-weight: 500;
+    text-shadow: 0 0 8px #000000;
     @include breakpoint-min($tablet){
       font-size: 16px;
     }
@@ -349,7 +358,7 @@
 .friendships {
   h3 {
     font-size: rem(12px);
-    color: #888;
+    // color: #888;
   }
 
   .friends {

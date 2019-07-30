@@ -1,9 +1,24 @@
-// general variables
+// Variables and Bootstrap ovverides
 
-$brand-color-var: #4569d8;
+// -------------------------------------------------------------------------------------------------
+// Generic variables
+// -------------------------------------------------------------------------------------------------
+
+$background-color: #282D34;
+$text-color: #b1a9ca; // overrides $text-color in bootstrap
+$header-color: #1e2027;
+$brand-color-2: #1e2227;
+$brand-color-3: #16191d;
+$brand-color-4: #1e2027;
+// 1e2227
+// 16191d
+// 1e2027
+// 656578
 $font-size-var: 16px;
-$font-family: 'lato', 'helvetica neue', arial, sans-serif;
-$background-color: #F5F5F5;
+$font-family: 'avenir', 'helvetica neue', arial, sans-serif;
+
+// $body-bg: #03070B;
+// $text-color: #807c8c;
 
 
 // Breakpoint variables
@@ -16,3 +31,25 @@ $tablet-h: 1024px;
 $desktop: 1200px;
 $sd: 1400px;
 $hd: 1920px;
+
+
+
+
+
+// -------------------------------------------------------------------------------------------------
+// Bootstrap ovverides
+// -------------------------------------------------------------------------------------------------
+
+
+$primary: $header-color;
+$body-bg: $background-color;
+// $text-color was overridden before;
+$headings-color: $text-color;
+
+$state-success-text: #3c763d;
+$state-success-bg: #f8eb96;
+$btn-active-bg-lightness: 30% !default;
+
+.alert-dismissible .close {
+  height: 100%;
+}

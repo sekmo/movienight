@@ -2,7 +2,7 @@
 <nav class="main-nav is-hidden-mobile">
   <ul>
     <% if user_signed_in? %>
-      <li><%= link_to "Your watchlist", wishes_path %></li>
+      <!-- <li><#%= link_to "Your watchlist", wishes_path %></li> -->
       <li><%= link_to "Add movies", new_wish_path %></li>
       <li><%= link_to "Quick match", new_match_path %></li>
       <li><%= link_to "Social", user_path(current_user.id) %></li>
