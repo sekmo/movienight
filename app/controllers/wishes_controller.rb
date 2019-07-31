@@ -19,7 +19,7 @@ class WishesController < ApplicationController
       wish.save!
       flash[:success] = "The movie has been added to your watchlist."
     end
-    redirect_to wishes_url
+    redirect_to user_url(current_user)
   end
 
   def destroy
@@ -27,7 +27,7 @@ class WishesController < ApplicationController
       flash[:success] = "The movie was removed from your watchlist."
     end
     respond_to do |format|
-      format.html { redirect_to wishes_url }
+      format.html { redirect_to user_url(current_user) }
       format.js
     end
   end
