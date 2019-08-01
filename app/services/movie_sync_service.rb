@@ -1,6 +1,6 @@
 class MovieSyncService
   # The rate limit for the TMDB API is 40 reqs per 10 seconds
-  TIME_WINDOW = 10
+  TIME_WINDOW = 11 # one more second, looks 10 is not enough
   MAX_REQUESTS_IN_TIME_WINDOW = 40
 
   def self.sync_from_tmdb
