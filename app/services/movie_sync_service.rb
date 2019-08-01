@@ -9,7 +9,7 @@ class MovieSyncService
     all_updated_tmdb_ids = TMDB::Client.get_updated_movies_ids
     ids_to_create = all_updated_tmdb_ids - persisted_tmdb_ids
     one_per_mille_amount_ids = ids_to_create.size / 1000
-    inserted = 0
+    amount_inserted = 0
 
     ids_to_create.each_slice(MAX_REQUESTS_IN_TIME_WINDOW) do |ids_to_create_grouped|
       time = Time.now
@@ -20,10 +20,11 @@ class MovieSyncService
           Rails.logger.info("XXX MovieSyncService Error with tmdb_id #{tmdb_id} - #{e.message}")
         end
 
-        inserted += 1
+        amount_inserted += 1
 
-        if (inserted % one_per_mille_amount_ids == 0)
-          Rails.logger.info "XXX #{DateTime.now} MovieSyncService: #{inserted/one_per_mille_amount_ids * 0.1}%"
+        if (amount_inserted % one_per_mille_amount_ids == 0)
+          percentage = (amount_inserted/one_per_mille_amount_ids * 0.1).round(1)
+          Rails.logger.info "XXX #{DateTime.now} MovieSyncService progress: #{percentage}%"
         end
       end
 
