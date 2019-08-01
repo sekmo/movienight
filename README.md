@@ -23,8 +23,14 @@ otherwise remains a pending request.
 
 ## Feature roadmap:
 
-* Public profile page
-* Facebook login
+* Movie sync from TMDB - done
+* Move movie search from TMDB to local db
+* Get more details when searching for a movie (or while browsing your watchlist)
+* Public profile page - done
+* Unified search for movies and friends
+* Search directors (director page with movies)
+* Notifications for friendship requests
+* Facebook login (now just Google login)
 * Movie suggestor
 
 ## Possible features:
