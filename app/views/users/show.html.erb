@@ -24,7 +24,7 @@
             <p class="movie__details">
               <span class="movie__details__title"><%= truncate(movie[:title], length: 50) %></span>
               <% if movie[:year].present? %>
-                <span class="movie__details__year">(<%= movie[:year] %>)</span>
+                <span class="movie__details__year"><%= movie[:year] %></span>
               <% end %>
             </p>
           </li>

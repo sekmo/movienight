@@ -126,6 +126,7 @@
       width: calc(100% / 6 - 10px);
     }
     margin: rem(5px);
+    margin-bottom: rem(10px);
     transition: all .25s ease-out;
     position: relative;
     &__poster {
@@ -134,7 +135,7 @@
       background-size: cover !important;
       background-position: center center !important;
       border-radius: rem(4px);
-      box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0.62);
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.4);
       transition: all .25s ease-out;
       // &:hover {
       //   box-shadow: 0 5px 10px 0 rgba(168, 182, 191, 0.6)
