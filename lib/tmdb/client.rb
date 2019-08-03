@@ -42,16 +42,11 @@ module TMDB
       result = Zlib::GzipReader.new(source).read
       serialized_movies_lines = result.split("\n")
 
-      serialized_movies_lines.map do |tmdb_movie|
-        JSON.parse(tmdb_movie)["id"]
-      end
-
-      # tmdb_movies.each do |tmdb_movie|
-      #   parsed_tmdb_movie = JSON.parse(tmdb_movie)
-      #   tmdb_id = parsed_tmdb_movie["id"]
-      #   Rails.logger.info("id #{tmdb_id} - #{parsed_tmdb_movie["original_title"]}")
-      #   Movie.find_or_create_by_tmdb_id(tmdb_id)
-      # end
+      serialized_movies_lines
+        .select { |line| line[1..13] == '"adult":false'}
+        .map do |tmdb_movie|
+          JSON.parse(tmdb_movie)["id"]
+        end
     end
 
     def self.make_request(endpoint, query_string)
