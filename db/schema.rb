@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190702225113) do
+ActiveRecord::Schema.define(version: 20190803161842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(version: 20190702225113) do
     t.json "directors"
     t.decimal "rating", precision: 3, scale: 1
     t.integer "year"
+    t.string "original_title"
+    t.string "plot"
     t.index ["tmdb_code"], name: "index_movies_on_tmdb_code", unique: true
   end
 
