@@ -9,7 +9,7 @@
 #
 
 # IN UTC
-every 1.day, at: '23:30 pm' do
+every 3.days, at: '23:30 pm' do
   runner "MovieSyncService.sync_from_tmdb"
 end
 

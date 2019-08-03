@@ -7,7 +7,7 @@ end
 
 gem 'bootstrap', '~> 4.3.1'
 gem 'devise', '~> 4.3'
-gem 'whenever'
+gem 'mina-whenever', require: false
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'httparty', '~> 0.15.6'
@@ -17,6 +17,7 @@ gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem "shrine"
+gem 'whenever', require: false
 # gem 'therubyracer', platforms: :ruby
 
 # Use CoffeeScript for .coffee assets and views

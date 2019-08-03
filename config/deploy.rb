@@ -3,6 +3,7 @@ require 'mina/puma'
 require 'mina/git'
 require 'mina/rbenv'  # for rbenv support. (https://rbenv.org)
 # require 'mina/rvm'    # for rvm support. (https://rvm.io)
+require 'mina/whenever'
 
 # Basic settings:
 #   domain       - The hostname to SSH to.
@@ -62,6 +63,7 @@ task :deploy do
       # first time run
       invoke :'puma:stop'
       invoke :'puma:start'
+      invoke :'whenever:update'
       #invoke :'puma:restart'
     end
   end
