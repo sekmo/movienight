@@ -37,7 +37,7 @@ module TMDB
     end
 
     def self.get_updated_movies_ids
-      date_string = (Date.today - 2).strftime('%d_%m_%Y') # Two days ago just to be safe
+      date_string = (Date.today - 2).strftime('%m_%d_%Y') # Two days ago just to be safe
       source = open("http://files.tmdb.org/p/exports/movie_ids_#{date_string}.json.gz")
       result = Zlib::GzipReader.new(source).read
       serialized_movies_lines = result.split("\n")
