@@ -7,7 +7,7 @@ end
 
 gem 'bootstrap', '~> 4.3.1'
 gem 'devise', '~> 4.3'
-gem 'mina-whenever', require: false
+gem 'dotenv-rails'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'httparty', '~> 0.15.6'
@@ -57,8 +57,6 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'spring-commands-rspec'
   gem 'web-console', '>= 3.3.0'
-  gem 'mina', require: false
-  gem 'mina-puma', require: false
 end
 
 group :test do
