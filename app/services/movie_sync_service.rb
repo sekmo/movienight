@@ -3,11 +3,11 @@ class MovieSyncService
   TIME_WINDOW = 11 # one more second, looks 10 is not enough
   MAX_REQUESTS_IN_TIME_WINDOW = 40
 
-  def self.sync_from_tmdb(refresh_existing_movies: true) #TODO change to false and schedule force update one time per month
+  def self.sync_from_tmdb(force_update: false) #TODO change to false and schedule force update one time per month
     Rails.logger.info "XXX #{DateTime.now} MovieSyncService Started!"
     all_current_tmdb_ids = TMDB::Client.get_updated_movies_ids
     
-    if refresh_existing_movies
+    if force_update
       ids_to_create = all_current_tmdb_ids
     else
       persisted_tmdb_ids = Movie.all.pluck(:tmdb_code)
@@ -21,11 +21,7 @@ class MovieSyncService
       time = Time.now
       ids_to_create_grouped.each do |tmdb_id|
         begin
-          if refresh_existing_movies
-            Movie.create_from_tmdb_id(tmdb_id, force_update: true)
-          else
-            Movie.create_from_tmdb_id(tmdb_id)
-          end
+          Movie.create_from_tmdb_id(tmdb_id, force_update: force_update)
         rescue TMDB::RequestError => e
           Rails.logger.info("XXX MovieSyncService Error with tmdb_id #{tmdb_id} - #{e.message}")
         end

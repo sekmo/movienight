@@ -24,6 +24,10 @@ class Movie < ApplicationRecord
     .to_h
   end
 
+  def self.find_or_create_by_tmdb_id(tmdb_id)
+    find_by(tmdb_code: tmdb_id) || create_from_tmdb_id(tmdb_id)
+  end
+
   def self.create_from_tmdb_id(tmdb_id, force_update: false)
     movie_details = TMDB::Client.get_movie_details(tmdb_id)
     movie_params = {
@@ -40,13 +44,13 @@ class Movie < ApplicationRecord
         .map { |person| person["name"] }.sort
     }
 
-    persisted_movie = Movie.find_by(tmdb_code: tmdb_id)
-    
-    if persisted_movie
-      persisted_movie.update!(movie_params) if force_update
+    if movie = Movie.find_by(tmdb_code: tmdb_id)
+      movie.update!(movie_params) if force_update
     else
-      Movie.create!(movie_params)
+      movie = Movie.create!(movie_params)
     end
+
+    return movie
   end
 
   def self.search_by_title(keyword)
