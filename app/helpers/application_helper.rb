@@ -10,7 +10,7 @@ module ApplicationHelper
 
   def poster_path(poster_path)
     if poster_path.present?
-      "http://image.tmdb.org/t/p/w185/#{poster_path}"
+      "http://image.tmdb.org/t/p/w342/#{poster_path}"
     else
       image_url("poster-placeholder.png")
     end
