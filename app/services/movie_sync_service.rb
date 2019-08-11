@@ -28,7 +28,8 @@ class MovieSyncService
         begin
           Movie.create_from_tmdb_id(tmdb_id, force_update: force_update)
         rescue TMDB::RequestError => e
-          Rails.logger.info("XXX MovieSyncService Error with tmdb_id #{tmdb_id} - #{e.message}")
+          Rails.logger.info("XXX MovieSyncService Error with status #{e.code} - tmdb_id: #{tmdb_id}")
+          Rails.logger.info("XXX Message: #{e.message}")
         end
 
         amount_inserted += 1
@@ -41,10 +42,10 @@ class MovieSyncService
 
       # TODO: wrap it in a "throttle" method
       seconds_elapsed = Time.now - time
-      Rails.logger.info("seconds_elapsed: #{seconds_elapsed}")
       if seconds_elapsed < TIME_WINDOW
-        Rails.logger.info("sleeping for #{TIME_WINDOW - seconds_elapsed}")
-        sleep(TIME_WINDOW - seconds_elapsed)
+        seconds_to_sleep = TIME_WINDOW - seconds_elapsed
+        Rails.logger.info("XXX MovieSyncService sleeping for #{seconds_to_sleep} seconds")
+        sleep(seconds_to_sleep)
       end
     end
 

@@ -1,8 +1,9 @@
 class TMDB::RequestError < StandardError
-  attr_reader :message
+  attr_reader :code, :message
 
-  def initialize(message)
+  def initialize(http_code, message = nil)
    super
+   @http_code = http_code
    @message = message
   end
 end

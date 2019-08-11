@@ -25,11 +25,13 @@ class Movie < ApplicationRecord
   end
 
   def self.find_or_create_by_tmdb_id(tmdb_id)
+    # TODO we will remove || create when the sync will be completed
     find_by(tmdb_code: tmdb_id) || create_from_tmdb_id(tmdb_id)
   end
 
   def self.create_from_tmdb_id(tmdb_id, force_update: false)
     movie_details = TMDB::Client.get_movie_details(tmdb_id)
+
     movie_params = {
       tmdb_code: movie_details["id"],
       title: movie_details["title"],

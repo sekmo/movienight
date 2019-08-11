@@ -54,9 +54,9 @@ module TMDB
 
       response = HTTParty.get(url)
 
-      api_response_errors = JSON.parse(response.body)["status_message"]
-      if response.code != 200 or api_response_errors
-        raise TMDB::RequestError.new(api_response_errors)
+      if response.code != 200
+        api_response_errors = JSON.parse(response.body)["status_message"] if response.headers["content-type"] == "application/json"
+        raise TMDB::RequestError.new(response.code, api_response_errors)
       end
 
       response.body
