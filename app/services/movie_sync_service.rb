@@ -31,7 +31,7 @@ class MovieSyncService
         begin
           Movie.create_from_tmdb_id(tmdb_id, force_update: force_update)
         rescue TMDB::RequestError => e
-          Rails.logger.info("XXX MovieSyncService Error with status #{e.code} - tmdb_id: #{tmdb_id}")
+          Rails.logger.info("XXX MovieSyncService Error with status #{e.http_code} - tmdb_id: #{tmdb_id}")
           Rails.logger.info("XXX Message: #{e.message}")
         end
 
