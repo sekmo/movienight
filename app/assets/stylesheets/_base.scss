@@ -76,8 +76,8 @@ h1, h2, h3, h4, h5, h6 {
   }
   @include breakpoint-max($tablet){
     position: fixed;
-    background: #244d5a;
-    top: rem(68px);
+    background: $background-color;
+    top: rem(58px);
     left: 0;
     font-size: 1.5rem;
     width: 100%;
@@ -86,8 +86,10 @@ h1, h2, h3, h4, h5, h6 {
       display: none;
     }
     & > ul {
+      text-align: right;
       margin-top: rem(20px);
       & > li {
+        margin: 0 !important;
         display: block;
         padding: rem(20px) rem(20px) 0;
       }
