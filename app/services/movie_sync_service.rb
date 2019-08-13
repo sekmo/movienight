@@ -17,7 +17,7 @@ class MovieSyncService
     if start_from_tmdb_code
       index = ids_to_create.index(start_from_tmdb_code)
       puts "XXX index: #{index}"
-      ids_to_create = ids_to_create[index + 1 .. -1]
+      ids_to_create = ids_to_create[index..-1]
       puts "XXX ids_to_create[0]: #{ids_to_create[0]}"
       puts "XXX ids_to_create[-1]: #{ids_to_create[-1]}"
     end
