@@ -41,7 +41,7 @@ class Movie < ApplicationRecord
       length: movie_details["runtime"],
       rating: movie_details["vote_average"],
       year: movie_details["release_date"][0..3].to_i,
-      directors: movie_details["credits"]["crew"]
+      directors: movie_details.dig("credits", "crew")
         .select { |person| person["job"] == "Director" }
         .map { |person| person["name"] }.sort
     }
