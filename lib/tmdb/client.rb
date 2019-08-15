@@ -28,7 +28,11 @@ module TMDB
           year: movie["release_date"][0..3]
         }
       end
-      movies
+      return movies
+
+    rescue TMDB::RequestError => e
+      Rails.logger.info("TMDB API Error with status #{e.http_code} while searching for #{keyword} - Message: #{e.message}")
+      return []
     end
 
     def self.get_movie_details(tmdb_code)
@@ -51,6 +55,7 @@ module TMDB
 
     def self.make_request(endpoint, query_string)
       url = "#{api_base_path}#{endpoint}?#{query_string}&api_key=#{api_key}"
+      Rails.logger.info("TMDB request to #{url}")
 
       response = HTTParty.get(url)
 
