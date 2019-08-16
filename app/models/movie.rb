@@ -56,6 +56,6 @@ class Movie < ApplicationRecord
   end
 
   def self.search_by_title(keyword)
-    Movie.where("title ILIKE ?", "%#{keyword}%").order(rating: :desc).limit(20)
+    Movie.where("title ILIKE ? or original_title ILIKE ?", "%#{keyword}%", "%#{keyword}%").order(rating: :desc).limit(20)
   end
 end

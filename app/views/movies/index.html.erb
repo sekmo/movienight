@@ -8,13 +8,13 @@
           <% @movies.each do |movie| %>
             <li class="movie">
               <%= tag.div class: "movie__poster", style: "background: url(#{poster_path(movie[:poster_path])})" do %>
-              <%= button_to "Add", wishes_path(tmdb_code: movie[:tmdb_code]),
+              <%= button_to "Add", wishes_path(movie_id: movie.id),
                     method: :post, class: "movie__add-button btn btn-primary btn-sm" %>
               <% end %>
               <p class="movie__details">
-                <span class="movie__details__title"><%= truncate(movie[:title], length: 50) %></span>
-                <% if movie[:year].present? %>
-                  <span class="movie__details__year"><%= movie[:year] %></span>
+                <span class="movie__details__title"><%= movie.title %></span>
+                <% if movie.year.present? %>
+                  <span class="movie__details__year">(<%= movie.year %>)</span>
                 <% end %>
               </p>
             </li>

@@ -5,13 +5,8 @@ class WishesController < ApplicationController
   def new
   end
 
-  def index
-    @wishes = Wish.find_by_user(current_user).includes(:movie)
-  end
-
   def create
-    movie = Movie.find_or_create_by_tmdb_id(params[:tmdb_code])
-    wish = Wish.find_or_initialize_by(movie: movie, user: current_user)
+    wish = Wish.find_or_initialize_by(movie_id: params[:movie_id], user: current_user)
 
     if wish.persisted?
       flash[:notice] = "The movie was already present in your watchlist."

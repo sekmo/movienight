@@ -1,4 +1,4 @@
-<%= form_with url: remote_movies_path, method: :get, local: true, class: "form-inline" do |f| %>
+<%= form_with url: movies_path, method: :get, local: true, class: "form-inline" do |f| %>
   <div class="form-group">
     <%= f.text_field :search, value: search_term, class: "form-control", placeholder: "Search by movie title" %>
   </div>

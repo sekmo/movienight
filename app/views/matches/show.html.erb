@@ -1,4 +1,5 @@
 <div class="wrapper">
+  <br><br>
   <h3>These are the movies that match your watchlists:</h3>
 
   <div class="matched-movies-list">
@@ -8,7 +9,7 @@
         <% @movies[:complete_match].each do |movie| %>
         <li class="movie">
           <%= movie_poster_image(movie[:poster_path]) %>
-          <span class="movie__info"><%= "#{truncate(movie[:title], length: 50)}" %><br>
+          <span class="movie__info"><%= movie[:title] %><br>
             <span class="movie__info--secondary">
               <span class="movie-rating"><%= movie.rating == 0 ? "n/a" : movie.rating %></span> tmdb score /
               <span class="movie-matching-percentage"><%= movie.matching_percentage %>%</span> match

@@ -8,9 +8,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    # TODO we currently ignore the id parameter - we will have a "/me page and keep this for public profiles"
     @user = User.find(params[:id])
-    @wishes = Wish.find_by_user(@user).includes(:movie)
+    @wishes = Wish.find_by_user(@user).includes(:movie).order(id: :desc)
     @friends = @user.friends
     @friendship_requests = @user.friendship_requests
   end

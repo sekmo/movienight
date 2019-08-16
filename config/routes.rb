@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'remote_movies', to: 'remote_movies#index'
+  resources :movies, only: [:index]
   resources :wishes, only: [:new, :create, :update, :destroy]
   resources :friendships
   resources :matches, only: [:new]
