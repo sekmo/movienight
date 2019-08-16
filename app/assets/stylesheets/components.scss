@@ -119,15 +119,15 @@
     margin: rem(-5px);
   }
   .movie {
-    width: calc(100% / 3 - 10px);
+    width: calc(100% / 3 - 12px);
     @include breakpoint-min($tablet){
-      width: calc(100% / 5 - 10px);
+      width: calc(100% / 5 - 12px);
     }
     @include breakpoint-min($tablet-h){
-      width: calc(100% / 6 - 10px);
+      width: calc(100% / 6 - 12px);
     }
-    margin: rem(5px);
-    // margin-bottom: rem(10px);
+    margin: rem(6px);
+    margin-bottom: rem(10px);
     transition: all .25s ease-out;
     position: relative;
     box-shadow: 0 5px 10px #0000003f;
