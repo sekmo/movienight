@@ -7,14 +7,21 @@
         <ul>
           <% @movies.each do |movie| %>
             <li class="movie">
-              <%= tag.div class: "movie__poster", style: "background: url(#{poster_path(movie[:poster_path])})" do %>
-              <%= button_to "Add", wishes_path(movie_id: movie.id),
-                    method: :post, class: "movie__add-button btn btn-primary btn-sm" %>
-              <% end %>
+              <div class="movie__poster">
+                <%= image_tag poster_path(movie[:poster_path]), class: "movie__poster" %>
+                <div class="movie__actions hide">
+                  <button class="movie__actions__view">View</button>
+                  <%= button_to "Add", wishes_path(movie_id: movie.id), {
+                    method: :post,
+                    class: "movie__actions__add",
+                    form_class: "movie__actions__add-form"
+                  } %>
+                </div>
+              </div>
               <p class="movie__details">
                 <span class="movie__details__title"><%= movie.title %></span>
                 <% if movie.year.present? %>
-                  <span class="movie__details__year">(<%= movie.year %>)</span>
+                  <span class="movie__details__year"><%= movie.year %></span>
                 <% end %>
               </p>
             </li>

@@ -7,7 +7,6 @@
     margin-top: 20px;
   }
 
-
   .omniauth-button {
     color: white;
     padding: 11px 20px;
@@ -123,42 +122,115 @@
     @include breakpoint-min($tablet){
       width: calc(100% / 5 - 12px);
     }
-    @include breakpoint-min($tablet-h){
+    @include breakpoint-min($ipad-h){
       width: calc(100% / 6 - 12px);
     }
     margin: rem(6px);
     margin-bottom: rem(10px);
-    transition: all .25s ease-out;
+    // transition: all .25s ease-out;
     position: relative;
     box-shadow: 0 5px 10px #0000003f;
     border-radius: 8px;
+
     &__poster {
       width: 100%;
-      padding-top: 150%; // To maintain the ratio
-      background-size: cover !important;
-      background-position: center center !important;
+      position: relative;
+      overflow: hidden;
       border-radius: rem(6px) rem(6px) 0 0;
-      // box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.4);
-      transition: all .25s ease-out;
-      // &:hover {
-      //   box-shadow: 0 5px 10px 0 rgba(168, 182, 191, 0.6)
-      // }
-      form.button_to {
-        position: absolute;
-        margin-top: -34px;
+      // TODO ratio-resize with js
+      height: rem(131px);
+      @include breakpoint-min($mobile){
+        height: rem(156px);
+      }
+      @include breakpoint-min($phablet){
+        height: rem(173px);
+      }
+      @include breakpoint-min($tablet){
+        height: rem(147px);
+      }
+      @include breakpoint-min($ipad){
+        height: rem(192px);
+      }
+      @include breakpoint-min($ipad-h){
+        height: rem(184px);
+      }
+      // from 1024 then we have a 6 col grid
+
+      > img {
         width: 100%;
+        height: 100%;
+        // transition: blur .25s ease-out;
+      }
+
+      &:hover .movie__actions {
+        display: block;
+      }
+      &:hover img {
+        // filter: blur(4px);
       }
     }
-    .movie__add-button {
-      opacity: 0;
-      transition: all .25s ease-out;
-      width: 100%;
-    }
     &:hover {
-      .movie__add-button {
+      .movie__actions {
+        position: initial !important;
+        top: initial !important;
+        left: initial !important;
         opacity: 1;
       }
     }
+    &__actions {
+      // display: none;
+      position: absolute;
+      opacity: 0;
+      transition: opacity .25s ease-out;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      // background: rgba(0, 0, 0, 0.308);
+      &__add,
+      &__view,
+      &__remove, {
+        display: table-cell;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 50%;
+        vertical-align: middle;
+        border: none;
+        color: #AEA6C6;
+        &:hover {
+          color: rgb(210, 202, 235);
+        }
+      }
+      &__view {
+        display: none; // TODO...
+        background: #3C3D52fa;
+      }
+      &__remove {
+        background: #845338fa;
+        width: 100%;
+        height: 100%;
+      }
+      &__remove-form {
+        width: 100%;
+        height: 50%;
+      }
+      &__add {
+        background: #44455Cfa;
+        width: 100%;
+        height: 100%;
+      }
+      &__add-form {
+        width: 100%;
+        height: 50%;
+      }
+    }
+
+
+
+
+
+
+
     &__details {
       margin-top: rem(5px);
       margin-bottom: 0;
@@ -173,40 +245,7 @@
         font-size: rem(10px);
         font-weight: normal;
         color: darken( $text-color, 10% )
-        // color: grey;
       }
-    }
-    & > img {
-      width: 100%;
-      height: rem(216px);
-      @include breakpoint-min($phablet){
-        height: rem(241px);
-      }
-      @include breakpoint-min($tablet){
-        height: rem(230px);
-      }
-
-
-      border-radius: rem(4px);
-      box-shadow: 0 1px 2px 0 rgba(168,182,191,0.6);
-      transition: all .25s ease-out;
-      &:hover {
-        box-shadow: 0 5px 10px 0 rgba(168, 182, 191, 0.6)
-      }
-    }
-    > form {
-      // position: absolute;
-      // top: rem(174px);
-      // @include breakpoint-min($phablet){
-      //   top: rem(197px);
-      // }
-      // @include breakpoint-min($tablet){
-      //   top: rem(188px);
-      // }
-
-      left: 0;
-      width: 100%;
-      text-align: center;
     }
   }
 }
@@ -380,7 +419,7 @@
       @include breakpoint-min($tablet){
         width: calc(100% / 6 - 10px);
       }
-      @include breakpoint-min($tablet-h){
+      @include breakpoint-min($ipad-h){
         width: calc(100% / 7 - 10px);
       }
       margin: rem(5px);

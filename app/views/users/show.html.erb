@@ -13,18 +13,29 @@
 </div>
 
 <div class="wrapper">
-  <div class="movie-list">
+  <div class="movie-list movie-list--wishlist">
     <h3><%= @user == current_user ? "Your" : "#{@user.first_name}'s"  %> Watchlist</h3>
     <% if @wishes.any? %>
       <ul>
         <% @wishes.each do |wish| %>
           <% movie = wish.movie %>
-          <li class="movie">
-            <%= tag.div class: "movie__poster", style: "background: url(#{poster_path(movie[:poster_path])})" %>
+          <li class="movie" data-wish-id="<%= wish.id %>">
+            <div class="movie__poster">
+              <%= image_tag poster_path(movie[:poster_path]), class: "movie__poster" %>
+              <div class="movie__actions hide">
+                <button class="movie__actions__view">View</button>
+                <%= button_to "Remove", wish_path(wish), {
+                  method: :delete,
+                  remote: true,
+                  class: "movie__actions__remove",
+                  form_class: "movie__actions__remove-form"
+                } %>
+              </div>
+            </div>
             <p class="movie__details">
-              <span class="movie__details__title"><%= truncate(movie[:title], length: 50) %></span>
-              <% if movie[:year].present? %>
-                <span class="movie__details__year"><%= movie[:year] %></span>
+              <span class="movie__details__title"><%= movie.title %></span>
+              <% if movie.year.present? %>
+                <span class="movie__details__year"><%= movie.year %></span>
               <% end %>
             </p>
           </li>

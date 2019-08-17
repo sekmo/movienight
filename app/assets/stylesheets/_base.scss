@@ -128,6 +128,12 @@ div.flash {
   }
 }
 
-form.button_to {
-  display: inline-block;
+// form.button_to {
+//   display: inline-block;
+// }
+
+.hide {
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
 }
