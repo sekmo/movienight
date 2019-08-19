@@ -13,4 +13,8 @@ class UsersController < ApplicationController
     @friends = @user.friends
     @friendship_requests = @user.friendship_requests
   end
+
+  def me
+    redirect_to user_path(current_user)
+  end
 end
