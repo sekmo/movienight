@@ -435,3 +435,19 @@
     }
   }
 }
+
+.watchlist-actions-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #00000088;
+  z-index: 1;
+}
+
+.watchlist-actions {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
