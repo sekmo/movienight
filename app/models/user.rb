@@ -9,8 +9,8 @@ class User < ApplicationRecord
   include ImageUploader[:image]
 
   has_many :wishes, dependent: :destroy
-  has_many :outgoing_friendships, class_name: "Friendship", foreign_key: "sender_id"
-  has_many :incoming_friendships, class_name: "Friendship", foreign_key: "receiver_id"
+  has_many :outgoing_friendships, class_name: "Friendship", foreign_key: "sender_id", dependent: :destroy
+  has_many :incoming_friendships, class_name: "Friendship", foreign_key: "receiver_id", dependent: :destroy
 
   validates_presence_of :first_name, :last_name, :username
   validates :username, uniqueness: { case_sensitive: false }
