@@ -24,11 +24,10 @@
               <%= image_tag poster_path(movie[:poster_path]), class: "movie__poster" %>
               <div class="movie__actions hide">
                 <button class="movie__actions__view">View</button>
-                <%= button_to "Remove", wish_path(wish), {
-                  method: :delete,
-                  remote: true,
-                  class: "movie__actions__remove",
-                  form_class: "movie__actions__remove-form"
+                <%= button_to "Details", movie_path(wish.movie), {
+                  method: :get,
+                  class: "movie__actions__add",
+                  form_class: "movie__actions__add-form"
                 } %>
               </div>
             </div>
