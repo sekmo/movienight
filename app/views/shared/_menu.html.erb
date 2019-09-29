@@ -2,10 +2,9 @@
 <nav class="main-nav is-hidden-mobile">
   <ul>
     <% if user_signed_in? %>
-      <!-- <li><#%= link_to "Your watchlist", wishes_path %></li> -->
+      <li><%= link_to "Your Profile", user_path(current_user.id) %></li>
       <li><%= link_to "Add movies", new_wish_path %></li>
       <li><%= link_to "Quick match", new_match_path %></li>
-      <li><%= link_to "Social", user_path(current_user.id) %></li>
       <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
     <% else %>
       <li><%= link_to "Login", new_user_session_path %></li>
