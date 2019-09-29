@@ -8,15 +8,9 @@
           <% @movies.each do |movie| %>
             <li class="movie">
               <div class="movie__poster">
-                <%= image_tag poster_path(movie[:poster_path]), class: "movie__poster" %>
-                <div class="movie__actions hide">
-                  <button class="movie__actions__view">View</button>
-                  <%= button_to "Details", movie_path(movie), {
-                    method: :get,
-                    class: "movie__actions__add",
-                    form_class: "movie__actions__add-form"
-                  } %>
-                </div>
+                <%= link_to movie_path(movie) do %>
+                  <%= image_tag poster_path(movie[:poster_path]), class: "movie__poster" %>
+                <% end %>
               </div>
               <p class="movie__details">
                 <span class="movie__details__title"><%= movie.title %></span>

@@ -154,80 +154,11 @@
       }
       // from 1024 then we have a 6 col grid
 
-      > img {
-        width: 100%;
-        height: 100%;
-        // transition: blur .25s ease-out;
-      }
-
-      &:hover .movie__actions {
-        display: block;
-      }
-      &:hover img {
-        // filter: blur(4px);
-      }
-    }
-    &:hover {
-      .movie__actions {
-        position: initial !important;
-        top: initial !important;
-        left: initial !important;
-        opacity: 1;
-      }
-    }
-    &__actions {
-      // display: none;
-      position: absolute;
-      opacity: 0;
-      transition: opacity .25s ease-out;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      // background: rgba(0, 0, 0, 0.308);
-      &__add,
-      &__view,
-      &__remove, {
-        display: table-cell;
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 50%;
-        vertical-align: middle;
-        border: none;
-        color: #AEA6C6;
-        &:hover {
-          color: rgb(210, 202, 235);
-        }
-      }
-      &__view {
-        display: none; // TODO...
-        background: #3C3D52fa;
-      }
-      &__remove {
-        background: #845338fa;
+      img {
         width: 100%;
         height: 100%;
       }
-      &__remove-form {
-        width: 100%;
-        height: 50%;
-      }
-      &__add {
-        background: #44455Cfa;
-        width: 100%;
-        height: 100%;
-      }
-      &__add-form {
-        width: 100%;
-        height: 50%;
-      }
     }
-
-
-
-
-
-
 
     &__details {
       margin-top: rem(5px);
