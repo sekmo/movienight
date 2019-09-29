@@ -1,0 +1,6 @@
+<%= button_to "Remove from your wishlist",
+      wish_path(id: wish.id),
+      remote: true, 
+      method: :delete,
+      class: "movie-page__add-remove-button movie-page__remove-button btn btn-primary btn-lg"
+%>

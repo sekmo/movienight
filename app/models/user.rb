@@ -29,8 +29,9 @@ class User < ApplicationRecord
         last_name: data['last_name'],
       )
     end
+
     user
- end
+  end
 
   def self.new_with_session(params, session)
     super.tap do |user|
@@ -97,5 +98,9 @@ class User < ApplicationRecord
 
   def friendship_receivers_ids
     outgoing_friendships.select(&:pending?).pluck(:receiver_id)
+  end
+
+  def wish_from_movie?(movie)
+    wishes.includes(:movie).find_by(movie: movie)
   end
 end

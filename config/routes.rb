@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :movies, only: [:index]
+  resources :movies, only: [:index, :show]
   resources :wishes, only: [:new, :create, :update, :destroy]
   resources :friendships
   resources :matches, only: [:new]

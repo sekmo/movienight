@@ -1,3 +1,5 @@
+@import "movie-page";
+
 .login {
   text-align: center;
   max-width: 400px;
@@ -96,10 +98,6 @@
       height: 70px;
       width: 47px;
       margin-right: rem(15px);
-    }
-    &__remove-button {
-      margin-left: rem(10px);
-      margin-right: rem(20px);
     }
   }
 }

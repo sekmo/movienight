@@ -1,0 +1,8 @@
+<%= button_to "Add to your wishlist",
+      wishes_path,
+      remote: true, 
+      method: :post,
+      params: { movie_id: movie.id },
+      class: "movie-page__add-remove-button btn btn-primary btn-lg",
+      form_class: "movie__actions__add-form"
+%>

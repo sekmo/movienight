@@ -1,4 +1,4 @@
 var button = document.querySelector('input.movie-page__add-remove-button');
-var newForm = new DOMParser().parseFromString('<%= j(render "movies/add_movie_button", movie: @wish.movie) %>', 'text/html');
+var newForm = new DOMParser().parseFromString('<%= j(render "movies/remove_movie_button", wish: @wish) %>', 'text/html');
 var form = button.parentNode;
 form.parentNode.replaceChild(newForm.body.firstChild, form);

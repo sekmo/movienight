@@ -1,0 +1,39 @@
+// Place all the styles related to the movies controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.movie-page {
+  > h1 {
+    font-size: rem(27px);
+    color: white;
+    margin-top: rem(17px);
+    margin-bottom: rem(0px);
+  }
+  > h2 {
+    font-size: rem(14px);
+    color: #A9B3C0;
+    margin-bottom: rem(18px);
+  }
+  &__poster {
+    width: 31.9%;
+    height: auto;
+    float: left;
+    margin-top: rem(5px);
+    margin-right: rem(13px);
+  }
+  &__plot {
+    font-size: rem(16px);
+    color: #76808E;
+    @include breakpoint-min($tablet + 1) {
+      font-size: rem(18px);
+      // line-height: 1.25;
+    }
+  }
+  // &__add-remove-button {
+  //   background: #2E343D;
+  //   color: white;
+  // }
+  &__remove-button {
+    color: #B2B2B2;
+  }
+}

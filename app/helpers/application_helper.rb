@@ -3,9 +3,9 @@ module ApplicationHelper
     render(partial: "shared/error_messages", locals: {object: object})
   end
 
-  def movie_poster_image(poster_path)
+  def movie_poster_image(poster_path, html_class = nil)
     image_path = poster_path(poster_path)
-    image_tag(image_path)
+    image_tag(image_path, class: html_class)
   end
 
   def poster_path(poster_path)

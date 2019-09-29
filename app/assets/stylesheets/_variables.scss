@@ -46,14 +46,28 @@ $hd: 1920px;
 // -------------------------------------------------------------------------------------------------
 
 
-$primary: $header-color;
+// $primary: $header-color;
+$primary: #2E343D;
 $body-bg: $background-color;
 // $text-color was overridden before;
 $headings-color: $text-color;
 
 $state-success-text: #3c763d;
 $state-success-bg: #f8eb96;
-$btn-active-bg-lightness: 30% !default;
+
+
+// $btn-active-bg-lightness: 30% !default;
+
+
+.btn, input {
+  border: none !important;
+}
+
+// .btn, .btn:hover {
+//   color: white !important;
+// }
+
+
 
 .alert-dismissible .close {
   height: 100%;
