@@ -3,10 +3,18 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .movie-page {
+  button.close-movie-details-modal {
+    display: none;
+  }
+}
+
+// TODO movie-page__poster and plot applied only to movie-page
+.movie-page, .movie-details-modal {
+  padding-top: rem(14px);
+
   > h1 {
     font-size: rem(27px);
     color: white;
-    margin-top: rem(17px);
     margin-bottom: rem(0px);
   }
   > h2 {
@@ -24,16 +32,35 @@
   &__plot {
     font-size: rem(16px);
     color: #76808E;
+    margin-bottom: rem(5px);
     @include breakpoint-min($tablet + 1) {
       font-size: rem(18px);
-      // line-height: 1.25;
     }
   }
-  // &__add-remove-button {
-  //   background: #2E343D;
-  //   color: white;
-  // }
+
+  &__add-remove-button {
+    margin-top: rem(10px);
+    @include breakpoint-max($mobile) {
+      width: 100%;
+    }
+  }
+
   &__remove-button {
     color: #B2B2B2;
+  }
+}
+
+.movie-details-modal {
+  display: block;
+  overflow: auto;
+  background: #282d34;
+  padding-left: rem(10px);
+  padding-right: rem(10px);
+  padding-bottom: rem(10px);
+  button.close-movie-details-modal {
+    background: none;
+    border: none;
+    float: right;
+    color: #76808E;
   }
 }

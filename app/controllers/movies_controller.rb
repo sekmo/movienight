@@ -9,5 +9,10 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find(params[:id])
+
+    respond_to do |format|
+      format.html #{ redirect_to movie_url(@wish.movie) }
+      format.js
+    end
   end
 end

@@ -1,14 +1,3 @@
 <div class="wrapper movie-page">
-  <h1><%= @movie.title %></h1>
-  <h2><%= @movie.directors&.join(", ") %> - <%= @movie.year %></h2>
-  
-  <%= movie_poster_image(@movie.poster_path, "movie-page__poster") %>
-
-  <p class="movie-page__plot"><%= @movie.plot %></p>
-
-  <% if wish = current_user.wish_from_movie?(@movie) %>
-    <%= render "movies/remove_movie_button", wish: wish %>
-  <% else %>
-    <%= render "movies/add_movie_button", movie: @movie %>
-  <% end %>
+  <%= render("movies/details", movie: @movie) %>
 </div>
