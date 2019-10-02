@@ -3,6 +3,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+*:focus, button:focus {
+  outline: none;
+}
+
 html, body {
   font-size: $font-size-var;
   font-family: $font-family;
@@ -42,6 +46,22 @@ h1, h2, h3, h4, h5, h6 {
   background: $header-color;
   color: white;
 }
+
+.button {
+  background: #2e343e;
+  // color: #a0afc3;
+  color: #a0afc3;
+  font-size: 20px;
+  padding: 8px 16px;
+  border-radius: rem(6px);
+}
+
+@media (pointer: fine) {
+  .button:hover {
+    background: #343b46;
+  }
+}
+
 
 .site-title {
   color: white;
