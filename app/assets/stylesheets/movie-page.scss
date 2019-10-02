@@ -16,11 +16,13 @@
     font-size: rem(27px);
     color: white;
     margin-bottom: rem(0px);
+    margin-left: rem(1px);
   }
   > h2 {
     font-size: rem(14px);
     color: #A9B3C0;
-    margin-bottom: rem(18px);
+    margin-bottom: rem(7px);
+    margin-left: rem(1px);
   }
   &__poster {
     width: 31.9%;
@@ -28,6 +30,7 @@
     float: left;
     margin-top: rem(5px);
     margin-right: rem(13px);
+    border-radius: rem(4px);
   }
   &__plot {
     font-size: rem(16px);
@@ -40,13 +43,9 @@
 
   &__add-remove-button {
     margin-top: rem(10px);
-    @include breakpoint-max($mobile) {
+    @include breakpoint-max($tablet - 1) {
       width: 100%;
     }
-  }
-
-  &__remove-button {
-    color: #B2B2B2;
   }
 }
 
@@ -57,6 +56,8 @@
   padding-left: rem(10px);
   padding-right: rem(10px);
   padding-bottom: rem(10px);
+  border: none;
+  border-radius: rem(6px);
   button.close-movie-details-modal {
     background: none;
     border: none;
