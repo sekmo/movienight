@@ -13,7 +13,7 @@ gem 'omniauth-google-oauth2'
 gem 'httparty', '~> 0.15.6'
 gem 'rails', '~> 5.1.6'
 gem 'pg', '~> 0.18'
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 3.12'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem "shrine"
