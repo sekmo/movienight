@@ -12,8 +12,22 @@ Rails.application.configure do
   # Show full error reports.
   config.consider_all_requests_local = true
 
-  config.action_mailer.default_url_options = { host: 'movienight.test', port: 80 }
+  config.action_mailer.default_url_options = { host: 'movienight.pizza', port: 80 }
   config.action_mailer.delivery_method = :letter_opener
+  # # for testing gmail smtp
+  # config.action_mailer.default_url_options = { host: 'movienight.pizza', port: 80 }
+  # config.action_mailer.raise_delivery_errors = true
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #   address:              "smtp.gmail.com",
+  #   port:                 587,
+  #   domain:               "gmail.com",
+  #   user_name:            "getmovienight@gmail.com",
+  #   password:             Rails.application.secrets.gmail_smtp_password,
+  #   authentication:       :plain,
+  #   enable_starttls_auto: true
+  # }
+
   config.active_job.queue_adapter = :inline
 
   # Enable/disable caching. By default caching is disabled.
