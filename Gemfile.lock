@@ -121,7 +121,8 @@ GEM
       activesupport (>= 4.2.0)
     hashdiff (1.0.0)
     hashie (3.6.0)
-    httparty (0.15.7)
+    httparty (0.21.0)
+      mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
@@ -337,7 +338,7 @@ DEPENDENCIES
   dotenv-rails
   factory_girl
   faker
-  httparty (~> 0.15.6)
+  httparty (~> 0.21.0)
   jbuilder (~> 2.5)
   jquery-rails
   letter_opener
